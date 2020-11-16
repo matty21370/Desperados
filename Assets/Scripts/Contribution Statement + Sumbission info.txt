@@ -1,0 +1,17 @@
+------------------------------------------------------------------------------------------------------------------------------------
+																Contribution
+------------------------------------------------------------------------------------------------------------------------------------
+Andrew Viney: worked on general code fixes. Was particularly responsible for implementing mines, vehicle rotation, and audio work
+
+Matthew Burke: Implemented networking and the base gamplay including movement and shooting. 
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+																Sumbission Info
+------------------------------------------------------------------------------------------------------------------------------------
+Features in this submission:
+- Networking
+- Player movement
+- Shooting and killing other players
+- Statistics such as level, kills and deaths
+- Particle effects when performing different actions in game
