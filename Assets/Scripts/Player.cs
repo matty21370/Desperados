@@ -176,7 +176,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <summary>
     /// This method is called once per frame, framerate dependent.
     /// Movement related commands are not recommended to go in here.
-    /// </summary>
+    /// </summary> //
     void Update()
     {
         //If we are not controlling this object (another player is)
