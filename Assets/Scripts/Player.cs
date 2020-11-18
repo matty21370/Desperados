@@ -200,7 +200,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             AddExperience(10); //Add 10 experience (similarly to the method above, this will be removed)
         }
 
-        if (Input.GetKeyDown(KeyCode.R )) //If the user presses the R key on the keyboard
+        if (Input.GetKeyDown(KeyCode.T )) //If the user presses the T key on the keyboard
         {
             photonView.RPC("DropMine", RpcTarget.All); //Send an RPC to all clients to execute the DropMine function on this particular player. Similarly to the shoot function, this allows synchronisation.
         }
