@@ -32,16 +32,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject teamSelection;
 
-    /// <summary>
-    /// This is a list of teams the player is able to choose
-    /// </summary>
-    public enum Teams { Red, Blue };
+    GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
         //teamSelection.SetActive(true);
-        GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity, 0); //Instantiate the player object over the network
+        player = PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity, 0); //Instantiate the player object over the network
         player.transform.name = "Player" + PhotonNetwork.CountOfPlayers + 1; //Set the players name in the scene
         player.GetComponent<Player>().InitiatePlayer(Vector3.zero); //Grab the Player.cs script off the instantiated object and call the InitiatePlayer method.
     }
@@ -59,6 +56,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     /// </summary>
     public override void OnLeftRoom()
     {
+        player.GetPhotonView().RPC("updatePlayerList", RpcTarget.AllBuffered);
         SceneManager.LoadScene(0); //We want to load the main menu scene
     }
+
+    
+
 }

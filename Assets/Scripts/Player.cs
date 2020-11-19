@@ -14,6 +14,8 @@ using UnityEngine.UIElements;
 /// </summary>
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    public List<Player> allPlayers = new List<Player>();
+
     /// <summary>
     /// This is a reference to the name of the player
     /// </summary>
@@ -55,6 +57,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int killsThisGame;
     private bool canShoot = true;
 
+    private int team;
+
+    private bool leaderboardOpen;
+
     /// <summary>
     /// This is a reference to the camera object so it can be modified later
     /// </summary>
@@ -94,6 +100,33 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject explosiveParticle;
     [SerializeField] private GameObject boostTrail;
 
+    Leaderboard leaderboard;
+
+    public int GetTeam()
+    {
+        return team;
+    }
+
+    public string GetName()
+    {
+        return playerName;
+    }
+
+    public int GetLevel()
+    {
+        return level;
+    }
+
+    public int GetKills()
+    {
+        return killCount;
+    }
+
+    public int GetDeaths()
+    {
+        return deaths;
+    }
+
     /// <summary>
     /// This is the method for syncing all of the players variables to the other clients on the server.
     /// This is called multiple times per second to ensure proper synchronisation between players.
@@ -107,6 +140,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(level);
             stream.SendNext(killCount);
             stream.SendNext(killsThisGame);
+            stream.SendNext(team);
         }
         else if (stream.IsReading) //If our client is not controlling this object, then we recieve the variables from the client who is and apply them.
         {
@@ -115,6 +149,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             level = (int)stream.ReceiveNext();
             killCount = (int)stream.ReceiveNext();
             killsThisGame = (int)stream.ReceiveNext();
+            team = (int)stream.ReceiveNext();
         }
     }
 
@@ -134,10 +169,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     void Start()
     {
+        leaderboard = FindObjectOfType<Leaderboard>();
+        leaderboard.player = this;
+
         UnityEngine.Cursor.lockState = CursorLockMode.Locked; //We want to lock the cursor to the centre of the screen to prevent accidentally clicking off the game.
         UnityEngine.Cursor.visible = false; //Hide the mouse cursor
 
         photonView.RPC("SyncName", RpcTarget.AllBuffered); //Immediately send an RPC to all current and future clients to sync our nickname.
+        photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
 
         //Due to prefab limitations, we are not able to directly set these four variables. Instead we have to find the objects by name when we enter the scene.
         healthText = GameObject.Find("Health Text").GetComponent<Text>(); 
@@ -158,10 +197,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         camera = GetComponentInChildren<Camera>(); //We want to be able to adjust some camera settings depending on the players movement, so we need to grab the camera object 
 
+        team = UnityEngine.Random.Range(1, 2);
+
         if(!photonView.IsMine) //If we are not controlling this object 
         {
             Destroy(GetComponentInChildren<Camera>().gameObject); //We destroy the camera to avoid confusion (if we didn't do this then we could have 40 different cameras in the scene)
         }
+    }
+
+    [PunRPC]
+    private void UpdateColour()
+    {
+        
     }
 
     /// <summary>
@@ -205,6 +252,21 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("DropMine", RpcTarget.All); //Send an RPC to all clients to execute the DropMine function on this particular player. Similarly to the shoot function, this allows synchronisation.
         }
 
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            if(!leaderboardOpen)
+            {
+                leaderboard.ShowLeaderBoard();
+                leaderboardOpen = true;
+                photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
+            }
+            else
+            {
+                leaderboard.HideLeaderboard();
+                leaderboardOpen = false;
+            }
+        }
+
         pingText.text = "Latency: " + PhotonNetwork.GetPing(); //We set the text component of the pingText variable to the current ping of the PhotonNetwork
     }
 
@@ -221,6 +283,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         transform.forward = -GetComponentInChildren<Camera>().transform.forward; //Face the player in the direction the camera is faced. This allows the player to rotate with the mouse.
 
         HandleInput(); //To avoid clutter, we created a seperate method to handle input. It is still framerate independent due to it being called in this FixedUpdate method.
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
     }
 
     /// <summary>
@@ -281,6 +349,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             transform.position += transform.up * movementSpeed * Time.deltaTime; //Move the player upwards
         }
+    }
+
+    private void OnDestroy()
+    {
+        photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
     }
 
     /// <summary>
@@ -576,6 +649,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public PhotonView GetPhotonView()
     {
         return photonView;
+    }
+
+    [PunRPC]
+    public void updatePlayerList()
+    {
+        allPlayers.Clear();
+        foreach (Player player in FindObjectsOfType<Player>())
+        {
+            if (!allPlayers.Contains(player))
+            {
+                allPlayers.Add(player);
+            }
+        }
     }
 }
 
