@@ -103,9 +103,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
    
 
-    [SerializeField] private GameObject shop;
+    Shop shop;
     Leaderboard leaderboard;
-
+   
     public int GetTeam()
     {
         return team;
@@ -173,7 +173,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     void Start()
     {
-      
+        shop = FindObjectOfType<Shop>();
 
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
@@ -259,11 +259,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("DropMine", RpcTarget.All); //Send an RPC to all clients to execute the DropMine function on this particular player. Similarly to the shoot function, this allows synchronisation.
 
         }
-        /*    if (Input.GetKeyDown(KeyCode.I)) //If the user presses the T key on the keyboard
+        if (Input.GetKeyDown(KeyCode.I)) //If the user presses the I key on the keyboard
+        {
+            // GameObject.Find("shop").GetComponent<Shop>().setEnabled();
+            Debug.Log("shop");
+            shop.setEnabled();
+
+            if (shop.shopEnabled)
             {
-           // GameObject.Find("shop").GetComponent<Shop>().setEnabled();
-          //shop.setEnabled();
-            }*/
+                shop.gameObject.SetActive(true);
+                UnityEngine.Cursor.visible = true;
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                shop.gameObject.SetActive(false);
+                UnityEngine.Cursor.visible = false;
+                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Tab))

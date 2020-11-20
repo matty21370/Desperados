@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-	private bool shopEnabled;
+	public bool shopEnabled;
 	private GameObject shop;
 
 	private int allSlots;
@@ -34,25 +34,12 @@ public class Shop : MonoBehaviour
 
 	}
 
-	void Update( )
-	{
 
-		if (Input.GetKeyDown(KeyCode.I)) //If the user presses the T key on the keyboard
-		{
-			// GameObject.Find("shop").GetComponent<Shop>().setEnabled();
-		setEnabled();
-		}
 
-		if (shopEnabled)
-		{
-			gameObject.SetActive(true);
-		}
-		else
-		{
-			gameObject.SetActive(false);
-		}
+		
 
-	}
+
+	
 	public void setEnabled()
 	{
 		shopEnabled = !shopEnabled;
