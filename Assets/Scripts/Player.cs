@@ -266,7 +266,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }*/
 
 
-                if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if(!leaderboardOpen)
             {
@@ -281,7 +281,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-      //  pingText.text = "Latency: " + PhotonNetwork.GetPing(); //We set the text component of the pingText variable to the current ping of the PhotonNetwork
+        pingText.text = "Latency: " + PhotonNetwork.GetPing(); //We set the text component of the pingText variable to the current ping of the PhotonNetwork
     }
 
     /// <summary>
