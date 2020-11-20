@@ -14,6 +14,7 @@ using UnityEngine.UIElements;
 /// </summary>
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+   
     public List<Player> allPlayers = new List<Player>();
 
     /// <summary>
@@ -100,6 +101,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject explosiveParticle;
     [SerializeField] private GameObject boostTrail;
 
+   
+
+    [SerializeField] private GameObject shop;
     Leaderboard leaderboard;
 
     public int GetTeam()
@@ -169,6 +173,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     void Start()
     {
+      
+
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
 
@@ -226,8 +232,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary> //
     void Update()
     {
+       
         //If we are not controlling this object (another player is)
-        if(!photonView.IsMine)
+        if (!photonView.IsMine)
         {
             return; //Exit out of this method to avoid multiple clients controlling the same object
         }
@@ -247,12 +254,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             AddExperience(10); //Add 10 experience (similarly to the method above, this will be removed)
         }
 
-        if (Input.GetKeyDown(KeyCode.T )) //If the user presses the T key on the keyboard
+        if (Input.GetKeyDown(KeyCode.T)) //If the user presses the T key on the keyboard
         {
             photonView.RPC("DropMine", RpcTarget.All); //Send an RPC to all clients to execute the DropMine function on this particular player. Similarly to the shoot function, this allows synchronisation.
-        }
 
-        if(Input.GetKeyDown(KeyCode.Tab))
+        }
+        /*    if (Input.GetKeyDown(KeyCode.I)) //If the user presses the T key on the keyboard
+            {
+           // GameObject.Find("shop").GetComponent<Shop>().setEnabled();
+          //shop.setEnabled();
+            }*/
+
+
+                if (Input.GetKeyDown(KeyCode.Tab))
         {
             if(!leaderboardOpen)
             {
@@ -267,7 +281,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        pingText.text = "Latency: " + PhotonNetwork.GetPing(); //We set the text component of the pingText variable to the current ping of the PhotonNetwork
+      //  pingText.text = "Latency: " + PhotonNetwork.GetPing(); //We set the text component of the pingText variable to the current ping of the PhotonNetwork
     }
 
     /// <summary>
@@ -314,7 +328,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            camera.fieldOfView -= Time.deltaTime * 6; //When the player lets go of the W and Space key, slowly decrease the field of view to reflect this.
+           // camera.fieldOfView -= Time.deltaTime * 6; //When the player lets go of the W and Space key, slowly decrease the field of view to reflect this.
         }
 
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) //When the user presses the A key and is not pressing the D key (to avoid bugs with movement)
