@@ -174,7 +174,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     void Start()
     {
         shop = FindObjectOfType<Shop>();
-
+        shop.gameObject.SetActive(false);
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
 
