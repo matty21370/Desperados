@@ -43,6 +43,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private float movementSpeed = 5f;
 
     /// <summary>
+	/// the player money
+	/// </summary> 
+    private int currency;
+
+	/// <summary>
     /// This is the health the player currently has
     /// </summary>
     private float playerHealth = 10;
@@ -175,6 +180,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         shop = FindObjectOfType<Shop>();
         shop.gameObject.SetActive(false);
+        currency = 0;
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
 
@@ -262,7 +268,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (Input.GetKeyDown(KeyCode.I)) //If the user presses the I key on the keyboard
         {
             // GameObject.Find("shop").GetComponent<Shop>().setEnabled();
-            Debug.Log("shop");
+            
             shop.setEnabled();
 
             if (shop.shopEnabled)
@@ -270,6 +276,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 shop.gameObject.SetActive(true);
                 UnityEngine.Cursor.visible = true;
                 UnityEngine.Cursor.lockState = CursorLockMode.None;
+               // shop.updateTxt();
             }
             else
             {
@@ -538,6 +545,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             PlayerPrefs.SetInt("Kills", PlayerPrefs.GetInt("Kills") + 1); //Increment the kill count saved in the players registry
             AddExperience(10); //Add 10 experience to the player
+            addCurrency();
         }
     }
 
@@ -679,7 +687,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         return photonView;
     }
 
-    [PunRPC]
+    /// <summary>
+    /// add funds
+    /// </summary>
+
+    private void addCurrency()
+    {
+        currency = currency + 20;
+    }
+
+    public int getCurrency()
+	{
+        return currency;
+	}
+
+    public void purchaseMade(int price)
+	{
+        currency = currency + price;
+	}
+        [PunRPC]
     public void updatePlayerList()
     {
         allPlayers.Clear();

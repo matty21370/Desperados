@@ -7,9 +7,9 @@ public class Shop : MonoBehaviour
 	public bool shopEnabled;
 	private GameObject shop;
 
-	private int allSlots;
+	private int allSlots=4;
 	private int enabeldSlots;
-	private GameObject[] slot;
+	[SerializeField] private GameObject[] slots;
 
 	//public GameObject slotHolder;
 
@@ -28,9 +28,17 @@ public class Shop : MonoBehaviour
 		}*/
 	}
 
-	public void OpenShop()
+	public void updateTxt()
 	{
+		slots = new GameObject[allSlots+1];
+		for (int i =1; i < allSlots+1; i++)
+		{
+		//	slots[i] = transform.GetChild(i).gameObject;
+			//Debug.Log(slots[i]);
+		//	Debug.Log(slots[i].transform.GetChild(i).gameObject);
 
+		}
+		
 
 	}
 
@@ -54,12 +62,12 @@ public class Shop : MonoBehaviour
 			Item item = itemToStore.GetComponent<Item>();
 
 
-			AddItem(itemToStore, item.ID, item.type, item.description, item.icon);
+			//AddItem(itemToStore, item.ID, item.type, item.description, item.icon);
 
 		}
 	}
 
-	void AddItem(GameObject itemObject, int itemId, string itemType, string description, Sprite itemIcon)
+	/*void AddItem(GameObject itemObject, int itemId, string itemType, string description, Sprite itemIcon)
 	{
 		for (int i = 0; i < allSlots; i++)
 		{
@@ -82,7 +90,7 @@ public class Shop : MonoBehaviour
 			}
 			return;
 		}
-	}
+	}*/
 
 
 }

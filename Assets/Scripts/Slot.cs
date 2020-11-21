@@ -5,17 +5,10 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
-	public GameObject item;
-	public bool empty;
-	public Sprite icon;
-	public string type;
-	public int ID;
-	public string description;
+	[SerializeField] private GameObject buttonHandler;
 
-
-
-	public void UpdateSlot()
-	{
-		this.GetComponent<Image>().sprite = icon;
-	}
+	//public Text UpdateSlot()
+	//{
+		//return buttonHandler.GetComponent<ButtonHandler>().updateText();
+//	}
 }
