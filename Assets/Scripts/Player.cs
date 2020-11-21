@@ -691,6 +691,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
     }
+
+
+
+
+    public void upgradePurchasedHealth()
+	{
+        maxHealth = 20;
+        playerHealth = maxHealth;
+    }
 }
 
 [Serializable]//create gun to fire weapons.

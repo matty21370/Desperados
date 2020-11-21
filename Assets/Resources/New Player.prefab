@@ -872,6 +872,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4972981041676924931, guid: 9516b0ab591a4214888a51c2c6d51236, type: 3}
+      propertyPath: user
+      value: 
+      objectReference: {fileID: 9077486523674453253}
+    - target: {fileID: 4972981041676924931, guid: 9516b0ab591a4214888a51c2c6d51236, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 9077486523674453253}
     - target: {fileID: 5191939458314816543, guid: 9516b0ab591a4214888a51c2c6d51236, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
