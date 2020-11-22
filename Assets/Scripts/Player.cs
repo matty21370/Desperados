@@ -1,20 +1,15 @@
 ﻿using Photon.Pun;
-using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 /// <summary>
 /// Script created by: Matthew Burke, Andrew Viney
 /// </summary>
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
-   
     public List<Player> allPlayers = new List<Player>();
 
     /// <summary>
@@ -142,7 +137,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting) //If our client is controlling this object, then we send our variables to the stream for other clients
+        if (stream.IsWriting)
         {
             stream.SendNext(playerHealth);
             stream.SendNext(canShoot);
@@ -151,7 +146,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(killsThisGame);
             stream.SendNext(team);
         }
-        else if (stream.IsReading) //If our client is not controlling this object, then we recieve the variables from the client who is and apply them.
+        else if (stream.IsReading) 
         {
             playerHealth = (float)stream.ReceiveNext();
             canShoot = (bool)stream.ReceiveNext();
@@ -187,36 +182,35 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         canMove = true;
 
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked; //We want to lock the cursor to the centre of the screen to prevent accidentally clicking off the game.
-        UnityEngine.Cursor.visible = false; //Hide the mouse cursor
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
 
-        photonView.RPC("SyncName", RpcTarget.AllBuffered); //Immediately send an RPC to all current and future clients to sync our nickname.
+        photonView.RPC("SyncName", RpcTarget.AllBuffered); 
         photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
 
-        //Due to prefab limitations, we are not able to directly set these four variables. Instead we have to find the objects by name when we enter the scene.
         healthText = GameObject.Find("Health Text").GetComponent<Text>(); 
         healthSlider = GameObject.Find("Health Background").GetComponent<UnityEngine.UI.Slider>();
         levelText = GameObject.Find("Level Text").GetComponent<Text>();
         expSlider = FindObjectOfType<UnityEngine.UI.Slider>();
 
-        playerHealth = maxHealth; //The player will start with their maximum health, 10 by default and will have the opportunity to upgrade.
-        UpdateHealthBar(); //We want to sync the healthbar to reflect the health change we just applied.
+        playerHealth = maxHealth; 
+        UpdateHealthBar();
 
-        level = PlayerPrefs.GetInt("Level"); //Automatically grab the players level from the registry, this allows the user to keep their progress when they exit the game.
-        levelText.text = "Level: " + level; //Adjust the level text to reflect the above change.
+        level = PlayerPrefs.GetInt("Level"); 
+        levelText.text = "Level: " + level; 
 
-        exp = PlayerPrefs.GetFloat("Exp"); //Similarly to the level, we want to grab the players level from their registry.
-        expSlider.value = exp / 100; //Rather than setting the text like we did for the level, we adjust the slider to reflect the players experience.
+        exp = PlayerPrefs.GetFloat("Exp");
+        expSlider.value = exp / 100; 
 
-        pingText = GameObject.Find("Ping Text").GetComponent<Text>(); //We want to grab the ping text from the scene
+        pingText = GameObject.Find("Ping Text").GetComponent<Text>();
 
-        camera = GetComponentInChildren<Camera>(); //We want to be able to adjust some camera settings depending on the players movement, so we need to grab the camera object 
+        camera = GetComponentInChildren<Camera>(); 
 
         team = UnityEngine.Random.Range(1, 2);
 
-        if(!photonView.IsMine) //If we are not controlling this object 
+        if(!photonView.IsMine)
         {
-            Destroy(GetComponentInChildren<Camera>().gameObject); //We destroy the camera to avoid confusion (if we didn't do this then we could have 40 different cameras in the scene)
+            Destroy(GetComponentInChildren<Camera>().gameObject);
         }
     }
 
@@ -251,6 +245,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("DropMine", RpcTarget.All);
 
         }
+
         if (Input.GetKeyDown(KeyCode.I)) 
         {
             shop.setEnabled();
@@ -268,7 +263,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
             }
         }
-
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -415,7 +409,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <summary>
     /// If we want to apply damage to a player. We call this method.
     /// </summary>
-    /// <param name="damage"></param> The amount of damage we want to apply to the player.
+    /// <param name="damage"> The amount of damage we want to apply to the player.</param>
     [PunRPC]
     public void hitDetected(int damage)
     {
@@ -472,15 +466,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths") + 1);
         }
 
-        StartCoroutine("respawn");
+        StartCoroutine("RespawnTimer");
     }
 
     /// <summary>
     /// This method simply adds a delay to the respawn process.
     /// This prevents players from immediately respawning after despawning
     /// </summary>
-    /// <returns></returns> Returns back to the method that called this coroutine for a set amount of seconds.
-    private IEnumerator respawn()
+    /// <returns>Returns back to the method that called this coroutine for a set amount of seconds.</returns> 
+    private IEnumerator RespawnTimer()
     {
         yield return new WaitForSeconds(3f); 
 
@@ -514,19 +508,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     public void addKill()
     {
-        if (photonView.IsMine) //Only execute the below code if we are controlling this object
+        if (photonView.IsMine)
         {
-            killCount++; //Increment the amount of kills this player has
-            killStreak++; //Increement the players current killstreak
+            killCount++; 
+            killStreak++; 
 
-            if (killStreak >= GameManager.killstreakForEffect && !displayedKillstreakText) //If the players killstreak is above a certain value
+            if (killStreak >= GameManager.killstreakForEffect && !displayedKillstreakText) 
             {
-                displayedKillstreakText = true; //Let the script know what we have displayed the killstreak text
-                StartCoroutine("killstreakText"); //Start the corouting responsible for displaying the killstreak text
+                displayedKillstreakText = true; 
+                StartCoroutine("killstreakText"); 
             }
 
-            PlayerPrefs.SetInt("Kills", PlayerPrefs.GetInt("Kills") + 1); //Increment the kill count saved in the players registry
-            AddExperience(10); //Add 10 experience to the player
+            PlayerPrefs.SetInt("Kills", PlayerPrefs.GetInt("Kills") + 1);
+            AddExperience(10); 
             addCurrency();
         }
     }
@@ -534,38 +528,33 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <summary>
     /// When we want to add experience to the player, we call this method.
     /// </summary>
-    /// <param name="amt"></param> The amount of experience we want to give the player
+    /// <param name="amt">The amount of experience we want to give the player</param> 
     public void AddExperience(float amt)
     {
-        exp += amt; //Increment the players experience by the amount set in the parameter
-        expSlider.value = exp / 100; //Update the experience bar to reflect the above change
+        exp += amt; 
+        expSlider.value = exp / 100;
 
-        if (exp >= 100) //If the players XP hits 100
+        if (exp >= 100) 
         {
-            photonView.RPC("RpcCreateLevelUpParticle", RpcTarget.All); //We want to create a particle effect to show the player has levelled up
-            level += 1; //Increment the players level
-            levelText.text = "Level: " + level; //Update the level text to reflect the above change
-            exp = 0; //Reset the players XP back to 0
-            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1); //Increment the level in the players registry
-            expSlider.value = 0; //Reset the XP bar back to 0
+            photonView.RPC("RpcCreateLevelUpParticle", RpcTarget.All); 
+            level += 1; 
+            levelText.text = "Level: " + level;
+            exp = 0;
+            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1); 
+            expSlider.value = 0; 
         }
 
-        PlayerPrefs.SetFloat("Exp", exp); //We want to save the current XP the player has, so we set it in the registry
+        PlayerPrefs.SetFloat("Exp", exp); 
     }
 
     /// <summary>
     /// We call this method if we want to know if the player is on a killstreak
     /// </summary>
-    /// <returns></returns> true or false
     public bool onKillStreak()
     {
-        return killStreak >= GameManager.killstreakForEffect; //If the players killstreak is above the necessary amount to trigger effects 
+        return killStreak >= GameManager.killstreakForEffect; 
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
     public IEnumerator killstreakText()
     {
         GameObject.Find("KillstreakText").GetComponent<CanvasGroup>().alpha = 1;
@@ -597,55 +586,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Destroy(p, 5f);
     }
 
-    [PunRPC]
-    public void RpcCreateBoostTrail(Vector3 position1, Vector3 position2, int id)
-    {
-        GameObject p = null;
-        Player[] players = FindObjectsOfType<Player>();
-        foreach (Player player in players)
-        {
-            if (player.GetComponent<PhotonView>().ViewID == id)
-            {
-                p = player.gameObject;
-                return;
-            }
-        }
-
-        GameObject p1 = Instantiate(boostTrail, position1, Quaternion.identity);
-        GameObject p2 = Instantiate(boostTrail, position2, Quaternion.identity);
-
-        p1.transform.parent = p.transform;
-        p2.transform.parent = p.transform;
-    }
-
-    [PunRPC]
-    public void RpcStopBoostTrail(int id)
-    {
-        GameObject p = null;
-        Player[] players = FindObjectsOfType<Player>();
-        foreach(Player player in players)
-        {
-            if(player.GetComponent<PhotonView>().ViewID == id)
-            {
-                p = player.gameObject;
-                return;
-            }
-        }
-
-        foreach(Transform child in p.transform)
-        {
-            if(child.GetComponent<ParticleSystem>())
-            {
-                child.GetComponent<ParticleSystem>().Stop();
-                Destroy(child.GetComponent<ParticleSystem>().gameObject, 3f);
-            }
-        }
-    }
-
     /// <summary>
     /// We call this method if we want to get the players current health
     /// </summary>
-    /// <returns></returns> the players current health
+    /// <returns>the players current health</returns> 
     public float getHealth()
     {
         return playerHealth;
@@ -654,7 +598,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <summary>
     /// We call this method if we want to get the players maximum health
     /// </summary>
-    /// <returns></returns> the players maxiumum health
+    /// <returns>the players maxiumum health</returns> 
     public float getMaxHealth()
     {
         return maxHealth;
@@ -672,7 +616,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <summary>
     /// add funds
     /// </summary>
-
     private void addCurrency()
     {
         currency = currency + 20;
@@ -687,7 +630,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 	{
         currency = currency + price;
 	}
-        [PunRPC]
+
+    [PunRPC]
     public void updatePlayerList()
     {
         allPlayers.Clear();
@@ -699,9 +643,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
     }
-
-
-
 
     public void upgradePurchasedHealth()
 	{

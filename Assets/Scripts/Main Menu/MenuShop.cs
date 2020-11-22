@@ -18,12 +18,6 @@ public class MenuShop : MonoBehaviour
         description.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SelectItem(MenuShopItem item)
     {
         this.selectedItem = item;

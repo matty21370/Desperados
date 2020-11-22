@@ -9,11 +9,8 @@ using UnityEngine;
 /// </summary>
 public class Mine : MonoBehaviourPunCallbacks
 {
-
-
     [SerializeField] private float speed;
     [SerializeField] private int damage;
-
 
     public GameObject owner;
     private Rigidbody rb;
@@ -23,7 +20,6 @@ public class Mine : MonoBehaviourPunCallbacks
         return speed;
     }
   
-
     public void InitializeMine(GameObject owner)
     {
         rb = GetComponent<Rigidbody>();
@@ -36,18 +32,11 @@ public class Mine : MonoBehaviourPunCallbacks
         return damage;
     }
 
-
-  /*  public void setRootPlayer(GameObject p)
-    {
-        rootPlayer = p;
-    }*/
-
     public void hit()//iff mine destroyed
     {
         owner.GetComponent<Player>().RpcCreateHitParticle(transform.position);
         owner.GetComponent<Player>().lostMine();
         Destroy(gameObject);
-
     }
 
     private void OnCollisionEnter(Collision collision)//if collision occures
@@ -62,9 +51,9 @@ public class Mine : MonoBehaviourPunCallbacks
 
                 if (collision.gameObject.GetComponent<Player>().getHealth() <= 0)//if kill
                 {
-                owner.GetComponent<Player>().addKill();
+                    owner.GetComponent<Player>().addKill();
+                }
             }
-              }
             owner.GetComponent<Player>().RpcExplosiveParticle(transform.position);
             owner.GetComponent<Player>().lostMine();
             Destroy(gameObject);

@@ -41,21 +41,15 @@ public class CameraMovement : MonoBehaviour
     private float minFov = 80;
     private float maxFov = 90;
 
-    /// <summary>
-    /// This method is called when the script is initialized
-    /// </summary>
     private void Start()
     {
-        camTransform = transform; //We want to set the camera transform to the transform component of this object
-        cam = GetComponent<Camera>(); //Set the camera variable to the camera component attached to the camera object
+        camTransform = transform;
+        cam = GetComponent<Camera>();
     }
 
-    /// <summary>
-    /// This method is called once per frame
-    /// </summary>
     private void Update()
     {
-        currentX += Input.GetAxis("Mouse X"); //
+        currentX += Input.GetAxis("Mouse X"); 
         currentY += Input.GetAxis("Mouse Y");
 
         currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
@@ -83,5 +77,4 @@ public class CameraMovement : MonoBehaviour
     {
         maxFov = n;
     } 
-
 }
