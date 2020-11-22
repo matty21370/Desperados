@@ -23,24 +23,20 @@ public class GameManager : MonoBehaviourPunCallbacks
     /// <summary>
     /// This is the prefab we want to instantiate when a player joins the game.
     /// </summary>
-    [SerializeField]
-    private GameObject playerPrefab;
-
-    /// <summary>
-    /// This is the team selection screen that is activated when we join the game
-    /// </summary>
-    [SerializeField]
-    private GameObject teamSelection;
+    [SerializeField] private GameObject playerPrefab;
 
     GameObject player;
 
-    // Start is called before the first frame update
     void Start()
     {
-        //teamSelection.SetActive(true);
-        player = PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity, 0); //Instantiate the player object over the network
-        player.transform.name = "Player" + PhotonNetwork.CountOfPlayers + 1; //Set the players name in the scene
-        player.GetComponent<Player>().InitiatePlayer(Vector3.zero); //Grab the Player.cs script off the instantiated object and call the InitiatePlayer method.
+        Spawn();
+    }
+
+    public void Spawn()
+    {
+        Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
+
+        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, Quaternion.identity, 0);
     }
 
     /// <summary>
@@ -48,7 +44,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void LeaveRoom()
     {
-        PhotonNetwork.LeaveRoom(); //Tell the PhotonNetwork that we want to leave the room
+        PhotonNetwork.LeaveRoom();
     }
 
     /// <summary>
@@ -57,9 +53,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         player.GetPhotonView().RPC("updatePlayerList", RpcTarget.AllBuffered);
-        SceneManager.LoadScene(0); //We want to load the main menu scene
+        SceneManager.LoadScene(0);
     }
-
-    
-
 }
