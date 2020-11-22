@@ -169,7 +169,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     private void SyncName()
     {
-        playerName = PhotonNetwork.NickName;
+        playerName = PlayerPrefs.GetString("Name");
     }
 
     /// <summary>
@@ -349,7 +349,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-           // camera.fieldOfView -= Time.deltaTime * 6; //When the player lets go of the W and Space key, slowly decrease the field of view to reflect this.
+           camera.fieldOfView -= Time.deltaTime * 6; //When the player lets go of the W and Space key, slowly decrease the field of view to reflect this.
         }
 
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) //When the user presses the A key and is not pressing the D key (to avoid bugs with movement)
