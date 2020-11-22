@@ -43,6 +43,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private float movementSpeed = 5f;
 
     /// <summary>
+	/// the player money
+	/// </summary> 
+    private int currency;
+
+	/// <summary>
     /// This is the health the player currently has
     /// </summary>
     private float playerHealth = 10;
@@ -103,9 +108,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
    
 
-    [SerializeField] private GameObject shop;
+    Shop shop;
     Leaderboard leaderboard;
-
+   
     public int GetTeam()
     {
         return team;
@@ -173,8 +178,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     void Start()
     {
-      
-
+        shop = FindObjectOfType<Shop>();
+        shop.gameObject.SetActive(false);
+        currency = 0;
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
 
@@ -259,11 +265,26 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("DropMine", RpcTarget.All); //Send an RPC to all clients to execute the DropMine function on this particular player. Similarly to the shoot function, this allows synchronisation.
 
         }
-        /*    if (Input.GetKeyDown(KeyCode.I)) //If the user presses the T key on the keyboard
+        if (Input.GetKeyDown(KeyCode.I)) //If the user presses the I key on the keyboard
+        {
+            // GameObject.Find("shop").GetComponent<Shop>().setEnabled();
+            
+            shop.setEnabled();
+
+            if (shop.shopEnabled)
             {
-           // GameObject.Find("shop").GetComponent<Shop>().setEnabled();
-          //shop.setEnabled();
-            }*/
+                shop.gameObject.SetActive(true);
+                UnityEngine.Cursor.visible = true;
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
+               // shop.updateTxt();
+            }
+            else
+            {
+                shop.gameObject.SetActive(false);
+                UnityEngine.Cursor.visible = false;
+                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -524,6 +545,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             PlayerPrefs.SetInt("Kills", PlayerPrefs.GetInt("Kills") + 1); //Increment the kill count saved in the players registry
             AddExperience(10); //Add 10 experience to the player
+            addCurrency();
         }
     }
 
@@ -665,7 +687,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         return photonView;
     }
 
-    [PunRPC]
+    /// <summary>
+    /// add funds
+    /// </summary>
+
+    private void addCurrency()
+    {
+        currency = currency + 20;
+    }
+
+    public int getCurrency()
+	{
+        return currency;
+	}
+
+    public void purchaseMade(int price)
+	{
+        currency = currency + price;
+	}
+        [PunRPC]
     public void updatePlayerList()
     {
         allPlayers.Clear();
@@ -676,6 +716,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 allPlayers.Add(player);
             }
         }
+    }
+
+
+
+
+    public void upgradePurchasedHealth()
+	{
+        maxHealth = 20;
+        playerHealth = maxHealth;
     }
 }
 
