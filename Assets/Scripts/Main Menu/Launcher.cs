@@ -37,12 +37,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     private GameObject progressLabel;
 
     /// <summary>
-    /// A reference to the input field responsible for entering the players name
-    /// </summary>
-    [SerializeField]
-    private InputField inputField;
-
-    /// <summary>
     /// The below variables are references to all of the different pages in the main menu
     /// </summary>
     [SerializeField] private GameObject playPage;
@@ -50,6 +44,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject shopPage;
     [SerializeField] private GameObject aboutPage;
     [SerializeField] private GameObject settingsPage;
+    [SerializeField] private GameObject namePrompt;
+
+    [SerializeField] private InputField nameField;
 
     /// <summary>
     /// We want to know if the player is connecting to a game or now
@@ -61,14 +58,19 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// </summary>
     private void Awake()
     {
-        PhotonNetwork.AutomaticallySyncScene = true; //We want the network to automatically sync the scenes for all players when in game
+        PhotonNetwork.AutomaticallySyncScene = true; 
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        controlPanel.SetActive(true); //We want to activate the control panel so the player can interact with the menu
-        progressLabel.SetActive(false); //We want to hide the progress label because the player is not currently connecting to a game
+        if(!PlayerPrefs.HasKey("Name"))
+        {
+            namePrompt.SetActive(true);
+        }
+
+        controlPanel.SetActive(true); 
+        progressLabel.SetActive(false); 
     }
 
     /// <summary>
@@ -76,22 +78,17 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// </summary>
     public void Connect()
     {
-        if (inputField.text != null) //If the player has entered something into the input field
+        progressLabel.SetActive(true); 
+        playPage.SetActive(false); 
+
+        if (PhotonNetwork.IsConnected) 
         {
-            PhotonNetwork.NickName = inputField.text; //We set the players nickname to the value of the input field
-
-            progressLabel.SetActive(true); //We want to show the players connection status, so we display the text responsible for showing it.
-            playPage.SetActive(false); //We want to hide the page the player is currently in
-
-            if (PhotonNetwork.IsConnected) //If the player is connected to the network
-            {
-                PhotonNetwork.JoinRandomRoom(); //Join a random room
-            }
-            else //If the player is not currently connected to the network
-            {
-                isConnecting = PhotonNetwork.ConnectUsingSettings(); //Connect to the network
-                PhotonNetwork.GameVersion = gameVersion; //Tell the network our current game version
-            }
+            PhotonNetwork.JoinRandomRoom(); 
+        }
+        else //If the player is not currently connected to the network
+        {
+            isConnecting = PhotonNetwork.ConnectUsingSettings(); 
+            PhotonNetwork.GameVersion = gameVersion; 
         }
     }
 
@@ -103,9 +100,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (isConnecting) //If the player has pressed the join button
         {
             Debug.Log("Connected to master server.");
-            progressLabel.GetComponent<Text>().text = "Finding session..."; //Update the progress text to let the player know the network is searching for a session
-            PhotonNetwork.JoinRandomRoom(); //Join a random room
-            isConnecting = false; //We are no longer connecting
+            progressLabel.GetComponent<Text>().text = "Finding session..."; 
+            PhotonNetwork.JoinRandomRoom(); 
+            isConnecting = false; 
         }
     }
 
@@ -116,7 +113,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// <param name="message"></param>
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom }); //We want the player to create their own room
+        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom }); 
     }
 
     /// <summary>
@@ -134,12 +131,21 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// <param name="cause"></param>
     public override void OnDisconnected(DisconnectCause cause)
     {
-        controlPanel.SetActive(true); //We want to activate the control panel
-        progressLabel.SetActive(false); //We want to deactivate the progress label
+        controlPanel.SetActive(true); 
+        progressLabel.SetActive(false); 
 
         isConnecting = false; //We are not connecting to anything
 
         Debug.Log("Disconnect caused by: " + cause); 
+    }
+
+    public void SubmitName()
+    {
+        if(nameField.text != "")
+        {
+            PlayerPrefs.SetString("Name", nameField.text);
+            namePrompt.SetActive(false);
+        }
     }
 
     /// <summary>
