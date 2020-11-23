@@ -7700,7 +7700,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Test environment
+  m_Text: Free for all
 --- !u!222 &1777538977
 CanvasRenderer:
   m_ObjectHideFlags: 0

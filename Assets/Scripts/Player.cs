@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -16,6 +17,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// This is a reference to the name of the player
     /// </summary>
     private string playerName;
+    private string userName;
 
     /// <summary>
     /// This is the base speed of the player, can be upgraded later
@@ -105,6 +107,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     Leaderboard leaderboard;
     GameManager manager;
     bool canMove;
+
+    private GameObject pauseMenu;
+    private CanvasGroup pauseMenuGroup;
     
     public int GetTeam()
     {
@@ -145,6 +150,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(killCount);
             stream.SendNext(killsThisGame);
             stream.SendNext(team);
+            stream.SendNext(playerName);
         }
         else if (stream.IsReading) 
         {
@@ -154,17 +160,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             killCount = (int)stream.ReceiveNext();
             killsThisGame = (int)stream.ReceiveNext();
             team = (int)stream.ReceiveNext();
+            playerName = (string)stream.ReceiveNext();
         }
-    }
-
-    /// <summary>
-    /// When we join the game, we want to grab the nickname from the PhotonNetwork and apply it to the object.
-    /// The PhotonNetwork nickname is set in the main menu.
-    /// </summary>
-    [PunRPC]
-    private void SyncName()
-    {
-        playerName = PlayerPrefs.GetString("Name");
     }
 
     /// <summary>
@@ -173,25 +170,32 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     void Start()
     {
+        if(photonView.IsMine)
+        {
+            userName = PlayerPrefs.GetString("Name");
+            playerName = userName;
+        }
+
         shop = FindObjectOfType<Shop>();
         shop.gameObject.SetActive(false);
         currency = 20;
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
         manager = FindObjectOfType<GameManager>();
+        pauseMenu = GameObject.Find("Menu");
+        pauseMenuGroup = pauseMenu.GetComponent<CanvasGroup>();
 
         canMove = true;
 
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        UnityEngine.Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
-        photonView.RPC("SyncName", RpcTarget.AllBuffered); 
         photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
 
         healthText = GameObject.Find("Health Text").GetComponent<Text>(); 
-        healthSlider = GameObject.Find("Health Background").GetComponent<UnityEngine.UI.Slider>();
+        healthSlider = GameObject.Find("Health Background").GetComponent<Slider>();
         levelText = GameObject.Find("Level Text").GetComponent<Text>();
-        expSlider = FindObjectOfType<UnityEngine.UI.Slider>();
+        expSlider = FindObjectOfType<Slider>();
 
         playerHealth = maxHealth; 
         UpdateHealthBar();
@@ -277,6 +281,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 leaderboard.HideLeaderboard();
                 leaderboardOpen = false;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleMenu();
         }
 
         pingText.text = "Latency: " + PhotonNetwork.GetPing(); 
@@ -366,6 +375,27 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    private void ToggleMenu()
+    {
+        if(pauseMenuGroup.alpha == 0)
+        {
+            pauseMenuGroup.alpha = 1;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else if(pauseMenuGroup.alpha == 1)
+        {
+            pauseMenuGroup.alpha = 0;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+    public void LeaveSession()
+    {
+        manager.LeaveRoom();
+    }
+
     private void OnDestroy()
     {
         photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
@@ -410,11 +440,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// If we want to apply damage to a player. We call this method.
     /// </summary>
     /// <param name="damage"> The amount of damage we want to apply to the player.</param>
-    [PunRPC]
     public void hitDetected(int damage)
     {
         playerHealth -= damage;
-        healthSlider.value = playerHealth; 
         UpdateHealthBar(); 
         if (playerHealth <= 0) 
         {
@@ -441,8 +469,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void Despawn()
     {
-        GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity); 
-        transform.position = Vector3.zero; 
+        GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
+        transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
         Destroy(p, 5f); 
         canShoot = false;
         canMove = false;

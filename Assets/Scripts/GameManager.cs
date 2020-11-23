@@ -2,6 +2,7 @@
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Script created by: Matthew Burke
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     /// </summary>
     [SerializeField] private GameObject playerPrefab;
 
+    [SerializeField] private Text neededPlayersText;
+
     GameObject player;
 
     void Start()
@@ -35,6 +38,18 @@ public class GameManager : MonoBehaviourPunCallbacks
         Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
 
         PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, Quaternion.identity, 0);
+    }
+
+    private void Update()
+    {
+        if(PhotonNetwork.CountOfPlayers == 1)
+        {
+            neededPlayersText.gameObject.SetActive(true);
+        }
+        else
+        {
+            neededPlayersText.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
