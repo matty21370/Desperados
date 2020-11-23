@@ -175,7 +175,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         shop = FindObjectOfType<Shop>();
         shop.gameObject.SetActive(false);
-        currency = 0;
+        currency = 20;
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
         manager = FindObjectOfType<GameManager>();
@@ -649,6 +649,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         maxHealth = 20;
         playerHealth = maxHealth;
     }
+    public void upgradePurchasedSpeed()
+    {
+        baseSpeed = baseSpeed*1.25f;
+            }
 }
 
 [Serializable]//create gun to fire weapons.

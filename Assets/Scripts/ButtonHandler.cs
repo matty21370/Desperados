@@ -6,27 +6,59 @@ using UnityEngine.UI;
 public class ButtonHandler : MonoBehaviour
 {
 	[SerializeField] private GameObject owner;
-	private int price=50;
+	
 	private Text txt;
 	private bool altern = false;
-
 	public void SetText(string text)
 	{
-		
-		if (owner.GetComponent<Player>().getCurrency() >= price)
+		if (text.Equals("health"))
 		{
+			int price = 100;
+			if (owner.GetComponent<Player>().getCurrency() >= price)
+			{
 
-			Text txt = transform.Find("healthText").GetComponent<Text>();
-			txt.text = "Purchased";
-			GetComponent<Button>().interactable = false;
-			
-			owner.GetComponent<Player>().upgradePurchasedHealth();
-			owner.GetComponent<Player>().UpdateHealthBar();
-		
-		}
-		else if (!altern)
+				Text txt = transform.Find("healthText").GetComponent<Text>();
+				txt.text = "Purchased";
+				GetComponent<Button>().interactable = false;
+
+				owner.GetComponent<Player>().upgradePurchasedHealth();
+				owner.GetComponent<Player>().UpdateHealthBar();
+
+			}
+			else
+			{
+				altText("healthText", "Increase Health");
+			}
+
+		}else if (text.Equals("speed"))
 		{
-			Text txt = transform.Find("healthText").GetComponent<Text>();
+			int price = 50;
+			if (owner.GetComponent<Player>().getCurrency() >= price)
+			{
+
+				Text txt = transform.Find("speedText").GetComponent<Text>();
+				txt.text = "Purchased";
+				GetComponent<Button>().interactable = false;
+
+				owner.GetComponent<Player>().upgradePurchasedSpeed();
+
+
+			}
+			else
+			{
+				altText("speedText", "Increase Speed");
+			}
+				
+		}
+	}
+
+
+
+	private void altText(string buttonNeeded,string item)
+	{
+		if (!altern)
+		{
+			Text txt = transform.Find(buttonNeeded).GetComponent<Text>();
 			txt.text = "Insufficient Funds";
 			altern = true;
 			Debug.Log(altern);
@@ -35,12 +67,11 @@ public class ButtonHandler : MonoBehaviour
 		}
 		else if (altern)
 		{
-			Text txt = transform.Find("healthText").GetComponent<Text>();
-			txt.text = "Increase Health";
+			Text txt = transform.Find(buttonNeeded).GetComponent<Text>();
+			txt.text =  item;
 			altern = false;
 			Debug.Log(altern);
 		}
-	
 	}
 	
 }
