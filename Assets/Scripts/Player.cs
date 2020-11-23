@@ -138,7 +138,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     /// <summary>
     /// This is the method for syncing all of the players variables to the other clients on the server.
-    /// This is called multiple times per second to ensure proper synchronisation between players.
+    /// This is called multiple times per second to ensure proper synchronisation between players
     /// </summary>
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
