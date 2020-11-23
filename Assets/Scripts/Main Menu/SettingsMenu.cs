@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class SettingsMenu : MonoBehaviour
     public Dropdown resolutionDropdown;
 
     Resolution[] resolutions;
+
+    public AudioMixer audioMixer;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +59,11 @@ public class SettingsMenu : MonoBehaviour
     public void setFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+    }
+
+    public void setVolume(float volume)
+    {
+        audioMixer.SetFloat("volume", volume);
     }
 
 }
