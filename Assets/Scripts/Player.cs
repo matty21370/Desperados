@@ -440,11 +440,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// If we want to apply damage to a player. We call this method.
     /// </summary>
     /// <param name="damage"> The amount of damage we want to apply to the player.</param>
-    [PunRPC]
     public void hitDetected(int damage)
     {
         playerHealth -= damage;
-        healthSlider.value = playerHealth; 
         UpdateHealthBar(); 
         if (playerHealth <= 0) 
         {
@@ -471,8 +469,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void Despawn()
     {
-        GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity); 
-        transform.position = Vector3.zero; 
+        GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
+        transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
         Destroy(p, 5f); 
         canShoot = false;
         canMove = false;
