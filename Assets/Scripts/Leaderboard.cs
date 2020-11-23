@@ -9,14 +9,7 @@ public class Leaderboard : MonoBehaviourPunCallbacks
     public Transform content;
     public GameObject prefab;
 
-    private GameManager manager;
-
     public Player player;
-
-    private void Start()
-    {
-        manager = FindObjectOfType<GameManager>();
-    }
 
     public void ShowLeaderBoard()
     {
@@ -25,7 +18,7 @@ public class Leaderboard : MonoBehaviourPunCallbacks
             Destroy(t.gameObject);
         }
         GetComponent<CanvasGroup>().alpha = 1;
-        foreach(Player player in player.allPlayers)
+        foreach (Player player in FindObjectsOfType<Player>())
         {
             GameObject tmp = Instantiate(prefab, content);
             tmp.GetComponentInChildren<Text>().text = player.GetName() + "          " + player.GetKills();

@@ -26,8 +26,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private Text neededPlayersText;
 
-    GameObject player;
-
     void Start()
     {
         Spawn();
@@ -65,7 +63,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     /// </summary>
     public override void OnLeftRoom()
     {
-        player.GetPhotonView().RPC("updatePlayerList", RpcTarget.AllBuffered);
         SceneManager.LoadScene(0);
     }
 }

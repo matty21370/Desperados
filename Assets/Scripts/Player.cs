@@ -11,8 +11,6 @@ using UnityEngine.UI;
 /// </summary>
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public List<Player> allPlayers = new List<Player>();
-
     /// <summary>
     /// This is a reference to the name of the player
     /// </summary>
@@ -190,8 +188,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
-
         healthText = GameObject.Find("Health Text").GetComponent<Text>(); 
         healthSlider = GameObject.Find("Health Background").GetComponent<Slider>();
         levelText = GameObject.Find("Level Text").GetComponent<Text>();
@@ -306,12 +302,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         HandleInput();
     }
 
-    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
-    {
-        base.OnPlayerLeftRoom(otherPlayer);
-        photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
-    }
-
     /// <summary>
     /// This method handles the player movement based on keyboard input.
     /// </summary>
@@ -394,11 +384,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void LeaveSession()
     {
         manager.LeaveRoom();
-    }
-
-    private void OnDestroy()
-    {
-        photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
     }
 
     /// <summary>
@@ -662,6 +647,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void updatePlayerList()
     {
+        print("Updating player list");
         allPlayers.Clear();
         foreach (Player player in FindObjectsOfType<Player>())
         {
