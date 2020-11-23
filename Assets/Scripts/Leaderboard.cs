@@ -11,6 +11,11 @@ public class Leaderboard : MonoBehaviourPunCallbacks
 
     public Player player;
 
+    private void Start()
+    {
+        
+    }
+
     public void ShowLeaderBoard()
     {
         foreach(Transform t in content)
@@ -21,7 +26,10 @@ public class Leaderboard : MonoBehaviourPunCallbacks
         foreach (Player player in FindObjectsOfType<Player>())
         {
             GameObject tmp = Instantiate(prefab, content);
-            tmp.GetComponentInChildren<Text>().text = player.GetName() + "          " + player.GetKills();
+            tmp.GetComponent<PlayerCard>().levelText.text = player.GetLevel().ToString();
+            tmp.GetComponent<PlayerCard>().nameText.text = player.GetName().ToString();
+            tmp.GetComponent<PlayerCard>().killsText.text = player.GetKills().ToString();
+            tmp.GetComponent<PlayerCard>().deathsText.text = player.GetDeaths().ToString();
         }
     }
 

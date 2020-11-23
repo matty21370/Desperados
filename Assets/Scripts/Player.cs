@@ -644,20 +644,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         currency = currency + price;
 	}
 
-    [PunRPC]
-    public void updatePlayerList()
-    {
-        print("Updating player list");
-        allPlayers.Clear();
-        foreach (Player player in FindObjectsOfType<Player>())
-        {
-            if (!allPlayers.Contains(player))
-            {
-                allPlayers.Add(player);
-            }
-        }
-    }
-
     public void upgradePurchasedHealth()
 	{
         maxHealth = 20;
