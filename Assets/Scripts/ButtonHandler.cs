@@ -51,6 +51,25 @@ public class ButtonHandler : MonoBehaviour
 			}
 				
 		}
+		else if (text.Equals("damage"))
+		{
+			int price = 150;
+			if (owner.GetComponent<Player>().getCurrency() >= price)
+			{
+				Text txt = transform.Find("damageText").GetComponent<Text>();
+				txt.text = "Purchased";
+				GetComponent<Button>().interactable = false;
+
+				owner.GetComponent<Player>().upgradeDamage();
+				//				owner.GetComponent<Player>().purchaseMade(price);
+				makePurchase(price);
+			}
+			else
+			{
+				altText("damageText", "Increase Damage: \n 150 Points");
+			}
+
+		}
 	}
 
 	private void makePurchase(int price)

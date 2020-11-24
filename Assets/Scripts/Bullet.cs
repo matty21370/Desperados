@@ -36,7 +36,8 @@ public class Bullet : MonoBehaviourPunCallbacks
     public void InitializeBullet(GameObject owner, Vector3 movement)
     {
         this.owner = owner;
-        this.movement = movement; 
+        this.movement = movement;
+		
     }
 
     /// <summary>
@@ -52,8 +53,22 @@ public class Bullet : MonoBehaviourPunCallbacks
     /// </summary>
     public int getDamage()
     {
-        return damage; 
+        if (owner.GetComponent<Player>().getBulletUpgrade())
+        {
+            Debug.Log("2");
+            return 2;
+
+            
+        }
+		else
+		{
+            Debug.Log("1");
+            return 1;
+            Debug.Log("1");
+        }
     }
+
+    
 
     /// <summary>
     /// Call this method if we want to grab the speed of the bullet
@@ -69,7 +84,7 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             if (collision.transform.tag == "Player")
             {
-                collision.gameObject.GetComponent<Player>().hitDetected(damage); 
+                collision.gameObject.GetComponent<Player>().hitDetected(getDamage()); 
                 if (collision.gameObject.GetComponent<Player>().getHealth() <= 0)
                 {
                     owner.GetComponent<Player>().addKill(); 
