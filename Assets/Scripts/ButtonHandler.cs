@@ -27,7 +27,7 @@ public class ButtonHandler : MonoBehaviour
 			}
 			else
 			{
-				altText("healthText", "Increase Health");
+				altText("healthText", "Increase Health: \n 100 Points");
 			}
 
 		}else if (text.Equals("speed"))
@@ -46,7 +46,7 @@ public class ButtonHandler : MonoBehaviour
 			}
 			else
 			{
-				altText("speedText", "Increase Speed");
+				altText("speedText", "Increase Speed: \n 50 Points");
 			}
 				
 		}

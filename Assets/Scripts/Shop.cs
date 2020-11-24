@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Shop : MonoBehaviour
 	private int allSlots=4;
 	private int enabeldSlots;
 	[SerializeField] private GameObject[] slots;
-
+	private Text txt;
 	//public GameObject slotHolder;
 
 	void Start()
@@ -53,6 +54,12 @@ public class Shop : MonoBehaviour
 		shopEnabled = !shopEnabled;
 	}
 
+	public void updateText(int currency)
+	{
+		txt = transform.Find("Currency").GetComponent<Text>();
+		txt.text = "Current Points:" + currency;
+		
+	}
 
 	private void onTriggerEnter(Collider other)
 	{

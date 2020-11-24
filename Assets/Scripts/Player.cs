@@ -105,7 +105,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     Leaderboard leaderboard;
     GameManager manager;
     bool canMove;
-
+    private int speedIncrease = 1;
     private GameObject pauseMenu;
     private CanvasGroup pauseMenuGroup;
     
@@ -253,6 +253,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (shop.shopEnabled)
             {
                 shop.gameObject.SetActive(true);
+                shop.updateText(currency);
                 UnityEngine.Cursor.visible = true;
                 UnityEngine.Cursor.lockState = CursorLockMode.None;
             }
@@ -311,7 +312,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (Input.GetKey(KeyCode.W))
             {
-                transform.position += -transform.forward * movementSpeed * Time.deltaTime;
+                transform.position += -transform.forward * (speedIncrease *movementSpeed) * Time.deltaTime;
                 camera.fieldOfView += Time.deltaTime * 6;
 
                 if (Input.GetKey(KeyCode.Space))
@@ -332,7 +333,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
             {
-                transform.position += transform.right * movementSpeed * Time.deltaTime;
+                transform.position += transform.right * (speedIncrease * movementSpeed) * Time.deltaTime;
                 float z = Input.GetAxis("Horizontal") * 15.0f;
                 Vector3 euler = transform.localEulerAngles;
                 euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
@@ -341,12 +342,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             if (Input.GetKey(KeyCode.S))
             {
-                transform.position += transform.forward * movementSpeed * Time.deltaTime;
+                transform.position += transform.forward * (speedIncrease * movementSpeed) * Time.deltaTime;
             }
 
             if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
             {
-                transform.position += -transform.right * movementSpeed * Time.deltaTime;
+                transform.position += -transform.right * (speedIncrease * movementSpeed) * Time.deltaTime;
                 float z = Input.GetAxis("Horizontal") * 15.0f;
                 Vector3 euler = transform.localEulerAngles;
                 euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
@@ -355,12 +356,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             if (Input.GetKey(KeyCode.LeftControl))
             {
-                transform.position += -transform.up * movementSpeed * Time.deltaTime;
+                transform.position += -transform.up * (speedIncrease * movementSpeed) * Time.deltaTime;
             }
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                transform.position += transform.up * movementSpeed * Time.deltaTime;
+                transform.position += transform.up * (speedIncrease * movementSpeed) * Time.deltaTime;
             }
         }
     }
@@ -651,7 +652,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     }
     public void upgradePurchasedSpeed()
     {
-        baseSpeed = baseSpeed*1.25f;
+        speedIncrease=2 ;
             }
 }
 
