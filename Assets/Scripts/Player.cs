@@ -101,7 +101,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject explosiveParticle;
     [SerializeField] private GameObject boostTrail;
 
-    Shop shop;
+    private Shop shop;
     Leaderboard leaderboard;
     GameManager manager;
     bool canMove;
@@ -448,6 +448,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+
+    public Shop getShop()
+	{
+        return shop;
+	}
+
     /// <summary>
     /// This method begins the death process.
     /// It is responsible for deactivating all of the necessary components to hide the player and prevent other players from interacting with it.
@@ -642,13 +648,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void purchaseMade(int price)
 	{
-        currency = currency + price;
+        currency = currency - price;
 	}
 
     public void upgradePurchasedHealth()
 	{
         maxHealth = 20;
         playerHealth = maxHealth;
+       
     }
     public void upgradePurchasedSpeed()
     {

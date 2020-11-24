@@ -23,7 +23,8 @@ public class ButtonHandler : MonoBehaviour
 
 				owner.GetComponent<Player>().upgradePurchasedHealth();
 				owner.GetComponent<Player>().UpdateHealthBar();
-
+				//owner.GetComponent<Player>().purchaseMade(price);
+				makePurchase(price);
 			}
 			else
 			{
@@ -41,8 +42,8 @@ public class ButtonHandler : MonoBehaviour
 				GetComponent<Button>().interactable = false;
 
 				owner.GetComponent<Player>().upgradePurchasedSpeed();
-
-
+				//				owner.GetComponent<Player>().purchaseMade(price);
+				makePurchase(price);
 			}
 			else
 			{
@@ -52,7 +53,11 @@ public class ButtonHandler : MonoBehaviour
 		}
 	}
 
-
+	private void makePurchase(int price)
+	{
+		owner.GetComponent<Player>().purchaseMade(price);
+		owner.GetComponent<Player>().getShop().updateText(owner.GetComponent<Player>().getCurrency());
+	}
 
 	private void altText(string buttonNeeded,string item)
 	{
