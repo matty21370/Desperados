@@ -1117,6 +1117,7 @@ MonoBehaviour:
   baseSpeed: 0
   boostSpeed: 8
   maxHealth: 10
+  bulletUpgrade: 0
   guns:
   - gunPosition: {fileID: 1660114049554927821}
     bullet: {fileID: 2389822185922206963, guid: 4c046527c3c304142bf4b3c13f6665e1, type: 3}

@@ -127,4 +127,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 40
   damage: 1
-  owner: {fileID: 0}

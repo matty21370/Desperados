@@ -57,7 +57,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int killStreak;
     private int killsThisGame;
     private bool canShoot = true;
-    private bool bulletUpgrade = false;
+    [SerializeField]private bool bulletUpgrade = false;
     private int team;
 
     private bool leaderboardOpen;
@@ -176,7 +176,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         shop = FindObjectOfType<Shop>();
         shop.gameObject.SetActive(false);
-        currency = 20;
+        currency = 100;
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
         manager = FindObjectOfType<GameManager>();
@@ -428,7 +428,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <param name="damage"> The amount of damage we want to apply to the player.</param>
     public void hitDetected(int damage)
     {
-        playerHealth = playerHealth- damage;
+        playerHealth = playerHealth - damage;//damage;
         UpdateHealthBar(); 
         if (playerHealth <= 0) 
         {
@@ -443,7 +443,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            healthSlider.value = playerHealth / 10; 
+            healthSlider.value = playerHealth / maxHealth; 
             healthText.text = playerHealth + "/" + maxHealth; 
         }
     }
@@ -660,17 +660,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void upgradePurchasedSpeed()
     {
         speedIncrease=2 ;
-            }
-    public void upgradeDamage()
-	{
-        bulletUpgrade=true;
-        Debug.Log("Upgradede");
-	}
-
-    public bool getBulletUpgrade()
-	{
-        return bulletUpgrade;
-	}
+    }
+    
 
 }
 

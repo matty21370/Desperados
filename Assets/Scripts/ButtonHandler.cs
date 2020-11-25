@@ -42,7 +42,7 @@ public class ButtonHandler : MonoBehaviour
 				GetComponent<Button>().interactable = false;
 
 				owner.GetComponent<Player>().upgradePurchasedSpeed();
-				//				owner.GetComponent<Player>().purchaseMade(price);
+				
 				makePurchase(price);
 			}
 			else
@@ -51,7 +51,7 @@ public class ButtonHandler : MonoBehaviour
 			}
 				
 		}
-		else if (text.Equals("damage"))
+		/*else if (text.Equals("damage"))
 		{
 			int price = 150;
 			if (owner.GetComponent<Player>().getCurrency() >= price)
@@ -61,7 +61,7 @@ public class ButtonHandler : MonoBehaviour
 				GetComponent<Button>().interactable = false;
 
 				owner.GetComponent<Player>().upgradeDamage();
-				//				owner.GetComponent<Player>().purchaseMade(price);
+				Debug.Log("HIT IT HAS BEEN BROUGHT AND SHOULD NOW WOEK");
 				makePurchase(price);
 			}
 			else
@@ -69,7 +69,7 @@ public class ButtonHandler : MonoBehaviour
 				altText("damageText", "Increase Damage: \n 150 Points");
 			}
 
-		}
+		}*/
 	}
 
 	private void makePurchase(int price)
