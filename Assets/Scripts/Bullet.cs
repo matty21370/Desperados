@@ -14,8 +14,8 @@ public class Bullet : MonoBehaviourPunCallbacks
     /// <summary>
     /// This is the damage we want the bullet to apply to the player when collided
     /// </summary>
-    [SerializeField] private int damage;
-
+    //  [SerializeField] private int damage;
+    public int damage;
     /// <summary>
     /// The owner of this bullet.
     /// Neccessary to avoid the player collider with their own bullet.
@@ -33,11 +33,11 @@ public class Bullet : MonoBehaviourPunCallbacks
     /// </summary>
     /// <param name="owner">The player who fired the bullet</param> 
     /// <param name="movement">The movement we want to apply to the bullet</param> 
-    public void InitializeBullet(GameObject owner, Vector3 movement)
+    public void InitializeBullet(GameObject owner, Vector3 movement, int damage)
     {
         this.owner = owner;
         this.movement = movement;
-		
+        this.damage = damage;
     }
 
     /// <summary>
@@ -76,7 +76,8 @@ public class Bullet : MonoBehaviourPunCallbacks
             if (collision.transform.tag == "Player")
             {
 
-                collision.gameObject.GetComponent<Player>().hitDetected(this.getDamage()); 
+                collision.gameObject.GetComponent<Player>().hitDetected(this.getDamage());
+                Debug.Log(this.getDamage());
                 if (collision.gameObject.GetComponent<Player>().getHealth() <= 0)
                 {
                     owner.GetComponent<Player>().addKill(); 

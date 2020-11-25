@@ -35,7 +35,7 @@ public class Mine : MonoBehaviourPunCallbacks
     public void hit()//iff mine destroyed
     {
         owner.GetComponent<Player>().RpcCreateHitParticle(transform.position);
-        owner.GetComponent<Player>().lostMine();
+       
         Destroy(gameObject);
     }
 
@@ -55,7 +55,7 @@ public class Mine : MonoBehaviourPunCallbacks
                 }
             }
             owner.GetComponent<Player>().RpcExplosiveParticle(transform.position);
-            owner.GetComponent<Player>().lostMine();
+          
             Destroy(gameObject);
         }
     }

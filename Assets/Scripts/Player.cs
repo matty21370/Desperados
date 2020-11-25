@@ -73,9 +73,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private List<Gun> guns = new List<Gun>();
 
     /// <summary>
-    /// This is the amount of mines the player has placed
+    /// check if the user can use mines
     /// </summary>
-    private int mineNumber = 1;
+    private bool minesEnabled=false;
 
     /// <summary>
     /// The below variables are references to all the UI components for the player
@@ -106,6 +106,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     GameManager manager;
     bool canMove;
     private int speedIncrease = 1;
+    private int bulletDamage = 1;
     private GameObject pauseMenu;
     private CanvasGroup pauseMenuGroup;
     
@@ -240,7 +241,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             AddExperience(10); 
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T) && (minesEnabled))
         {
             photonView.RPC("DropMine", RpcTarget.All);
 
@@ -396,7 +397,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         foreach (Gun g in guns)
         {
             GameObject bullet = Instantiate(g.getBullet(), g.getGunPosition().position, transform.rotation);
-            bullet.GetComponent<Bullet>().InitializeBullet(gameObject, -transform.forward);
+            bullet.GetComponent<Bullet>().InitializeBullet(gameObject, -transform.forward,bulletDamage);
             Destroy(bullet, 5f);
         }
     }
@@ -410,17 +411,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Gun g = guns[0];
         GameObject mine = Instantiate(g.getMine(), g.getGunPosition().position, transform.rotation);
         mine.GetComponent<Mine>().InitializeMine(gameObject); 
-        mineNumber++; 
+        
         Destroy(mine, 5f);
     }
 
-    /// <summary>
-    /// When the mine is destroyed, this method is called.
-    /// </summary>
-    public void lostMine()
-    {
-        mineNumber--; 
-    }
+    
 
     /// <summary>
     /// If we want to apply damage to a player. We call this method.
@@ -428,8 +423,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <param name="damage"> The amount of damage we want to apply to the player.</param>
     public void hitDetected(int damage)
     {
+        Debug.Log("damage:" + damage);
         playerHealth = playerHealth - damage;//damage;
-        UpdateHealthBar(); 
+        UpdateHealthBar();
+        Debug.Log(" playerHealth: " + playerHealth);
         if (playerHealth <= 0) 
         {
             photonView.RPC("Despawn", RpcTarget.All);
@@ -479,7 +476,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         GetComponent<BoxCollider>().enabled = false;
-        mineNumber = 0;
+       
         
         if(photonView.IsMine)
         {
@@ -661,6 +658,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         speedIncrease=2 ;
     }
+
+    public void unlockMines()
+	{
+        minesEnabled = true;
+	}
     
 
 }

@@ -51,25 +51,25 @@ public class ButtonHandler : MonoBehaviour
 			}
 				
 		}
-		/*else if (text.Equals("damage"))
+		else if (text.Equals("mine"))
 		{
-			int price = 150;
+			int price = 20;
 			if (owner.GetComponent<Player>().getCurrency() >= price)
 			{
-				Text txt = transform.Find("damageText").GetComponent<Text>();
+				Text txt = transform.Find("mineText").GetComponent<Text>();
 				txt.text = "Purchased";
 				GetComponent<Button>().interactable = false;
 
-				owner.GetComponent<Player>().upgradeDamage();
-				Debug.Log("HIT IT HAS BEEN BROUGHT AND SHOULD NOW WOEK");
+				owner.GetComponent<Player>().unlockMines();
+				
 				makePurchase(price);
 			}
 			else
 			{
-				altText("damageText", "Increase Damage: \n 150 Points");
+				altText("mineText", "Unlock Mines: \n 20 Points");
 			}
 
-		}*/
+		}
 	}
 
 	private void makePurchase(int price)
