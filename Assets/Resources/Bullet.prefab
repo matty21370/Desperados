@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2389822185922206962}
   - component: {fileID: 400001527437253846}
   - component: {fileID: 4960717829612764829}
+  - component: {fileID: 4632167389489877393}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2389822185922206963}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.7029686, y: 2.3547192, z: -2.9696343}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -42,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2389822185922206963}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: efbb13993d8043d4ba5c752ed4b1a2bc, type: 3}
 --- !u!23 &2389822185922206965
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -93,7 +94,7 @@ BoxCollider:
   m_GameObject: {fileID: 2389822185922206963}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -127,3 +128,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 40
   damage: 1
+--- !u!136 &4632167389489877393
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2389822185922206963}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1.9
+  m_Direction: 0
+  m_Center: {x: -0.4, y: 0, z: 1.6782146}

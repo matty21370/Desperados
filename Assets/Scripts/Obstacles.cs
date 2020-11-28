@@ -8,16 +8,34 @@ public class Obstacles : MonoBehaviour//PunCallbacks
 {
     private int obstacleHealth;
     [SerializeField] private GameObject explosionParticle;
+    private float movement;
     // Start is called before the first frame update
     void Start()
     {
         obstacleHealth = 10;
+        movement = Random.Range(1, 4);
+       
     }
-    private Rigidbody rb;
+  
+   
     // Update is called once per frame
     void Update()
     {
-       // transform.position += movement* Time.deltaTime;
+        // rb.velocity = new Vector3(0, movement, 0);
+
+        // transform.Rotate((Vector3.right *2* Time.deltaTime));
+        if (movement == 1)
+        {
+            transform.Rotate(0, 2 * Time.deltaTime, 0);
+        }else if (movement == 2)
+		{
+            transform.Rotate(0, 0, 2 * Time.deltaTime);
+        }
+        else if (movement == 3)
+		{
+            transform.Rotate(2 * Time.deltaTime, 0, 0);
+
+        }
     }
 
 
