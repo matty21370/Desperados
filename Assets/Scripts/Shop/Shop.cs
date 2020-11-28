@@ -16,17 +16,7 @@ public class Shop : MonoBehaviour
 
 	void Start()
 	{
-		//allSlots = 4;
-		//slot = new GameObject[allSlots];
-		//shopEnabled = false;
-	/*	for (int i = 0; i < allSlots; i++)
-		{
-			slot[i] = slotHolder.transform.GetChild(i).gameObject;
-			if (slot[i].GetComponent<Slot>().item == null)
-			{
-				slot[i].GetComponent<Slot>().empty = true;
-			}
-		}*/
+	
 	}
 
 	public void updateTxt()

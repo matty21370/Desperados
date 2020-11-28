@@ -525,7 +525,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void Respawn()
     {
         playerHealth = maxHealth; 
-        UpdateHealthBar(); 
+        UpdateHealthBar();
+        shotsLeft = 12;
         foreach (Transform child in transform) 
         {
             if (child.GetComponent<MeshRenderer>())
@@ -547,8 +548,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine)
         {
             killCount++; 
-            killStreak++; 
-
+            killStreak++;
+            shotsLeft = 12;
             if (killStreak >= GameManager.killstreakForEffect && !displayedKillstreakText) 
             {
                 displayedKillstreakText = true; 
