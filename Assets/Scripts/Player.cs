@@ -111,8 +111,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private CanvasGroup pauseMenuGroup;
 
    private Text overHeatText;
-   private float coolTimeRemaining;
+   
     private int shotsLeft = 12;
+    private float weaponCool = 2f;
     public int GetTeam()
     {
         return team;
@@ -183,7 +184,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         overHeatText = FindObjectOfType<Text>();
         //overHeatText = transform.Find("OverHeatText").GetComponent<Text>();
       overHeatText.text = "";
-        coolTimeRemaining = 1000;
+       
 
 
         currency = 100;
@@ -655,33 +656,55 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         currency = currency + 20;
     }
-
+    /// <summary>
+    //get the amount of points the player has
+    /// </summary>
     public int getCurrency()
 	{
         return currency;
 	}
-
+    /// <summary>
+    //take points for a purchase
+    /// </summary>
     public void purchaseMade(int price)
 	{
         currency = currency - price;
 	}
-
+    /// <summary>
+    //increase player health
+    /// </summary>
     public void upgradePurchasedHealth()
 	{
         maxHealth = 20;
         playerHealth = maxHealth;
        
     }
+    /// <summary>
+    //speed the player up
+    /// </summary>
     public void upgradePurchasedSpeed()
     {
         speedIncrease=2 ;
     }
-
+    /// <summary>
+    //allow mines to be used
+    /// </summary>
     public void unlockMines()
 	{
         minesEnabled = true;
 	}
+    /// <summary>
+    //reduce the cool down
+    /// </summary>
+    public void cooldownUpgrade()
+	{
+        weaponCool = weaponCool / 2;
+	}
 
+
+    /// <summary>
+    //set up text and start timer for cool down 
+    /// </summary>
     [PunRPC]
     private void weaponOverheat()
 	{
@@ -696,6 +719,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
 
     }
+    /// <summary>
+    //reset the weapon so that it can fire again
+    /// </summary>
     [PunRPC]
     private void weaponCoolDown()
 	{
@@ -703,6 +729,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         overHeatText.text = "";
         shotsLeft = 12;
     }
+    /// <summary>
+    //runs while the weapon is unable to fire
+    /// </summary>
     private IEnumerator CoolDownTimer()
     {
         yield return new WaitForSeconds(2f);

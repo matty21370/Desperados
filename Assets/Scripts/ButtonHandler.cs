@@ -70,6 +70,24 @@ public class ButtonHandler : MonoBehaviour
 			}
 
 		}
+		else if ((text.Equals("cooldown")))
+		{
+			int price = 250;
+			if (owner.GetComponent<Player>().getCurrency() >= price)
+			{
+				Text txt = transform.Find("CoolText").GetComponent<Text>();
+				txt.text = "Purchased";
+				GetComponent<Button>().interactable = false;
+
+				owner.GetComponent<Player>().cooldownUpgrade();
+
+				makePurchase(price);
+			}
+			else
+			{
+				altText("coolText", "Decrease Weapon Cooldown: \n 250 Points");
+			}
+		}
 	}
 
 	private void makePurchase(int price)
