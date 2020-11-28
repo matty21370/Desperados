@@ -109,7 +109,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int bulletDamage = 1;
     private GameObject pauseMenu;
     private CanvasGroup pauseMenuGroup;
-    
+
+   private Text overHeatText;
+   private float coolTimeRemaining;
+    private int shotsLeft = 12;
     public int GetTeam()
     {
         return team;
@@ -171,12 +174,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(photonView.IsMine)
         {
-            userName = PlayerPrefs.GetString("Name");
+            userName = PlayerPrefs.GetString("Name"); 
             playerName = userName;
         }
 
         shop = FindObjectOfType<Shop>();
         shop.gameObject.SetActive(false);
+        overHeatText = FindObjectOfType<Text>();
+        //overHeatText = transform.Find("OverHeatText").GetComponent<Text>();
+      overHeatText.text = "";
+        coolTimeRemaining = 1000;
+
+
         currency = 100;
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
@@ -228,7 +237,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (Input.GetMouseButtonDown(0) && photonView.IsMine && canShoot)
         {
-            photonView.RPC("Shoot", RpcTarget.All); 
+            if (shotsLeft > 0)
+            {
+                photonView.RPC("Shoot", RpcTarget.All);
+                shotsLeft--;
+			}
+			else
+			{
+               
+                weaponOverheat();
+			}
         }
 
         if (Input.GetKeyDown(KeyCode.G)) 
@@ -663,7 +681,35 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 	{
         minesEnabled = true;
 	}
-    
+
+    [PunRPC]
+    private void weaponOverheat()
+	{
+        Debug.Log("Weapon Overheating ");
+        overHeatText.color = new Color(255, 0, 0, 1);
+        overHeatText.text = "Weapon Overheating";
+        StartCoroutine("CoolDownTimer");
+        //CoolDownTimer();
+      
+
+
+
+
+    }
+    [PunRPC]
+    private void weaponCoolDown()
+	{
+       // coolTimeRemaining = 10000;
+        overHeatText.text = "";
+        shotsLeft = 12;
+    }
+    private IEnumerator CoolDownTimer()
+    {
+        yield return new WaitForSeconds(2f);
+        // photonView.RPC("WeaponOverheat", RpcTarget.All);
+        // photonView.RPC("Respawn", RpcTarget.All);
+        weaponCoolDown();
+    }
 
 }
 
