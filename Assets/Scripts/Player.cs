@@ -482,7 +482,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Destroy(p, 5f); 
         canShoot = false;
         canMove = false;
-        deaths += 1;
+        deaths += 1;                                                   //could this and line 502 be why we are getting 2 deaths
         killStreak = 0;
         displayedKillstreakText = false;
 
@@ -499,7 +499,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         if(photonView.IsMine)
         {
-            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths") + 1);
+            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths"));// + 1);
         }
        
         StartCoroutine("RespawnTimer");

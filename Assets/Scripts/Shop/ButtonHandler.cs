@@ -93,7 +93,7 @@ public class ButtonHandler : MonoBehaviour
 			}
 			else
 			{
-				altText("coolText", "Decrease Weapon Cooldown: \n 250 Points");
+				altText("CoolText", "Decrease Weapon Cooldown: \n 250 Points");
 			}
 		}
 	}
