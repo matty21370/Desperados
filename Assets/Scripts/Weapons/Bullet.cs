@@ -87,11 +87,11 @@ public class Bullet : MonoBehaviourPunCallbacks
             {
                 collision.gameObject.GetComponent<Mine>().hit(); 
             }
-            else if (collision.transform.tag == "Obstacle")
+            /*else if (collision.transform.tag == "Obstacle")
 			{
                 collision.gameObject.GetComponent<Obstacles>().reduceHealth(getDamage());
 
-            }
+            }*/
 
             owner.GetComponent<Player>().RpcCreateHitParticle(transform.position); 
             Destroy(gameObject); 

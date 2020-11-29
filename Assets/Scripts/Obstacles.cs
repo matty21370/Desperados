@@ -12,7 +12,7 @@ public class Obstacles : MonoBehaviour//PunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        obstacleHealth = 10;
+        obstacleHealth = Random.Range(10,30);
         movement = Random.Range(1, 4);
        
     }
@@ -38,23 +38,34 @@ public class Obstacles : MonoBehaviour//PunCallbacks
         }
     }
 
-
+    /// <summary>
+	/// if anything hits the object
+	/// </summary>
+	/// <param name="collision">
+	/// the object that has hit the object
+	/// </param>
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("collide");
         Debug.Log(collision.transform.tag);
           if (collision.transform.tag == "Player")
+            //if the player has collided
             {
             
                 collision.gameObject.GetComponent<Player>().hitDetected(1);
+            //give the player damage
                                
             }
+          else if (collision.transform.tag == "Bullet")
+		{
+            reduceHealth(collision.gameObject.GetComponent<Bullet>().getDamage());
+		}
                  
         
     }
 
 
-    public void reduceHealth(int damage)
+    private void reduceHealth(int damage)
 	{
         obstacleHealth = obstacleHealth - damage;
         if (obstacleHealth <= 0)

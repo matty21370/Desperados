@@ -20,7 +20,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <summary>
     /// This is the base speed of the player, can be upgraded later
     /// </summary>
-    [SerializeField] private float baseSpeed = 5f;
+   // [SerializeField] private float baseSpeed = 5f;
 
     /// <summary>
     /// This is the speed of the player when boosting, can be upgraded later
@@ -57,7 +57,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int killStreak;
     private int killsThisGame;
     private bool canShoot = true;
-    [SerializeField]private bool bulletUpgrade = false;
+   
     private int team;
 
     private bool leaderboardOpen;
@@ -123,7 +123,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         return playerName;
     }
-
+    
     public int GetLevel()
     {
         return level;
@@ -178,16 +178,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             userName = PlayerPrefs.GetString("Name"); 
             playerName = userName;
         }
-
+        currency = 100;
+        //set starting currency
         shop = FindObjectOfType<Shop>();
         shop.gameObject.SetActive(false);
+        //set the players shop and hide it
         overHeatText = FindObjectOfType<Text>();
-        //overHeatText = transform.Find("OverHeatText").GetComponent<Text>();
-      overHeatText.text = "";
+        overHeatText.text = "";
+        //set player warning text and hide it
        
-
-
-        currency = 100;
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
         manager = FindObjectOfType<GameManager>();
@@ -478,6 +477,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void Despawn()
     {
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
+        photonView.RPC("dropPack", RpcTarget.All);
         transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
         Destroy(p, 5f); 
         canShoot = false;
@@ -501,7 +501,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths") + 1);
         }
-
+       
         StartCoroutine("RespawnTimer");
     }
 
@@ -550,6 +550,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             killCount++; 
             killStreak++;
             shotsLeft = 12;
+            //reset shots on kill
             if (killStreak >= GameManager.killstreakForEffect && !displayedKillstreakText) 
             {
                 displayedKillstreakText = true; 
@@ -677,8 +678,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void upgradePurchasedHealth()
 	{
         maxHealth = 20;
-        playerHealth = maxHealth;
-       
+        playerHealth = maxHealth;   
+        //this may need to be change as will heal player if they purchase upgrade
+        UpdateHealthBar();
     }
     /// <summary>
     //speed the player up
@@ -700,47 +702,70 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void cooldownUpgrade()
 	{
         weaponCool = weaponCool / 2;
+        //half the cooldown
 	}
 
 
     /// <summary>
-    //set up text and start timer for cool down 
+    ///set up text and start timer for cool down 
     /// </summary>
     [PunRPC]
     private void weaponOverheat()
 	{
         Debug.Log("Weapon Overheating ");
+
         overHeatText.color = new Color(255, 0, 0, 1);
+        //set text colour to red
         overHeatText.text = "Weapon Overheating";
+        //set warning message
         StartCoroutine("CoolDownTimer");
-        //CoolDownTimer();
-      
-
-
-
+        //run timmer
 
     }
     /// <summary>
-    //reset the weapon so that it can fire again
+    ///reset the weapon so that it can fire again
     /// </summary>
     [PunRPC]
     private void weaponCoolDown()
 	{
-       // coolTimeRemaining = 10000;
+       
         overHeatText.text = "";
+        //make the text invisible
         shotsLeft = 12;
+        //reset the number of shots
     }
     /// <summary>
-    //runs while the weapon is unable to fire
+    ///runs while the weapon is unable to fire
     /// </summary>
     private IEnumerator CoolDownTimer()
     {
         yield return new WaitForSeconds(2f);
-        // photonView.RPC("WeaponOverheat", RpcTarget.All);
-        // photonView.RPC("Respawn", RpcTarget.All);
+        
         weaponCoolDown();
     }
 
+
+    public void HealthBoost(int boost)
+	{
+        if (playerHealth <= maxHealth-5)
+        {
+            playerHealth = playerHealth + boost;
+		}
+		else
+		{
+            playerHealth = maxHealth;
+		}
+        UpdateHealthBar();
+	}
+    [PunRPC]
+    private void dropPack()
+	{
+        Gun g = guns[0];
+        GameObject pack = Instantiate(g.getHealthPack(), g.getGunPosition().position, transform.rotation);
+        pack.GetComponent<HealthPack>().InitializePack(5);
+
+        Destroy(pack, 5f);
+    }
 }
 
 [Serializable]//create gun to fire weapons.
@@ -749,6 +774,7 @@ public class Gun
     [SerializeField] private Transform gunPosition;
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject mine;
+    [SerializeField] private GameObject healthPack;
 
     public Transform getGunPosition()
     {
@@ -763,4 +789,9 @@ public class Gun
     {
         return mine;
     }
+    public GameObject getHealthPack()
+    {
+        return healthPack;
+    }
+
 }
