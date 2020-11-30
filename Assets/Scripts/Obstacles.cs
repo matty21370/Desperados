@@ -72,6 +72,7 @@ public class Obstacles : MonoBehaviour//PunCallbacks
 		{
             GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
             Destroy(gameObject);
+            FindObjectOfType<AudioManager>().Play("MeteorExplode");
 
         }
 	}

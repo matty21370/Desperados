@@ -341,6 +341,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     movementSpeed = 11f;
                     camera.GetComponent<CameraMovement>().SetMaxFOV(95f);
+
+                    //FindObjectOfType<AudioManager>().Play("BoostNoise");
                 }
                 else
                 {

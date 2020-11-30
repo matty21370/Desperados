@@ -38,6 +38,8 @@ public class Bullet : MonoBehaviourPunCallbacks
         this.owner = owner;
         this.movement = movement;
         this.damage = damage;
+
+        FindObjectOfType<AudioManager>().Play("LaserSound1");
     }
 
     /// <summary>
