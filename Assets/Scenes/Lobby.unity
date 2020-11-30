@@ -3562,11 +3562,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0.1
-    loop: 0
+  - audioMixerGroup: {fileID: 24300002, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
+    name: Music
+    clip: {fileID: 8300000, guid: cc275ecc9cceebe46b55cc52e5fa6c7c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
 --- !u!4 &751442056
 Transform:
