@@ -764,7 +764,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         GameObject pack = Instantiate(g.getHealthPack(), g.getGunPosition().position, transform.rotation);
         pack.GetComponent<HealthPack>().InitializePack(5);
 
-        Destroy(pack, 5f);
+        Destroy(pack);
     }
 }
 
