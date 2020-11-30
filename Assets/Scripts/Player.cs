@@ -61,7 +61,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int team;
 
     private bool leaderboardOpen;
-
+    private bool outOfBounds;
     /// <summary>
     /// This is a reference to the camera object so it can be modified later
     /// </summary>
@@ -186,6 +186,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         overHeatText = FindObjectOfType<Text>();
         overHeatText.text = "";
         //set player warning text and hide it
+        outOfBounds = false;
        
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
@@ -329,8 +330,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (canMove)
         {
-            if (Input.GetKey(KeyCode.W))
+            CheckOutOfBounds();
+            if (Input.GetKey(KeyCode.W) )
             {
+                
                 transform.position += -transform.forward * (speedIncrease *movementSpeed) * Time.deltaTime;
                 camera.fieldOfView += Time.deltaTime * 6;
 
@@ -345,12 +348,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     camera.GetComponent<CameraMovement>().SetMaxFOV(90f);
                 }
             }
+          
             else
             {
                 camera.fieldOfView -= Time.deltaTime * 6;
             }
 
-            if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) )
             {
                 transform.position += transform.right * (speedIncrease * movementSpeed) * Time.deltaTime;
                 float z = Input.GetAxis("Horizontal") * 15.0f;
@@ -358,6 +362,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
                 transform.localEulerAngles = euler;
             }
+            
 
             if (Input.GetKey(KeyCode.S))
             {
@@ -765,6 +770,45 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         pack.GetComponent<HealthPack>().InitializePack(5);
 
         Destroy(pack);
+    }
+
+
+    public void CheckOutOfBounds()
+	{
+        if (transform.position.z <= -180) {
+            transform.position = new Vector3(transform.position.x, transform.position.y  , -170);
+            Debug.Log("zmax");
+        }
+        else if (transform.position.z >= 300)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -290);
+            Debug.Log("zmax");
+        }
+
+
+        if(transform.position.y <= -180)
+		{
+            transform.position = new Vector3(transform.position.x, -170, transform.position.z);
+            Debug.Log("ymax");
+        }
+        else if (transform.position.y >= 300)
+        {
+            transform.position = new Vector3(transform.position.x, 290, transform.position.z);
+            Debug.Log("ymax");
+        }
+
+
+
+        if (transform.position.x >= 300)
+        {
+            transform.position = new Vector3(280, transform.position.y, transform.position.y);
+            Debug.Log("xmax");
+        }
+        else if (transform.position.x <= -180)
+        {
+            transform.position = new Vector3(170, transform.position.y, transform.position.y);
+            Debug.Log("xmax");
+        }
     }
 }
 
