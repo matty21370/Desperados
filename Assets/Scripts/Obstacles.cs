@@ -14,7 +14,8 @@ public class Obstacles : MonoBehaviour//PunCallbacks
     {
         obstacleHealth = Random.Range(10,30);
         movement = Random.Range(1, 4);
-       
+        transform.position = new Vector3(Random.Range(-160,250), Random.Range(-160, 250), Random.Range(-160, 250));
+
     }
   
    
@@ -64,7 +65,12 @@ public class Obstacles : MonoBehaviour//PunCallbacks
         
     }
 
-
+    /// <summary>
+    /// if object is shot. sound will be played
+    /// </summary>
+    /// <param name="collision">
+    /// the object that has hit the object
+    /// </param>
     private void reduceHealth(int damage)
 	{
         obstacleHealth = obstacleHealth - damage;

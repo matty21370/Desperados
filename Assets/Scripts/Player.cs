@@ -448,7 +448,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         GameObject mine = Instantiate(g.getMine(), g.getGunPosition().position, transform.rotation);
         mine.GetComponent<Mine>().InitializeMine(gameObject); 
         
-        Destroy(mine, 5f);
+        Destroy(mine, 10f);
     }
 
     
@@ -792,38 +792,27 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 	{
         if (transform.position.z <= -180) {
             transform.position = new Vector3(transform.position.x, transform.position.y  , -170);
-            Debug.Log("zmax");
         }
         else if (transform.position.z >= 300)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -290);
-            Debug.Log("zmax");
+            transform.position = new Vector3(transform.position.x, transform.position.y, -290);         
         }
-
-
         if(transform.position.y <= -180)
 		{
             transform.position = new Vector3(transform.position.x, -170, transform.position.z);
-            Debug.Log("ymax");
         }
         else if (transform.position.y >= 300)
         {
             transform.position = new Vector3(transform.position.x, 290, transform.position.z);
-            Debug.Log("ymax");
         }
-
-
-
         if (transform.position.x >= 300)
         {
-            transform.position = new Vector3(280, transform.position.y, transform.position.y);
-            Debug.Log("xmax");
+            transform.position = new Vector3(280, transform.position.y, transform.position.y);   
         }
         else if (transform.position.x <= -180)
         {
             transform.position = new Vector3(170, transform.position.y, transform.position.y);
-            Debug.Log("xmax");
-        }
+            }
     }
 }
 
