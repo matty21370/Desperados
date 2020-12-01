@@ -10,6 +10,7 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject explosionParticle;
     private float movement;//= Random.Range(1, 4);
     private bool notDestroyed = true;
+    private bool checkCalled = false;
     /*  private const float Xpos;
      private const float Ypos;
      private const float Zpos;
@@ -33,7 +34,7 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
         {
             obstacleHealth = (int)stream.ReceiveNext();
             notDestroyed = (bool)stream.ReceiveNext();
-            movement = (int)stream.ReceiveNext();
+            movement = (float)stream.ReceiveNext();
         }
     }
 
@@ -41,9 +42,10 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void Update()
     {
-        if (!notDestroyed)
+        if (!notDestroyed && !checkCalled)
         {
             photonView.RPC("Despawn", RpcTarget.All);
+            checkCalled = true;
         }
         else
         {
