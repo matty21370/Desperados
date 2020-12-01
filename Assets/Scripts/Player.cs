@@ -167,6 +167,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+
     /// <summary>
     /// This method is called as soon as the player enters the main scene. 
     /// It is responsible for setting up all of the required variables that cannot be set in the editor.
@@ -178,6 +179,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             userName = PlayerPrefs.GetString("Name"); 
             playerName = userName;
         }
+      
         currency = 100;
         //set starting currency
         shop = FindObjectOfType<Shop>();

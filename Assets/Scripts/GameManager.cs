@@ -35,8 +35,20 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
 
+      //  SpawnObstacles();
+
         PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, Quaternion.identity, 0);
     }
+
+    /*private void SpawnObstacles()
+    {
+        GameObject[] objs;
+        objs = GameObject.FindGameObjectsWithTag("Obstacle");
+        foreach (GameObject obstacle in objs)
+        {
+            obstacle.GetComponent<Obstacles>().spawn();
+        }
+    }*/
 
     private void Update()
     {

@@ -4,38 +4,41 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine;
 
-public class Obstacles : MonoBehaviour//PunCallbacks
+public class Obstacles : MonoBehaviourPunCallbacks
 {
-    private int obstacleHealth;
+    private int obstacleHealth =10;
     [SerializeField] private GameObject explosionParticle;
-    private float movement;
-    // Start is called before the first frame update
-    void Start()
-    {
-        obstacleHealth = Random.Range(10,30);
-        movement = Random.Range(1, 4);
-        transform.position = new Vector3(Random.Range(-160,250), Random.Range(-160, 250), Random.Range(-160, 250));
-
-    }
+    private float movement;//= Random.Range(1, 4);
+    /*  private const float Xpos;
+     private const float Ypos;
+     private const float Zpos;
+    */
+ 
+   // Start is called before the first frame update
   
+    public void spawn()
+	{
+    }
    
+
     // Update is called once per frame
     void Update()
     {
-        // rb.velocity = new Vector3(0, movement, 0);
-
-        // transform.Rotate((Vector3.right *2* Time.deltaTime));
+        movement = Random.Range(1, 4);
+		
         if (movement == 1)
         {
             transform.Rotate(0, 2 * Time.deltaTime, 0);
-        }else if (movement == 2)
+        }
+        else if (movement == 2)
 		{
             transform.Rotate(0, 0, 2 * Time.deltaTime);
+         
         }
         else if (movement == 3)
 		{
             transform.Rotate(2 * Time.deltaTime, 0, 0);
-
+    
         }
     }
 
@@ -65,12 +68,12 @@ public class Obstacles : MonoBehaviour//PunCallbacks
         
     }
 
-    /// <summary>
-    /// if object is shot. sound will be played
-    /// </summary>
-    /// <param name="collision">
-    /// the object that has hit the object
-    /// </param>
+        /// <summary>
+	/// if anything hits the object
+	/// </summary>
+	/// <param name="collision">
+	/// the object that has hit the object
+	/// </param>
     private void reduceHealth(int damage)
 	{
         obstacleHealth = obstacleHealth - damage;
@@ -82,4 +85,10 @@ public class Obstacles : MonoBehaviour//PunCallbacks
 
         }
 	}
+
+
+
+   
+
+   
 }
