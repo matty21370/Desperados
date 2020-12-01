@@ -12,6 +12,8 @@ public class SettingsMenu : MonoBehaviour
     Resolution[] resolutions;
 
     public AudioMixer audioMixer;
+    public AudioMixer sfxMixer;
+    public AudioMixer musicMixer;
 
     // Start is called before the first frame update
     void Start()
@@ -66,4 +68,13 @@ public class SettingsMenu : MonoBehaviour
         audioMixer.SetFloat("volume", volume);
     }
 
+    public void setSFXVolume(float volume)
+    {
+        sfxMixer.SetFloat("sfxVolume", volume);
+    }
+
+    public void setMusicVolume(float volume)
+    {
+        musicMixer.SetFloat("musicVolume", volume);
+    }
 }

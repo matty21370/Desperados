@@ -305,6 +305,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             ToggleMenu();
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            FindObjectOfType<AudioManager>().Play("BoostNoise");
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            FindObjectOfType<AudioManager>().Stop("BoostNoise");
+        }
+
         pingText.text = "Latency: " + PhotonNetwork.GetPing(); 
     }
 
@@ -342,13 +352,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     movementSpeed = 11f;
                     camera.GetComponent<CameraMovement>().SetMaxFOV(95f);
 
-                    //FindObjectOfType<AudioManager>().Play("BoostNoise");
                 }
                 else
                 {
                     movementSpeed = 5f;
                     camera.GetComponent<CameraMovement>().SetMaxFOV(90f);
                 }
+
+                
             }
           
             else
@@ -727,6 +738,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         //set warning message
         StartCoroutine("CoolDownTimer");
         //run timmer
+
+        FindObjectOfType<AudioManager>().Play("Overheat");
 
     }
     /// <summary>
