@@ -11,15 +11,22 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
     private float movement;//= Random.Range(1, 4);
     private bool notDestroyed = true;
     private bool checkCalled = false;
-    /*  private const float Xpos;
-     private const float Ypos;
-     private const float Zpos;
-    */
+    private  float Xpos;
+     private  float Ypos;
+     private  float Zpos;
+    private bool positionSet = false;
 
     // Start is called before the first frame update
 
     public void spawn()
     {
+    }
+    public void start()
+	{
+        Xpos = Random.Range(-160, 280);
+        Ypos = Random.Range(-160, 280);
+        Zpos = Random.Range(-160, 280);
+
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -29,19 +36,32 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(notDestroyed);
             stream.SendNext(movement);
 
+            stream.SendNext(Xpos);
+            stream.SendNext(Ypos);
+            stream.SendNext(Zpos);
+
         }
         else if (stream.IsReading)
         {
             obstacleHealth = (int)stream.ReceiveNext();
             notDestroyed = (bool)stream.ReceiveNext();
             movement = (float)stream.ReceiveNext();
+            Xpos=(float)stream.ReceiveNext();
+            Ypos = (float)stream.ReceiveNext();
+            Zpos = (float)stream.ReceiveNext();
         }
+        
     }
 
 
     // Update is called once per frame
     void Update()
     {
+		/*if (!positionSet)
+		{
+            setPosition();
+            positionSet = true;
+        }*/
         if (!notDestroyed && !checkCalled)
         {
             photonView.RPC("Despawn", RpcTarget.All);
@@ -67,7 +87,6 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
                 transform.Rotate(2 * Time.deltaTime, 0, 0);
 
             }
-
 
         }
     }
@@ -134,11 +153,10 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
-    [PunRPC]
-    void SetAll()
-    {
-        gameObject.GetComponent<Obstacles>().obstacleHealth = obstacleHealth;
-    }
+    private void setPosition()
+	{
+         transform.position = new Vector3(Xpos,Ypos,Zpos);
+	}
 
 
 }
