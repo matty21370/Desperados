@@ -450,6 +450,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Destroy(mine, 10f);
     }
 
+    [PunRPC]
+    public void NetworkAddKill()
+    {
+        killCount += 1;
+    }
+
+    [PunRPC]
+    public void NetworkAddDeath()
+    {
+        deaths += 1;
+    }
+
     /// <summary>
     /// If we want to apply damage to a player. We call this method.
     /// </summary>
@@ -467,7 +479,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 photonView.RPC("dropPack", RpcTarget.All);
                 photonView.RPC("Despawn", RpcTarget.All);
-                who.addKill();
+                who.photonView.RPC("NetworkAddKill", RpcTarget.AllBuffered);
                 //Despawn();
             }
         }
@@ -507,7 +519,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             canShoot = false;
             canMove = false;
-            deaths += 1;
+            photonView.RPC("NetworkAddDeath", RpcTarget.AllBuffered);
             killStreak = 0;
             displayedKillstreakText = false;
         }
