@@ -20,7 +20,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// This is the maxiumum amount of players we want in a server
     /// </summary>
     [SerializeField]
-    private byte maxPlayersPerRoom = 4;
+    private byte maxPlayersPerRoom = 8;
 
     /// <summary>
     /// This is a reference to the control panel object in the scene.

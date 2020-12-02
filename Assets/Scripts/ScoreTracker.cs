@@ -27,6 +27,11 @@ public class ScoreTracker : MonoBehaviour
             else
             {
                 otherPlayers.Add(player);
+
+                if(player.GetKills() >= 25)
+                {
+                    //End game logic goes here
+                }
             }
         }
 
