@@ -57,7 +57,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int killStreak;
     private int killsThisGame;
     private bool canShoot = true;
-   
+  
     private int team;
 
     private bool leaderboardOpen;
@@ -154,6 +154,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(killsThisGame);
             stream.SendNext(team);
             stream.SendNext(playerName);
+           
         }
         else if (stream.IsReading) 
         {
@@ -164,6 +165,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             killsThisGame = (int)stream.ReceiveNext();
             team = (int)stream.ReceiveNext();
             playerName = (string)stream.ReceiveNext();
+            
         }
     }
 
@@ -467,6 +469,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log(" playerHealth: " + playerHealth);
         if (playerHealth <= 0) 
         {
+            photonView.RPC("dropPack", RpcTarget.All);
+         
+          
             photonView.RPC("Despawn", RpcTarget.All);
         }
     }
@@ -488,6 +493,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 	{
         return shop;
 	}
+    private void explode()
+	{
+        
+	}
 
     /// <summary>
     /// This method begins the death process.
@@ -497,30 +506,30 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void Despawn()
     {
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
-        photonView.RPC("dropPack", RpcTarget.All);
+
         transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
-        Destroy(p, 5f); 
+        Destroy(p, 5f);
         canShoot = false;
         canMove = false;
-        deaths += 1;                                                   //could this and line 502 be why we are getting 2 deaths
+        deaths += 1;
         killStreak = 0;
         displayedKillstreakText = false;
 
         foreach (Transform child in transform)
         {
-            if(child.GetComponent<MeshRenderer>()) 
+            if (child.GetComponent<MeshRenderer>())
             {
-                child.GetComponent<MeshRenderer>().enabled = false; 
+                child.GetComponent<MeshRenderer>().enabled = false;
             }
         }
 
         GetComponent<BoxCollider>().enabled = false;
+     
        
-        
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {
-            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths"));// + 1);
-        }
+            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths") + 1);
+       }
        
         StartCoroutine("RespawnTimer");
     }
@@ -532,8 +541,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <returns>Returns back to the method that called this coroutine for a set amount of seconds.</returns> 
     private IEnumerator RespawnTimer()
     {
-        yield return new WaitForSeconds(3f); 
-
+        yield return new WaitForSeconds(3f);
+       
         photonView.RPC("Respawn", RpcTarget.All);
     }
 
@@ -558,6 +567,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         GetComponent<BoxCollider>().enabled = true; 
         canShoot = true;
         canMove = true;
+       
     }
 
     /// <summary>
@@ -783,10 +793,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private void dropPack()
 	{
         Gun g = guns[0];
-        GameObject pack = Instantiate(g.getHealthPack(), g.getGunPosition().position, transform.rotation);
+     GameObject pack = Instantiate(g.getHealthPack(), g.getGunPosition().position, transform.rotation);
+       
         pack.GetComponent<HealthPack>().InitializePack(5);
 
-        Destroy(pack);
+        Destroy(pack,20f);
     }
 
 

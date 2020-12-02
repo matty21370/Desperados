@@ -20,12 +20,11 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 
     public void spawn()
     {
+       
     }
     public void start()
 	{
-        Xpos = Random.Range(-160, 280);
-        Ypos = Random.Range(-160, 280);
-        Zpos = Random.Range(-160, 280);
+       
 
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -40,6 +39,8 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(Ypos);
             stream.SendNext(Zpos);
 
+            stream.SendNext(positionSet);
+
         }
         else if (stream.IsReading)
         {
@@ -49,6 +50,7 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
             Xpos=(float)stream.ReceiveNext();
             Ypos = (float)stream.ReceiveNext();
             Zpos = (float)stream.ReceiveNext();
+            positionSet = (bool)stream.ReceiveNext();
         }
         
     }
@@ -57,12 +59,8 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void Update()
     {
-		/*if (!positionSet)
-		{
-            setPosition();
-            positionSet = true;
-        }*/
-        if (!notDestroyed && !checkCalled)
+	   
+        if (!checkCalled && !notDestroyed)
         {
             photonView.RPC("Despawn", RpcTarget.All);
             checkCalled = true;
@@ -155,7 +153,11 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 
     private void setPosition()
 	{
-         transform.position = new Vector3(Xpos,Ypos,Zpos);
+        Xpos = Random.Range(-160, 280);
+        Ypos = Random.Range(-160, 280);
+        Zpos = Random.Range(-160, 280);
+        transform.position = new Vector3(Xpos,Ypos,Zpos);
+        positionSet = true;
 	}
 
 
