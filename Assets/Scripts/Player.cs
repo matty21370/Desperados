@@ -470,9 +470,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (playerHealth <= 0) 
         {
             photonView.RPC("dropPack", RpcTarget.All);
-         
-          
-            photonView.RPC("Despawn", RpcTarget.All);
+
+
+            // photonView.RPC("Despawn", RpcTarget.All);
+            Despawn();
         }
     }
 
@@ -502,7 +503,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// This method begins the death process.
     /// It is responsible for deactivating all of the necessary components to hide the player and prevent other players from interacting with it.
     /// </summary>
-    [PunRPC]
+   // [PunRPC]
     public void Despawn()
     {
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
@@ -528,7 +529,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
        
         if (photonView.IsMine)
         {
-            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths") + 1);
+            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths"));// + 1);
        }
        
         StartCoroutine("RespawnTimer");
