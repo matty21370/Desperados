@@ -103,7 +103,7 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
             //if the player has collided
             {
            
-            collision.gameObject.GetComponent<Player>().hitDetected(1);
+            collision.gameObject.GetComponent<Player>().hitDetected(1, null);
             //give the player damage
                                
             }

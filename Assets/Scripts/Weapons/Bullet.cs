@@ -77,23 +77,14 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             if (collision.transform.tag == "Player")
             {
-
-                collision.gameObject.GetComponent<Player>().hitDetected(this.getDamage());
-                Debug.Log(this.getDamage());
-                if (collision.gameObject.GetComponent<Player>().getHealth() <= 0)
-                {
-                    owner.GetComponent<Player>().addKill(); 
-                }
+                collision.gameObject.GetComponent<Player>().hitDetected(getDamage(), owner.GetComponent<Player>());
+                //collision.gameObject.GetPhotonView().RPC("hitDetected", RpcTarget.All, damage);
+                Debug.Log(getDamage());
             }
             else if (collision.transform.tag == "Mine")
             {
                 collision.gameObject.GetComponent<Mine>().hit(); 
             }
-            /*else if (collision.transform.tag == "Obstacle")
-			{
-                collision.gameObject.GetComponent<Obstacles>().reduceHealth(getDamage());
-
-            }*/
 
             owner.GetComponent<Player>().RpcCreateHitParticle(transform.position); 
             Destroy(gameObject); 

@@ -45,7 +45,7 @@ public class Mine : MonoBehaviourPunCallbacks
         {
             if (collision.transform.tag == "Player")
             {
-                collision.gameObject.GetComponent<Player>().hitDetected(damage);//deal damage
+                collision.gameObject.GetComponent<Player>().hitDetected(damage, owner.GetComponent<Player>());//deal damage
                 owner.GetComponent<Player>().RpcCreateHitParticle(transform.position);//effect
                 Destroy(gameObject);//get rid of object
 

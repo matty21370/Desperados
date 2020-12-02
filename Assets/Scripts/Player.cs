@@ -169,7 +169,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-
     /// <summary>
     /// This method is called as soon as the player enters the main scene. 
     /// It is responsible for setting up all of the required variables that cannot be set in the editor.
@@ -249,14 +248,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 			}
 			else
 			{
-               
                 weaponOverheat();
 			}
         }
 
         if (Input.GetKeyDown(KeyCode.G)) 
         {
-            hitDetected(1); 
+            //hitDetected(1); 
         }
         
         if(Input.GetKeyDown(KeyCode.X))
@@ -295,7 +293,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 leaderboard.ShowLeaderBoard();
                 leaderboardOpen = true;
-                photonView.RPC("updatePlayerList", RpcTarget.AllBuffered);
             }
             else
             {
@@ -362,8 +359,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     movementSpeed = 5f;
                     camera.GetComponent<CameraMovement>().SetMaxFOV(90f);
                 }
-
-                
             }
           
             else
@@ -437,7 +432,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         foreach (Gun g in guns)
         {
             GameObject bullet = Instantiate(g.getBullet(), g.getGunPosition().position, transform.rotation);
-            bullet.GetComponent<Bullet>().InitializeBullet(gameObject, -transform.forward,bulletDamage);
+            bullet.GetComponent<Bullet>().InitializeBullet(gameObject, -transform.forward, bulletDamage);
             Destroy(bullet, 5f);
         }
     }
@@ -455,25 +450,26 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Destroy(mine, 10f);
     }
 
-    
-
     /// <summary>
     /// If we want to apply damage to a player. We call this method.
     /// </summary>
     /// <param name="damage"> The amount of damage we want to apply to the player.</param>
-    public void hitDetected(int damage)
+    public void hitDetected(int damage, Player who)
     {
-        Debug.Log("damage:" + damage);
-        playerHealth = playerHealth - damage;//damage;
-        UpdateHealthBar();
-        Debug.Log(" playerHealth: " + playerHealth);
-        if (playerHealth <= 0) 
+        if (photonView.IsMine)
         {
-            photonView.RPC("dropPack", RpcTarget.All);
+            Debug.Log("damage:" + damage);
+            playerHealth = playerHealth - damage;//damage;
+            UpdateHealthBar();
+            Debug.Log(" playerHealth: " + playerHealth);
 
-
-            // photonView.RPC("Despawn", RpcTarget.All);
-            Despawn();
+            if (playerHealth <= 0)
+            {
+                photonView.RPC("dropPack", RpcTarget.All);
+                photonView.RPC("Despawn", RpcTarget.All);
+                who.addKill();
+                //Despawn();
+            }
         }
     }
 
@@ -489,32 +485,32 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-
     public Shop getShop()
 	{
         return shop;
-	}
-    private void explode()
-	{
-        
 	}
 
     /// <summary>
     /// This method begins the death process.
     /// It is responsible for deactivating all of the necessary components to hide the player and prevent other players from interacting with it.
     /// </summary>
-   // [PunRPC]
+    [PunRPC]
     public void Despawn()
     {
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
+        FindObjectOfType<ScoreTracker>().CalculateScore();
 
         transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
         Destroy(p, 5f);
-        canShoot = false;
-        canMove = false;
-        deaths += 1;
-        killStreak = 0;
-        displayedKillstreakText = false;
+
+        if (photonView.IsMine)
+        {
+            canShoot = false;
+            canMove = false;
+            deaths += 1;
+            killStreak = 0;
+            displayedKillstreakText = false;
+        }
 
         foreach (Transform child in transform)
         {
@@ -543,15 +539,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private IEnumerator RespawnTimer()
     {
         yield return new WaitForSeconds(3f);
-       
-        photonView.RPC("Respawn", RpcTarget.All);
+
+        //photonView.RPC("Respawn", RpcTarget.All);
+        Respawn();
     }
 
     /// <summary>
     /// This RPC is called when we want the player to respawn. 
     /// It is responsible for reactivating all the necessary components to get the player back into the action.
     /// </summary>
-    [PunRPC]
+    //[PunRPC]
     public void Respawn()
     {
         playerHealth = maxHealth; 
