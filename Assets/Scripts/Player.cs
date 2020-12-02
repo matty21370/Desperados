@@ -454,12 +454,24 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void NetworkAddKill()
     {
         killCount += 1;
+
+        if(photonView.IsMine)
+        {
+            PlayerPrefs.SetInt("Kills", PlayerPrefs.GetInt("Kills") + 1);
+            AddExperience(10);
+            addCurrency();
+        }
     }
 
     [PunRPC]
     public void NetworkAddDeath()
     {
         deaths += 1;
+
+        if(photonView.IsMine)
+        {
+            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths") + 1);
+        }
     }
 
     /// <summary>
@@ -470,17 +482,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            Debug.Log("damage:" + damage);
             playerHealth = playerHealth - damage;//damage;
             UpdateHealthBar();
-            Debug.Log(" playerHealth: " + playerHealth);
 
             if (playerHealth <= 0)
             {
                 photonView.RPC("dropPack", RpcTarget.All);
                 photonView.RPC("Despawn", RpcTarget.All);
                 who.photonView.RPC("NetworkAddKill", RpcTarget.AllBuffered);
-                //Despawn();
             }
         }
     }
@@ -510,8 +519,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void Despawn()
     {
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
-        FindObjectOfType<ScoreTracker>().CalculateScore();
-
         transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
         Destroy(p, 5f);
 
@@ -552,7 +559,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         yield return new WaitForSeconds(3f);
 
-        //photonView.RPC("Respawn", RpcTarget.All);
         Respawn();
     }
 
@@ -560,7 +566,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// This RPC is called when we want the player to respawn. 
     /// It is responsible for reactivating all the necessary components to get the player back into the action.
     /// </summary>
-    //[PunRPC]
     public void Respawn()
     {
         playerHealth = maxHealth; 
@@ -578,29 +583,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         canShoot = true;
         canMove = true;
        
-    }
-
-    /// <summary>
-    /// This method is called when the player successfully kills another player.
-    /// </summary>
-    public void addKill()
-    {
-        if (photonView.IsMine)
-        {
-            killCount++; 
-            killStreak++;
-            shotsLeft = 12;
-            //reset shots on kill
-            if (killStreak >= GameManager.killstreakForEffect && !displayedKillstreakText) 
-            {
-                displayedKillstreakText = true; 
-                StartCoroutine("killstreakText"); 
-            }
-
-            PlayerPrefs.SetInt("Kills", PlayerPrefs.GetInt("Kills") + 1);
-            AddExperience(10); 
-            addCurrency();
-        }
     }
 
     /// <summary>

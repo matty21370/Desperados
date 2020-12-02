@@ -9,8 +9,15 @@ public class ScoreTracker : MonoBehaviour
 
     private List<Player> otherPlayers = new List<Player>();
 
+    private void Update()
+    {
+        CalculateScore();
+    }
+
     public void CalculateScore()
     {
+        otherPlayers.Clear();
+
         foreach(Player player in FindObjectsOfType<Player>())
         {
             if(player.photonView.IsMine)

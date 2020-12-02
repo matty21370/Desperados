@@ -48,11 +48,6 @@ public class Mine : MonoBehaviourPunCallbacks
                 collision.gameObject.GetComponent<Player>().hitDetected(damage, owner.GetComponent<Player>());//deal damage
                 owner.GetComponent<Player>().RpcCreateHitParticle(transform.position);//effect
                 Destroy(gameObject);//get rid of object
-
-                if (collision.gameObject.GetComponent<Player>().getHealth() <= 0)//if kill
-                {
-                    owner.GetComponent<Player>().addKill();
-                }
             }
             owner.GetComponent<Player>().RpcExplosiveParticle(transform.position);
           
