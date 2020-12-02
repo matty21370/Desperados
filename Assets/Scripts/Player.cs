@@ -87,6 +87,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private UnityEngine.UI.Slider healthSlider;
     private UnityEngine.UI.Slider expSlider;
 
+    private GameObject levelUpNotification;
+
     /// <summary>
     /// A boolean showing if we have displayed the killstreak text or not
     /// </summary>
@@ -180,6 +182,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             userName = PlayerPrefs.GetString("Name"); 
             playerName = userName;
         }
+
+        levelUpNotification = GameObject.Find("Level Up");
       
         currency = 100;
         //set starting currency
@@ -597,7 +601,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (exp >= 100) 
         {
             photonView.RPC("RpcCreateLevelUpParticle", RpcTarget.All); 
-            level += 1; 
+            level += 1;
+            StartCoroutine(levelUpPopup());
             levelText.text = "Level: " + level;
             exp = 0;
             PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1); 
@@ -605,6 +610,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         PlayerPrefs.SetFloat("Exp", exp); 
+    }
+
+    private IEnumerator levelUpPopup()
+    {
+        levelUpNotification.GetComponent<CanvasGroup>().alpha = 1;
+        levelUpNotification.GetComponent<LevelUpNotification>().SetText("Rank: " + level);
+        yield return new WaitForSeconds(2f);
+        levelUpNotification.GetComponent<CanvasGroup>().alpha = 0;
     }
 
     /// <summary>
