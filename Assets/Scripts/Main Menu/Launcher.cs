@@ -123,6 +123,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Successfully joined room");
         PhotonNetwork.LoadLevel("SampleScene"); //Load the main game scene
+
+        FindObjectOfType<AudioManager>().Stop("Music");
     }
 
     /// <summary>
