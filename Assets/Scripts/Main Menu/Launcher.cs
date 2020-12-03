@@ -44,6 +44,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject shopPage;
     [SerializeField] private GameObject aboutPage;
     [SerializeField] private GameObject settingsPage;
+    [SerializeField] private GameObject controlsPage;
     [SerializeField] private GameObject namePrompt;
 
     [SerializeField] private InputField nameField;
@@ -214,5 +215,17 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         controlPanel.SetActive(true);
         settingsPage.SetActive(false);
+    }
+
+    public void OpenControlsPage()
+    {
+        controlPanel.SetActive(false);
+        controlsPage.SetActive(true);
+    }
+
+    public void CloseControlsPage()
+    {
+        controlPanel.SetActive(true);
+        controlsPage.SetActive(false);
     }
 }
