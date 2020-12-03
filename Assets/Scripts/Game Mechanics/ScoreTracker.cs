@@ -39,16 +39,19 @@ public class ScoreTracker : MonoBehaviour
             else
             {
                 otherPlayers.Add(player);
-
-                if(player.GetKills() >= 10)
-                {
-                    FindObjectOfType<GameOverScreen>().GetComponent<CanvasGroup>().alpha = 1;
-                    FindObjectOfType<GameOverScreen>().SetScores("Your score: " + yourPlayer.GetKills(), "1. " + otherPlayers[0].GetName() + otherPlayers[0].GetKills(), "2. " + otherPlayers[1].GetName() + otherPlayers[1].GetKills(), "3. " + otherPlayers[2].GetName() + otherPlayers[2].GetKills());
-                }
             }
         }
 
         otherPlayers.Sort(SortByKills);
+
+        foreach (Player player in otherPlayers) {
+            if (player.GetKills() >= 10)
+            {
+                FindObjectOfType<GameOverScreen>().GetComponent<CanvasGroup>().alpha = 1;
+                FindObjectOfType<GameOverScreen>().SetScores("Your score: " + yourPlayer.GetKills(), "1. " + otherPlayers[0].GetName() + otherPlayers[0].GetKills(), "2. " + otherPlayers[1].GetName() + otherPlayers[1].GetKills(), "3. " + otherPlayers[2].GetName() + otherPlayers[2].GetKills());
+            }
+        }
+
         enemyText.text = otherPlayers[0].GetName() + ": " + otherPlayers[0].GetKills();
     }
 
