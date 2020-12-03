@@ -30,6 +30,8 @@ public class Leaderboard : MonoBehaviourPunCallbacks
             tmp.GetComponent<PlayerCard>().nameText.text = player.GetName().ToString();
             tmp.GetComponent<PlayerCard>().killsText.text = player.GetKills().ToString();
             tmp.GetComponent<PlayerCard>().deathsText.text = player.GetDeaths().ToString();
+
+
         }
     }
 

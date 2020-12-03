@@ -8,6 +8,7 @@ public class ScoreTracker : MonoBehaviour
     public Text youText, enemyText;
 
     private List<Player> otherPlayers = new List<Player>();
+    Player yourPlayer;
 
     private void Update()
     {
@@ -22,15 +23,17 @@ public class ScoreTracker : MonoBehaviour
         {
             if(player.photonView.IsMine)
             {
+                yourPlayer = player;
                 youText.text = "You: " + player.GetKills();
             }
             else
             {
                 otherPlayers.Add(player);
 
-                if(player.GetKills() >= 25)
+                if(player.GetKills() >= 10)
                 {
-                    //End game logic goes here
+                    FindObjectOfType<GameOverScreen>().GetComponent<CanvasGroup>().alpha = 1;
+                    FindObjectOfType<GameOverScreen>().SetScores("Your score: " + yourPlayer.GetKills(), "1. " + otherPlayers[0].GetName() + otherPlayers[0].GetKills(), "2. " + otherPlayers[1].GetName() + otherPlayers[1].GetKills(), "3. " + otherPlayers[2].GetName() + otherPlayers[2].GetKills());
                 }
             }
         }
