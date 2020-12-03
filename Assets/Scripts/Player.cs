@@ -544,8 +544,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         GetComponent<BoxCollider>().enabled = false;
-     
-       
+        GetComponent<CapsuleCollider>().enabled = false;
+
+
         if (photonView.IsMine)
         {
             PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths"));// + 1);
@@ -583,7 +584,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        GetComponent<BoxCollider>().enabled = true; 
+        GetComponent<BoxCollider>().enabled = true;
+        GetComponent<CapsuleCollider>().enabled = true;
         canShoot = true;
         canMove = true;
        
