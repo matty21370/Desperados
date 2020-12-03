@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,16 @@ public class ScoreTracker : MonoBehaviour
 
     private void Update()
     {
-        CalculateScore();
+        if (PhotonNetwork.PlayerList.Length > 1)
+        {
+            CalculateScore();
+            GetComponent<CanvasGroup>().alpha = 1;
+        }
+        else
+        {
+            Debug.LogWarning("Need 1 more player to start game");
+            GetComponent<CanvasGroup>().alpha = 0;
+        }
     }
 
     public void CalculateScore()
