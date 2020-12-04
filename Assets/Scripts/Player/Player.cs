@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Script created by: Matthew Burke, Andrew Viney
@@ -111,6 +112,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int bulletDamage = 1;
     private GameObject pauseMenu;
     private CanvasGroup pauseMenuGroup;
+    private TMP_Text currencyText;
 
     private Text overHeatText;
    
@@ -202,15 +204,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         respawnScreen = GameObject.Find("Respawn Screen");
 
         levelUpNotification = GameObject.Find("Level Up");
-      
+
         currency = 100;
-        //set starting currency
+        currencyText = GameObject.Find("Currency Text").GetComponent<TMP_Text>();
+        currencyText.text = "Currency: " + currency;
+
         shop = FindObjectOfType<Shop>();
         shop.gameObject.SetActive(false);
-        //set the players shop and hide it
+
         overHeatText = FindObjectOfType<Text>();
         overHeatText.text = "";
-        //set player warning text and hide it
+
         outOfBounds = false;
        
         leaderboard = FindObjectOfType<Leaderboard>();
@@ -241,8 +245,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         pingText = GameObject.Find("Ping Text").GetComponent<Text>();
 
         camera = GetComponentInChildren<Camera>(); 
-
-        team = UnityEngine.Random.Range(1, 2);
 
         if(!photonView.IsMine)
         {
@@ -705,6 +707,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private void addCurrency()
     {
         currency = currency + 20;
+        currencyText.text = "Currency: " + currency;
     }
     /// <summary>
     //get the amount of points the player has
@@ -719,6 +722,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void purchaseMade(int price)
 	{
         currency = currency - price;
+        currencyText.text = "Currency: " + currency;
 	}
     /// <summary>
     //increase player health

@@ -625,6 +625,8 @@ MonoBehaviour:
   explosiveParticle: {fileID: 426939254516331892, guid: 661b2b08c4e2b944cb376f66a1e838f4, type: 3}
   boostTrail: {fileID: 8626708731874616210, guid: eb5b9f73209c02a4daa361e7613a0d43, type: 3}
   canMove: 0
+  respawnScreen: {fileID: 0}
+  isDead: 0
 --- !u!65 &941554950578719353
 BoxCollider:
   m_ObjectHideFlags: 0
