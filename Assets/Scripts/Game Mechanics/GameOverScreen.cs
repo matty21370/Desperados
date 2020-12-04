@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviour
 {
-    public Text yourScore, firstScore, secondScore, thirdScore;
+    public Text yourScore, firstScore;
 
-    public void SetScores(string your, string first, string second, string third)
+    public void SetScores(string whoWon, int yourScore)
     {
-        yourScore.text = your;
-        firstScore.text = first;
-        secondScore.text = second;
-        thirdScore.text = third;
+        firstScore.text = whoWon + " won the game!";
+        this.yourScore.text = "You scored: " + yourScore;
     }
 }

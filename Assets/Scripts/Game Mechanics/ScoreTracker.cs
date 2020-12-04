@@ -6,7 +6,18 @@ using UnityEngine.UI;
 
 public class ScoreTracker : MonoBehaviour
 {
-    public Text youText, enemyText;
+    public Text youText, scoreToWinText;
+
+    public int scoreToWin;
+
+    private Player yourPlayer;
+    private GameOverScreen gameOverScreen;
+
+    private void Start()
+    {
+        scoreToWinText.text = "Score to win: " + scoreToWin;
+        gameOverScreen = FindObjectOfType<GameOverScreen>();
+    }
 
     private void Update()
     {
@@ -20,14 +31,25 @@ public class ScoreTracker : MonoBehaviour
             if(player.photonView.IsMine)
             {
                 youText.text = "Your score: " + player.GetKills();
-            } 
-            else
+                yourPlayer = player;
+            }
+
+            if (player.GetKills() >= scoreToWin)
             {
-                if(player.GetKills() >= 10)
-                {
-                    //End game
-                }
+                gameOverScreen.GetComponent<CanvasGroup>().alpha = 1;
+                gameOverScreen.SetScores(player.GetName(), yourPlayer.GetKills());
+                yourPlayer.canMove = false;
+                yourPlayer.canShoot = false;
+                Invoke("RestartGame", 5f);
             }
         }
+    }
+
+    public void RestartGame()
+    {
+        yourPlayer.canMove = true;
+        yourPlayer.canShoot = true;
+        yourPlayer.photonView.RPC("ResetPlayer", RpcTarget.All);
+        gameOverScreen.GetComponent<CanvasGroup>().alpha = 0;
     }
 }

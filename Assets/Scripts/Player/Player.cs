@@ -56,7 +56,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int deaths;
     private int killStreak;
     private int killsThisGame;
-    private bool canShoot = true;
+    public bool canShoot = true;
   
     private int team;
 
@@ -106,7 +106,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Shop shop;
     Leaderboard leaderboard;
     GameManager manager;
-    bool canMove;
+    public bool canMove;
     private int speedIncrease = 1;
     private int bulletDamage = 1;
     private GameObject pauseMenu;
@@ -139,6 +139,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public int GetDeaths()
     {
         return deaths;
+    }
+
+    [PunRPC]
+    public void ResetPlayer()
+    {
+        killCount = 0;
+        deaths = 0;
+        currency = 0;
+        shotsLeft = 12;
+        speedIncrease = 1;
+        bulletDamage = 1;
     }
 
     /// <summary>
