@@ -62,6 +62,17 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void RespawnPlayer()
+    {
+        foreach(Player player in FindObjectsOfType<Player>())
+        {
+            if(player.photonView.IsMine)
+            {
+                player.RespawnButton();
+            }
+        }
+    }
+
     /// <summary>
     /// When we want to leave the server, we call this method.
     /// </summary>

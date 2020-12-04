@@ -368,6 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookAt: {fileID: 6565789079543952783}
   camTransform: {fileID: 67559537115011858}
+  camEnabled: 0
 --- !u!1 &7920328243946091557
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boostSpeed: 8
   maxHealth: 10
+  canShoot: 1
   guns:
   - gunPosition: {fileID: 1660114049554927821}
     bullet: {fileID: 2389822185922206963, guid: 4c046527c3c304142bf4b3c13f6665e1, type: 3}
@@ -622,6 +624,7 @@ MonoBehaviour:
   hitParticle: {fileID: 1092632126663006434, guid: 2d8c92cdaa809e748836433028e21082, type: 3}
   explosiveParticle: {fileID: 426939254516331892, guid: 661b2b08c4e2b944cb376f66a1e838f4, type: 3}
   boostTrail: {fileID: 8626708731874616210, guid: eb5b9f73209c02a4daa361e7613a0d43, type: 3}
+  canMove: 0
 --- !u!65 &941554950578719353
 BoxCollider:
   m_ObjectHideFlags: 0

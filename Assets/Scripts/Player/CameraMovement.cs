@@ -32,6 +32,8 @@ public class CameraMovement : MonoBehaviour
     /// </summary>
     private Camera cam;
 
+    public bool camEnabled = true;
+
     private float distance = 10.0f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
@@ -49,28 +51,28 @@ public class CameraMovement : MonoBehaviour
 
     private void Update()
     {
-        currentX += Input.GetAxis("Mouse X"); 
-        currentY += Input.GetAxis("Mouse Y");
+            currentX += Input.GetAxis("Mouse X");
+            currentY += Input.GetAxis("Mouse Y");
 
-        currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
+            currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
 
-        if(cam.fieldOfView <= minFov)
-        {
-            cam.fieldOfView = minFov;
-        }
-        else if(cam.fieldOfView >= maxFov)
-        {
-            cam.fieldOfView = maxFov;
-        }
+            if (cam.fieldOfView <= minFov)
+            {
+                cam.fieldOfView = minFov;
+            }
+            else if (cam.fieldOfView >= maxFov)
+            {
+                cam.fieldOfView = maxFov;
+            }
     }
 
     private void LateUpdate()
     {
-        Vector3 dir = new Vector3(0, 0, -distance);
-        Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        camTransform.position = lookAt.position + rotation * dir;
+            Vector3 dir = new Vector3(0, 0, -distance);
+            Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+            camTransform.position = lookAt.position + rotation * dir;
 
-        camTransform.LookAt(lookAt.position);
+            camTransform.LookAt(lookAt.position);
     }
 
     public void SetMaxFOV(float n)

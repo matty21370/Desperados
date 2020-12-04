@@ -112,10 +112,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private GameObject pauseMenu;
     private CanvasGroup pauseMenuGroup;
 
-   private Text overHeatText;
+    private Text overHeatText;
    
     private int shotsLeft = 12;
     private float weaponCool = 2f;
+
+    private GameObject respawnScreen;
+
     public int GetTeam()
     {
         return team;
@@ -194,6 +197,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             playerName = userName;
         }
 
+        respawnScreen = GameObject.Find("Respawn Screen");
+
         levelUpNotification = GameObject.Find("Level Up");
       
         currency = 100;
@@ -269,7 +274,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (Input.GetKeyDown(KeyCode.G)) 
         {
-            //hitDetected(1); 
+            hitDetected(1, this); 
         }
         
         if(Input.GetKeyDown(KeyCode.X))
@@ -482,11 +487,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void NetworkAddDeath()
     {
         deaths += 1;
-
-        if(photonView.IsMine)
-        {
-            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths") + 1);
-        }
     }
 
     /// <summary>
@@ -534,7 +534,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void Despawn()
     {
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
-        transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
+        camera.GetComponent<CameraMovement>().camEnabled = false;
         Destroy(p, 5f);
 
         if (photonView.IsMine)
@@ -542,6 +542,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             canShoot = false;
             canMove = false;
             photonView.RPC("NetworkAddDeath", RpcTarget.AllBuffered);
+            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths"));// + 1);
             killStreak = 0;
             displayedKillstreakText = false;
         }
@@ -557,25 +558,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         GetComponent<BoxCollider>().enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
-        if (photonView.IsMine)
-        {
-            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths"));// + 1);
-       }
-       
-        StartCoroutine("RespawnTimer");
+        respawnScreen.GetComponent<CanvasGroup>().alpha = 1;
     }
 
-    /// <summary>
-    /// This method simply adds a delay to the respawn process.
-    /// This prevents players from immediately respawning after despawning
-    /// </summary>
-    /// <returns>Returns back to the method that called this coroutine for a set amount of seconds.</returns> 
-    private IEnumerator RespawnTimer()
+    public void RespawnButton()
     {
-        yield return new WaitForSeconds(3f);
-
-        Respawn();
+        Invoke("Respawn", 3f);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     /// <summary>
@@ -584,6 +577,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     public void Respawn()
     {
+        transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
+        camera.GetComponent<CameraMovement>().camEnabled = false;
+        respawnScreen.GetComponent<CanvasGroup>().alpha = 0;
         playerHealth = maxHealth; 
         UpdateHealthBar();
         shotsLeft = 12;
