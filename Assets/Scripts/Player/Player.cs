@@ -123,6 +123,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public bool isDead = false;
 
+    public GameObject coinPickup;
+
     public int GetTeam()
     {
         return team;
@@ -539,7 +541,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         isDead = true;
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
-        camera.GetComponent<CameraMovement>().camEnabled = false;
         Destroy(p, 5f);
 
         if (photonView.IsMine)
@@ -563,17 +564,28 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         GetComponent<BoxCollider>().enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        if (photonView.IsMine)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
-        respawnScreen.GetComponent<CanvasGroup>().alpha = 1;
+        //respawnScreen.GetComponent<CanvasGroup>().alpha = 1;
+        StartCoroutine(RespawnTimer());
+
+        Instantiate(coinPickup, transform.position, Quaternion.identity);
     }
 
     public void RespawnButton()
     {
         Invoke("Respawn", 3f);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        
+    }
+
+    private IEnumerator RespawnTimer()
+    {
+        yield return new WaitForSeconds(5f);
+        Respawn();
     }
 
     /// <summary>
@@ -582,9 +594,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     public void Respawn()
     {
+        if (photonView.IsMine)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
         isDead = false;
         transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
-        camera.GetComponent<CameraMovement>().camEnabled = false;
         respawnScreen.GetComponent<CanvasGroup>().alpha = 0;
         playerHealth = maxHealth; 
         UpdateHealthBar();

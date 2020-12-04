@@ -627,6 +627,7 @@ MonoBehaviour:
   canMove: 0
   respawnScreen: {fileID: 0}
   isDead: 0
+  coinPickup: {fileID: 3318978757863166718, guid: f7f183043a9369a4686014bbebb01a30, type: 3}
 --- !u!65 &941554950578719353
 BoxCollider:
   m_ObjectHideFlags: 0
