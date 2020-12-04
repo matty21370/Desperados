@@ -1799,7 +1799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   youText: {fileID: 103829835}
   scoreToWinText: {fileID: 26124514}
-  scoreToWin: 2
+  scoreToWin: 10
 --- !u!225 &526476621
 CanvasGroup:
   m_ObjectHideFlags: 0
