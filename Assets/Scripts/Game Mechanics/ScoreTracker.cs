@@ -8,55 +8,26 @@ public class ScoreTracker : MonoBehaviour
 {
     public Text youText, enemyText;
 
-    private List<Player> otherPlayers = new List<Player>();
-    Player yourPlayer;
-
     private void Update()
     {
-        if (PhotonNetwork.PlayerList.Length > 1)
-        {
-            CalculateScore();
-            GetComponent<CanvasGroup>().alpha = 1;
-        }
-        else
-        {
-            Debug.LogWarning("Need 1 more player to start game");
-            GetComponent<CanvasGroup>().alpha = 0;
-        }
+        CalculateScore();
     }
 
     public void CalculateScore()
     {
-        otherPlayers.Clear();
-
         foreach(Player player in FindObjectsOfType<Player>())
         {
             if(player.photonView.IsMine)
             {
-                yourPlayer = player;
-                youText.text = "You: " + player.GetKills();
-            }
+                youText.text = "Your score: " + player.GetKills();
+            } 
             else
             {
-                otherPlayers.Add(player);
+                if(player.GetKills() >= 10)
+                {
+                    //End game
+                }
             }
         }
-
-        otherPlayers.Sort(SortByKills);
-
-        foreach (Player player in otherPlayers) {
-            if (player.GetKills() >= 10)
-            {
-                FindObjectOfType<GameOverScreen>().GetComponent<CanvasGroup>().alpha = 1;
-                FindObjectOfType<GameOverScreen>().SetScores("Your score: " + yourPlayer.GetKills(), "1. " + otherPlayers[0].GetName() + otherPlayers[0].GetKills(), "2. " + otherPlayers[1].GetName() + otherPlayers[1].GetKills(), "3. " + otherPlayers[2].GetName() + otherPlayers[2].GetKills());
-            }
-        }
-
-        enemyText.text = otherPlayers[0].GetName() + ": " + otherPlayers[0].GetKills();
-    }
-
-    static int SortByKills(Player p1, Player p2)
-    {
-        return p1.GetKills().CompareTo(p2.GetKills());
     }
 }
