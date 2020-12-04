@@ -117,7 +117,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int shotsLeft = 12;
     private float weaponCool = 2f;
 
-    private GameObject respawnScreen;
+    public GameObject respawnScreen;
+
+    public bool isDead = false;
 
     public int GetTeam()
     {
@@ -533,6 +535,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void Despawn()
     {
+        isDead = true;
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
         camera.GetComponent<CameraMovement>().camEnabled = false;
         Destroy(p, 5f);
@@ -577,6 +580,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     public void Respawn()
     {
+        isDead = false;
         transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
         camera.GetComponent<CameraMovement>().camEnabled = false;
         respawnScreen.GetComponent<CanvasGroup>().alpha = 0;

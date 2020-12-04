@@ -36,6 +36,10 @@ public class ScoreTracker : MonoBehaviour
 
             if (player.GetKills() >= scoreToWin)
             {
+                if (yourPlayer.isDead)
+                {
+                    yourPlayer.respawnScreen.GetComponent<CanvasGroup>().alpha = 0;
+                }
                 gameOverScreen.GetComponent<CanvasGroup>().alpha = 1;
                 gameOverScreen.SetScores(player.GetName(), yourPlayer.GetKills());
                 yourPlayer.canMove = false;
@@ -47,6 +51,10 @@ public class ScoreTracker : MonoBehaviour
 
     public void RestartGame()
     {
+        if (yourPlayer.isDead)
+        {
+            yourPlayer.Respawn();
+        }
         yourPlayer.canMove = true;
         yourPlayer.canShoot = true;
         yourPlayer.photonView.RPC("ResetPlayer", RpcTarget.All);
