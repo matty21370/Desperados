@@ -33,24 +33,24 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
         {
             stream.SendNext(obstacleHealth);
             stream.SendNext(notDestroyed);
-            stream.SendNext(movement);
+            /*stream.SendNext(movement);
 
             stream.SendNext(Xpos);
             stream.SendNext(Ypos);
             stream.SendNext(Zpos);
 
-            stream.SendNext(positionSet);
+            stream.SendNext(positionSet);*/
 
         }
         else if (stream.IsReading)
         {
             obstacleHealth = (int)stream.ReceiveNext();
             notDestroyed = (bool)stream.ReceiveNext();
-            movement = (float)stream.ReceiveNext();
+           /* movement = (float)stream.ReceiveNext();
             Xpos=(float)stream.ReceiveNext();
             Ypos = (float)stream.ReceiveNext();
             Zpos = (float)stream.ReceiveNext();
-            positionSet = (bool)stream.ReceiveNext();
+            positionSet = (bool)stream.ReceiveNext();*/
         }
         
     }
