@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 27071735}
   - component: {fileID: 27071734}
   - component: {fileID: 27071733}
+  - component: {fileID: 27071739}
   m_Layer: 0
   m_Name: Obstacle (10)
   m_TagString: Obstacle
@@ -396,7 +397,7 @@ SphereCollider:
   m_GameObject: {fileID: 27071731}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 11
   m_Center: {x: 0, y: 0, z: 0}
@@ -449,6 +450,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27071731}
   m_Mesh: {fileID: 4300000, guid: 401fae203bae0ee428e401e7f9af9be8, type: 3}
+--- !u!136 &27071739
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27071731}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 11
+  m_Height: 11
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &82705930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1269,7 @@ GameObject:
   - component: {fileID: 460116764}
   - component: {fileID: 460116763}
   - component: {fileID: 460116769}
+  - component: {fileID: 460116770}
   m_Layer: 0
   m_Name: Obstacle (3)
   m_TagString: Obstacle
@@ -1390,6 +1406,20 @@ MonoBehaviour:
   viewIdField: 21
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!136 &460116770
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460116762}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 11
+  m_Height: 11
+  m_Direction: 1
+  m_Center: {x: -0.26678705, y: 0.05224514, z: -0.52043915}
 --- !u!1 &471906645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,6 +1826,7 @@ GameObject:
   - component: {fileID: 566045704}
   - component: {fileID: 566045703}
   - component: {fileID: 566045709}
+  - component: {fileID: 566045710}
   m_Layer: 0
   m_Name: Obstacle (2)
   m_TagString: Obstacle
@@ -1842,7 +1873,7 @@ SphereCollider:
   m_GameObject: {fileID: 566045702}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 11
   m_Center: {x: 0, y: 0, z: 0}
@@ -1932,6 +1963,20 @@ MonoBehaviour:
   viewIdField: 19
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!136 &566045710
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566045702}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 11
+  m_Height: 11
+  m_Direction: 1
+  m_Center: {x: -0.26678705, y: 0.05224514, z: -0.52043915}
 --- !u!1 &613913441
 GameObject:
   m_ObjectHideFlags: 0
@@ -3072,11 +3117,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 896277547}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 2.6564913
-  m_Height: 9.096331
+  m_Enabled: 1
+  m_Radius: 2
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.018456936, y: -0.23098612, z: 1.456719}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &896277549
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3116,7 +3161,7 @@ SphereCollider:
   m_GameObject: {fileID: 896277547}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
@@ -4525,6 +4570,7 @@ GameObject:
   - component: {fileID: 1345790742}
   - component: {fileID: 1345790741}
   - component: {fileID: 1345790740}
+  - component: {fileID: 1345790746}
   m_Layer: 0
   m_Name: Obstacle (13)
   m_TagString: Obstacle
@@ -4608,7 +4654,7 @@ SphereCollider:
   m_GameObject: {fileID: 1345790738}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 11
   m_Center: {x: 0, y: 0, z: 0}
@@ -4661,6 +4707,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345790738}
   m_Mesh: {fileID: 4300000, guid: 401fae203bae0ee428e401e7f9af9be8, type: 3}
+--- !u!136 &1345790746
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345790738}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 11
+  m_Height: 11
+  m_Direction: 1
+  m_Center: {x: -0.26678705, y: 0.05224514, z: -0.52043915}
 --- !u!1 &1348521018
 GameObject:
   m_ObjectHideFlags: 0
@@ -5088,6 +5148,7 @@ GameObject:
   - component: {fileID: 1558553989}
   - component: {fileID: 1558553988}
   - component: {fileID: 1558553987}
+  - component: {fileID: 1558553993}
   m_Layer: 0
   m_Name: Obstacle (9)
   m_TagString: Obstacle
@@ -5171,7 +5232,7 @@ SphereCollider:
   m_GameObject: {fileID: 1558553985}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 11
   m_Center: {x: 0, y: 0, z: 0}
@@ -5224,6 +5285,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558553985}
   m_Mesh: {fileID: 4300000, guid: 401fae203bae0ee428e401e7f9af9be8, type: 3}
+--- !u!136 &1558553993
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558553985}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 11
+  m_Height: 11
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1562427994
 GameObject:
   m_ObjectHideFlags: 0
@@ -5239,6 +5314,7 @@ GameObject:
   - component: {fileID: 1562427998}
   - component: {fileID: 1562427997}
   - component: {fileID: 1562427996}
+  - component: {fileID: 1562428002}
   m_Layer: 0
   m_Name: Obstacle (7)
   m_TagString: Obstacle
@@ -5322,7 +5398,7 @@ SphereCollider:
   m_GameObject: {fileID: 1562427994}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 11
   m_Center: {x: 0, y: 0, z: 0}
@@ -5375,6 +5451,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562427994}
   m_Mesh: {fileID: 4300000, guid: 401fae203bae0ee428e401e7f9af9be8, type: 3}
+--- !u!136 &1562428002
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562427994}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 11
+  m_Height: 11
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1571634495
 GameObject:
   m_ObjectHideFlags: 0
@@ -5465,6 +5555,7 @@ GameObject:
   - component: {fileID: 1577945911}
   - component: {fileID: 1577945910}
   - component: {fileID: 1577945915}
+  - component: {fileID: 1577945916}
   m_Layer: 0
   m_Name: Obstacle (6)
   m_TagString: Obstacle
@@ -5525,7 +5616,7 @@ SphereCollider:
   m_GameObject: {fileID: 1577945908}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 11
   m_Center: {x: 0, y: 0, z: 0}
@@ -5601,6 +5692,20 @@ MonoBehaviour:
   viewIdField: 11
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!136 &1577945916
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577945908}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 14
+  m_Height: 11
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1579875792
 GameObject:
   m_ObjectHideFlags: 0
@@ -6250,11 +6355,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 1866910479}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 2.6564913
-  m_Height: 9.096331
+  m_Enabled: 1
+  m_Radius: 2
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.018456936, y: -0.23098612, z: 1.456719}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1866910483
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6294,7 +6399,7 @@ SphereCollider:
   m_GameObject: {fileID: 1866910479}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
