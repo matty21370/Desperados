@@ -579,7 +579,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void RespawnButton()
     {
         Invoke("Respawn", 3f);
-        
     }
 
     private IEnumerator RespawnTimer()
