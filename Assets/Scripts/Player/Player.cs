@@ -866,11 +866,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (transform.position.x >= 300)
         {
-            transform.position = new Vector3(290, transform.position.y, transform.position.y);   
+            transform.position = new Vector3(290, transform.position.y, transform.position.z);   
         }
         else if (transform.position.x <= -180)
         {
-            transform.position = new Vector3(-170, transform.position.y, transform.position.y);
+            transform.position = new Vector3(-170, transform.position.y, transform.position.z);
             }
     }
 }
