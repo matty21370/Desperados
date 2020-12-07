@@ -265,7 +265,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             return; 
         }
 
-        if (Input.GetMouseButtonDown(0) && photonView.IsMine && canShoot)
+        if (Input.GetMouseButtonDown(0) && photonView.IsMine && canShoot && !shop.shopEnabled)
         {
             if (shotsLeft > 0)
             {
