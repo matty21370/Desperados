@@ -342,6 +342,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             FindObjectOfType<AudioManager>().Stop("BoostNoise");
         }
 
+        if (!Input.GetMouseButton(1))
+        {
+            canMove = true;
+            transform.forward = Vector3.Lerp(transform.forward, -GetComponentInChildren<Camera>().transform.forward, Time.deltaTime * 16f);
+        }
+        else
+        {
+            canMove = false;
+        }
+
         pingText.text = "Latency: " + PhotonNetwork.GetPing(); 
     }
 
@@ -355,7 +365,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             return;
         }
 
-        transform.forward = -GetComponentInChildren<Camera>().transform.forward; 
+        
 
         HandleInput();
     }

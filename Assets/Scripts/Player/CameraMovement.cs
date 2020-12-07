@@ -37,8 +37,8 @@ public class CameraMovement : MonoBehaviour
     private float distance = 10.0f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
-    private float sensivityX = 4.0f;
-    private float sensivityY = 1.0f;
+    private float sensivityX = 6.0f;
+    private float sensivityY = 3.0f;
 
     private float minFov = 80;
     private float maxFov = 90;
