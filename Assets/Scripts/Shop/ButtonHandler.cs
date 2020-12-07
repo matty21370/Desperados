@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class ButtonHandler : MonoBehaviour
 {
@@ -136,24 +137,32 @@ public class ButtonHandler : MonoBehaviour
 	/// the details of the item
 	/// </param>
 	/// </summary>
+	[PunRPC]
 	private void altText(string buttonNeeded,string item)
 	{
-		if (!altern)
-		{
+	
 			Text txt = transform.Find(buttonNeeded).GetComponent<Text>();
 			txt.text = "Insufficient Funds";
-			altern = true;
-			Debug.Log(altern);
-
-
-		}
-		else if (altern)
-		{
-			Text txt = transform.Find(buttonNeeded).GetComponent<Text>();
-			txt.text =  item;
-			altern = false;
-			Debug.Log(altern);
-		}
-	}
+			
+			Debug.Log("before");
+		StartCoroutine(CoolDownTimer( buttonNeeded, item));
 	
+	}
+	private void resetText(string buttonNeeded, string item)
+	{
+		Debug.Log("after");
+		Text txt = transform.Find(buttonNeeded).GetComponent<Text>();
+		txt.text = item;
+		///	altern = false;
+		Debug.Log(altern);
+	}
+
+
+	[PunRPC]
+	private IEnumerator CoolDownTimer(string buttonNeeded, string item)
+	{
+		yield return new WaitForSeconds(2f);
+		resetText(buttonNeeded, item);
+
+	}
 }

@@ -36,7 +36,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <summary>
     /// This is the speed the player is currently moving at
     /// </summary>
-    private float movementSpeed = 5f;
+    private float movementSpeed = 10f;
 
     /// <summary>
 	/// the player money
@@ -846,7 +846,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         else if (transform.position.z >= 300)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -290);         
+            transform.position = new Vector3(transform.position.x, transform.position.y, 290);         
         }
         if(transform.position.y <= -180)
 		{
@@ -858,11 +858,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (transform.position.x >= 300)
         {
-            transform.position = new Vector3(280, transform.position.y, transform.position.y);   
+            transform.position = new Vector3(290, transform.position.y, transform.position.y);   
         }
         else if (transform.position.x <= -180)
         {
-            transform.position = new Vector3(170, transform.position.y, transform.position.y);
+            transform.position = new Vector3(-170, transform.position.y, transform.position.y);
             }
     }
 }
