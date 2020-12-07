@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
       //  SpawnObstacles();
 
-        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Player", spawnPoint, Quaternion.identity, 0);
     }
 
     /*private void SpawnObstacles()
