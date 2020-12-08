@@ -115,7 +115,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private TMP_Text currencyText;
 
     private Text overHeatText;
-   
+    private Text mapText;
+
     private int shotsLeft = 12;
     private float weaponCool = 2f;
 
@@ -214,10 +215,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         shop = FindObjectOfType<Shop>();
         shop.gameObject.SetActive(false);
 
-        overHeatText = FindObjectOfType<Text>();
+        overHeatText = GameObject.Find("OverHeatText").GetComponent<Text>();
         overHeatText.text = "";
-
-        outOfBounds = false;
+        mapText = GameObject.Find("MapText").GetComponent<Text>();
+        mapText.text = "";
+       outOfBounds = false;
        
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
@@ -849,29 +851,56 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void CheckOutOfBounds()
 	{
-        if (transform.position.z <= -180) {
-            transform.position = new Vector3(transform.position.x, transform.position.y  , -170);
-        }
-        else if (transform.position.z >= 300)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 290);         
-        }
-        if(transform.position.y <= -180)
-		{
-            transform.position = new Vector3(transform.position.x, -170, transform.position.z);
-        }
-        else if (transform.position.y >= 300)
-        {
-            transform.position = new Vector3(transform.position.x, 290, transform.position.z);
-        }
-        if (transform.position.x >= 300)
-        {
-            transform.position = new Vector3(290, transform.position.y, transform.position.z);   
-        }
-        else if (transform.position.x <= -180)
-        {
-            transform.position = new Vector3(-170, transform.position.y, transform.position.z);
+        mapText.text = "";
+        if (transform.position.z <= -170) {
+            mapText.text = "   Leaving Battle Field";
+            if (transform.position.z <= -180)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, -170);
             }
+
+        }
+        else if (transform.position.z >= 280)
+        {
+            mapText.text = "   Leaving Battle Field";
+            if (transform.position.z >= 300)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, 280);
+            }
+        }
+        if (transform.position.y <= -160)
+        {
+            mapText.text = "   Leaving Battle Field";
+            if (transform.position.y <= -180)
+            {
+                transform.position = new Vector3(transform.position.x, -160, transform.position.z);
+            }
+        }
+        else if (transform.position.y >= 280)
+        {
+            mapText.text = "   Leaving Battle Field";
+            if (transform.position.y >= 300)
+            {
+                transform.position = new Vector3(transform.position.x, 280, transform.position.z);
+            }
+        }
+        if (transform.position.x >= 280)
+        {
+            mapText.text = "   Leaving Battle Field";
+            if (transform.position.x >= 300)
+            {
+                transform.position = new Vector3(280, transform.position.y, transform.position.z);
+            }
+        }
+
+        else if (transform.position.x <= -160)
+        {
+            mapText.text = "   Leaving Battle Field";
+            if (transform.position.x <= -180)
+            {
+                transform.position = new Vector3(-160, transform.position.y, transform.position.z);
+            }
+        }
     }
 }
 
