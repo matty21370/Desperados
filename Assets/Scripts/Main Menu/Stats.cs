@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Script created by: Matthew Burke
@@ -12,19 +13,19 @@ public class Stats : MonoBehaviour
     /// This is a reference to the kills text in the stats window
     /// </summary>
     [SerializeField]
-    private Text killsText;
+    private TMP_Text killsText;
 
     /// <summary>
     /// This is a reference to the deaths text in the stats window
     /// </summary>
     [SerializeField]
-    private Text deathsText;
+    private TMP_Text deathsText;
 
     /// <summary>
     /// This is a reference to the level text in the stats window
     /// </summary>
     [SerializeField]
-    private Text levelText;
+    private TMP_Text levelText;
 
     // Start is called before the first frame update
     void Start()
