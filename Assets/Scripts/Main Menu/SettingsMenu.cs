@@ -11,7 +11,7 @@ public class SettingsMenu : MonoBehaviour
 
     Resolution[] resolutions;
 
-    public AudioMixer audioMixer;
+    public AudioMixer masterMixer;
     public AudioMixer sfxMixer;
     public AudioMixer musicMixer;
 
@@ -63,9 +63,9 @@ public class SettingsMenu : MonoBehaviour
         Screen.fullScreen = isFullscreen;
     }
 
-    public void setVolume(float volume)
+    public void setMasterVolume(float volume)
     {
-        audioMixer.SetFloat("volume", volume);
+        masterMixer.SetFloat("masterVolume", volume);
     }
 
     public void setSFXVolume(float volume)
