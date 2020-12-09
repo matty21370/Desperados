@@ -105,6 +105,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject boostTrail;
 
     private Shop shop;
+    private LeaveButton leaveButton;
     Leaderboard leaderboard;
     GameManager manager;
     public bool canMove;
@@ -214,7 +215,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         shop = FindObjectOfType<Shop>();
         shop.gameObject.SetActive(false);
-
+        leaveButton = FindObjectOfType<LeaveButton>();
+        leaveButton.gameObject.SetActive(false);
         overHeatText = GameObject.Find("OverHeatText").GetComponent<Text>();
         overHeatText.text = "";
         mapText = GameObject.Find("MapText").GetComponent<Text>();
@@ -341,7 +343,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ToggleMenu();
+            //  ToggleMenu();
+            leaveButton.setEnabled();
+
+            if (leaveButton.leaveEnabled)
+            {
+                leaveButton.gameObject.SetActive(true);
+               
+                UnityEngine.Cursor.visible = true;
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                leaveButton.gameObject.SetActive(false);
+                UnityEngine.Cursor.visible = false;
+                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
