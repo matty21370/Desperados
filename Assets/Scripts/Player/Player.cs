@@ -344,6 +344,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             //  ToggleMenu();
+            // Application.Quit();
+            Disconnect();
             leaveButton.setEnabled();
 
             if (leaveButton.leaveEnabled)

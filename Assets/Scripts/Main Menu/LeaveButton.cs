@@ -32,7 +32,7 @@ public class LeaveButton : MonoBehaviour
 	private void leaveGame(GameObject owner)
 	{
 		gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-		//Application.Quit();
+		Application.Quit();
 		
 		//gameManager.LeaveRoom();
 		//PhotonNetwork.LeaveRoom();
