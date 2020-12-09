@@ -15,6 +15,8 @@ public class SettingsMenu : MonoBehaviour
     public AudioMixer sfxMixer;
     public AudioMixer musicMixer;
 
+    public Toggle fullscreenToggle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +52,17 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+        /* ensuring the toggle is checked or unchecked
+        depending on whether fullscreen is already enabled
+        when opening settings menu at the start */
+        if (Screen.fullScreen)
+        {
+            fullscreenToggle.isOn = true;
+        } else
+        {
+            fullscreenToggle.isOn = false;
+        }
     }
 
     public void setResolution(int resolutionIndex)
