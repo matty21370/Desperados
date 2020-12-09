@@ -23,7 +23,7 @@ public class LeaveButton : MonoBehaviour
 		//the health button 
 		if (text.Equals("leave"))
 		{
-
+			Debug.Log("leave game");
 			leaveGame(owner);
 
 		}
@@ -33,9 +33,21 @@ public class LeaveButton : MonoBehaviour
 	{
 		gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
 		//Application.Quit();
-		Debug.Log("leave game");
-		gameManager.LeaveRoom();
+		
+		//gameManager.LeaveRoom();
 		//PhotonNetwork.LeaveRoom();
+		owner.GetComponent<Player>().Disconnect();
 
 	}
+
+//	IEnumerator leaveGameSecond(GameObject owner)
+	//{
+		//gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+		//gameManager.Disconnect();
+		/*while (PhotonNetwork.IsConnected)
+		{
+			yield return null;
+		}
+		SceneManager.LoadScene("Lobby");*/
+	//}
 }

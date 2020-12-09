@@ -88,4 +88,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         SceneManager.LoadScene(0);
     }
+
+    public void Disconnect()
+    {
+        PhotonNetwork.Disconnect();
+    }
 }

@@ -3452,7 +3452,7 @@ MonoBehaviour:
   - {fileID: 1371365608}
   - {fileID: 1828167789}
   - {fileID: 1348521019}
-  playerPrefab: {fileID: 9077486523674453253, guid: ad0911dc9a08624448fd2251dd2e1d72, type: 3}
+  playerPrefab: {fileID: 9077486523674453253, guid: a3f2d25837416354bb9ccda89ce5a57a, type: 3}
   neededPlayersText: {fileID: 757622566}
 --- !u!4 &789462173
 Transform:

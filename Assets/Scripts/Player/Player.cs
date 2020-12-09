@@ -919,6 +919,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
     }
+
+    public void Disconnect()
+	{
+        PhotonNetwork.LeaveRoom();
+    }
 }
 
 [Serializable]//create gun to fire weapons.

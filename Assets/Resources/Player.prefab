@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leaveEnabled: 0
-  owner: {fileID: 0}
+  owner: {fileID: 9077486523674453253}
 --- !u!1 &4833725899605774166
 GameObject:
   m_ObjectHideFlags: 0
