@@ -279,7 +279,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         overHeatText.text = "";
         mapText = GameObject.Find("MapText").GetComponent<Text>();
         mapText.text = "";
-       outOfBounds = false;
+        outOfBounds = false;
        
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;
@@ -325,6 +325,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (!photonView.IsMine)
         {
             return; 
+        }
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            masterClient = true;
         }
 
         if (currentState != GameManager.GameStates.LOBBY)
