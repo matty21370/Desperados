@@ -5569,6 +5569,13 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
+    name: HealthPack
+    clip: {fileID: 8300000, guid: a8e2cafc25e4a4c418a06f31475b654b, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &751442056
 Transform:
   m_ObjectHideFlags: 0
