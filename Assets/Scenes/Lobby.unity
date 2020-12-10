@@ -7527,9 +7527,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2300111a5cc5cf943bcc0be8bac8319e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killsText: {fileID: 0}
-  deathsText: {fileID: 0}
-  levelText: {fileID: 0}
+  killsText: {fileID: 121139798}
+  deathsText: {fileID: 984488540}
+  levelText: {fileID: 347472477}
 --- !u!1 &1056348849
 GameObject:
   m_ObjectHideFlags: 0
