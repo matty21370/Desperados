@@ -64,6 +64,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<AudioManager>().Play("Music");
+
         if(!PlayerPrefs.HasKey("Name"))
         {
             namePrompt.SetActive(true);
