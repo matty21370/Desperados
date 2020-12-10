@@ -417,7 +417,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             //  ToggleMenu();
             // Application.Quit();
-            Disconnect();
+            
             leaveButton.setEnabled();
 
             if (leaveButton.leaveEnabled)
@@ -434,8 +434,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
             }
         }
+        if (Input.GetKeyDown(KeyCode.P) && leaveButton.leaveEnabled)
+        {
+            Disconnect();
+        }
 
-        pingText.text = "Latency: " + PhotonNetwork.GetPing(); 
+            pingText.text = "Latency: " + PhotonNetwork.GetPing(); 
     }
 
     /// <summary>
