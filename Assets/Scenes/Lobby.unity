@@ -5572,7 +5572,21 @@ MonoBehaviour:
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: HealthPack
     clip: {fileID: 8300000, guid: a8e2cafc25e4a4c418a06f31475b654b, type: 3}
-    volume: 0.8
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
+    name: PlayerExplode
+    clip: {fileID: 8300000, guid: c368062293233af4b8ac0f2461d0f67a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
+    name: LevelUp
+    clip: {fileID: 8300000, guid: b32e825abd284fc4898822a67c98b171, type: 3}
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}

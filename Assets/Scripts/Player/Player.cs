@@ -646,6 +646,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         isDead = true;
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
+        FindObjectOfType<AudioManager>().Play("PlayerExplode");
         Destroy(p, 5f);
 
         if (photonView.IsMine)
@@ -739,6 +740,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("RpcCreateLevelUpParticle", RpcTarget.All); 
             level += 1;
             StartCoroutine(levelUpPopup());
+            FindObjectOfType<AudioManager>().Play("LevelUp");
             levelText.text = "Level: " + level;
             exp = 0;
             PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1); 
