@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private Text neededPlayersText;
 
+    public enum GameStates { LOBBY, GAME }
+
     void Start()
     {
         Spawn();
@@ -35,31 +37,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
 
-      //  SpawnObstacles();
-
         PhotonNetwork.Instantiate("Player", spawnPoint, Quaternion.identity, 0);
     }
 
-    /*private void SpawnObstacles()
-    {
-        GameObject[] objs;
-        objs = GameObject.FindGameObjectsWithTag("Obstacle");
-        foreach (GameObject obstacle in objs)
-        {
-            obstacle.GetComponent<Obstacles>().spawn();
-        }
-    }*/
-
     private void Update()
     {
-        if(PhotonNetwork.CountOfPlayers == 1)
-        {
-            neededPlayersText.gameObject.SetActive(true);
-        }
-        else
-        {
-            neededPlayersText.gameObject.SetActive(false);
-        }
+        
     }
 
     public void RespawnPlayer()
