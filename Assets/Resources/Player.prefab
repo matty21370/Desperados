@@ -808,8 +808,11 @@ MonoBehaviour:
   boostTrail: {fileID: 8626708731874616210, guid: eb5b9f73209c02a4daa361e7613a0d43, type: 3}
   canMove: 0
   respawnScreen: {fileID: 0}
+  lobbyScreen: {fileID: 0}
   isDead: 0
   coinPickup: {fileID: 3318978757863166718, guid: f7f183043a9369a4686014bbebb01a30, type: 3}
+  isReady: 0
+  currentState: 0
 --- !u!65 &941554950578719353
 BoxCollider:
   m_ObjectHideFlags: 0

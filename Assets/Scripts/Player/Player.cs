@@ -123,9 +123,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public GameObject respawnScreen;
 
+    public GameObject lobbyScreen;
+
     public bool isDead = false;
 
     public GameObject coinPickup;
+
+    public bool isReady = false;
 
     public int GetTeam()
     {
@@ -152,6 +156,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         return deaths;
     }
 
+    public GameManager.GameStates currentState;
+
     [PunRPC]
     public void ResetPlayer()
     {
@@ -161,6 +167,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         shotsLeft = 12;
         speedIncrease = 1;
         bulletDamage = 1;
+    }
+
+    [PunRPC]
+    public void SetToLobby()
+    {
+        currentState = GameManager.GameStates.LOBBY;
+    }
+
+    [PunRPC]
+    public void SetToGame()
+    {
+        currentState = GameManager.GameStates.GAME;
+        lobbyScreen.GetComponent<CanvasGroup>().alpha = 0;
+    }
+
+    [PunRPC]
+    public void ReadyUp()
+    {
+        isReady = true;
     }
 
     /// <summary>
@@ -178,6 +203,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(killsThisGame);
             stream.SendNext(team);
             stream.SendNext(playerName);
+            stream.SendNext(isReady);
+            stream.SendNext(currentState);
            
         }
         else if (stream.IsReading) 
@@ -189,7 +216,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             killsThisGame = (int)stream.ReceiveNext();
             team = (int)stream.ReceiveNext();
             playerName = (string)stream.ReceiveNext();
-            
+            isReady = (bool)stream.ReceiveNext();
+            currentState = (GameManager.GameStates)stream.ReceiveNext();
         }
     }
 
@@ -203,6 +231,29 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             userName = PlayerPrefs.GetString("Name"); 
             playerName = userName;
+        }
+
+        lobbyScreen = GameObject.Find("Lobby");
+
+        if(FindObjectsOfType<Player>().Length < 2)
+        {
+            //photonView.RPC("SetToLobby", RpcTarget.AllBuffered);
+            currentState = GameManager.GameStates.LOBBY;
+            lobbyScreen.GetComponent<CanvasGroup>().alpha = 1;
+        }
+
+        foreach(Player player in FindObjectsOfType<Player>())
+        {
+            if(player.currentState == GameManager.GameStates.LOBBY)
+            {
+                //photonView.RPC("SetToLobby", RpcTarget.AllBuffered);
+                currentState = GameManager.GameStates.LOBBY;
+            }
+            else
+            {
+                currentState = GameManager.GameStates.GAME;
+                lobbyScreen.GetComponent<CanvasGroup>().alpha = 0;
+            }
         }
 
         respawnScreen = GameObject.Find("Respawn Screen");
@@ -269,75 +320,96 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             return; 
         }
 
-        if (!Input.GetMouseButton(1))
+        if (currentState != GameManager.GameStates.LOBBY)
         {
-            canMove = true;
-            transform.forward = Vector3.Lerp(transform.forward, -GetComponentInChildren<Camera>().transform.forward, Time.deltaTime * 16f);
+            if (!Input.GetMouseButton(1))
+            {
+                canMove = true;
+                transform.forward = Vector3.Lerp(transform.forward, -GetComponentInChildren<Camera>().transform.forward, Time.deltaTime * 16f);
+            }
+            else
+            {
+                canMove = false;
+            }
+
+            if (Input.GetMouseButtonDown(0) && photonView.IsMine && canShoot && !shop.shopEnabled)
+            {
+                if (shotsLeft > 0)
+                {
+                    photonView.RPC("Shoot", RpcTarget.All);
+                    shotsLeft--;
+                }
+                else
+                {
+                    weaponOverheat();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                hitDetected(1, this);
+            }
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                AddExperience(10);
+            }
+
+            if (Input.GetKeyDown(KeyCode.T) && (minesEnabled))
+            {
+                photonView.RPC("DropMine", RpcTarget.All);
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                shop.setEnabled();
+
+                if (shop.shopEnabled)
+                {
+                    shop.gameObject.SetActive(true);
+                    shop.updateText(currency);
+                    UnityEngine.Cursor.visible = true;
+                    UnityEngine.Cursor.lockState = CursorLockMode.None;
+                }
+                else
+                {
+                    shop.gameObject.SetActive(false);
+                    UnityEngine.Cursor.visible = false;
+                    UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                if (!leaderboardOpen)
+                {
+                    leaderboard.ShowLeaderBoard();
+                    leaderboardOpen = true;
+                }
+                else
+                {
+                    leaderboard.HideLeaderboard();
+                    leaderboardOpen = false;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                FindObjectOfType<AudioManager>().Play("BoostNoise");
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                FindObjectOfType<AudioManager>().Stop("BoostNoise");
+            }
         }
         else
         {
-            canMove = false;
-        }
-
-        if (Input.GetMouseButtonDown(0) && photonView.IsMine && canShoot && !shop.shopEnabled)
-        {
-            if (shotsLeft > 0)
+            if(Input.GetKeyDown(KeyCode.Space))
             {
-                photonView.RPC("Shoot", RpcTarget.All);
-                shotsLeft--;
-			}
-			else
-			{
-                weaponOverheat();
-			}
-        }
-
-        if (Input.GetKeyDown(KeyCode.G)) 
-        {
-            hitDetected(1, this); 
-        }
-        
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            AddExperience(10); 
-        }
-
-        if (Input.GetKeyDown(KeyCode.T) && (minesEnabled))
-        {
-            photonView.RPC("DropMine", RpcTarget.All);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.I)) 
-        {
-            shop.setEnabled();
-
-            if (shop.shopEnabled)
-            {
-                shop.gameObject.SetActive(true);
-                shop.updateText(currency);
-                UnityEngine.Cursor.visible = true;
-                UnityEngine.Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                shop.gameObject.SetActive(false);
-                UnityEngine.Cursor.visible = false;
-                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if(!leaderboardOpen)
-            {
-                leaderboard.ShowLeaderBoard();
-                leaderboardOpen = true;
-            }
-            else
-            {
-                leaderboard.HideLeaderboard();
-                leaderboardOpen = false;
+                //photonView.RPC("ReadyUp", RpcTarget.AllBuffered);
+                isReady = !isReady;
             }
         }
 
@@ -363,16 +435,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            FindObjectOfType<AudioManager>().Play("BoostNoise");
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            FindObjectOfType<AudioManager>().Stop("BoostNoise");
-        }
-
         pingText.text = "Latency: " + PhotonNetwork.GetPing(); 
     }
 
@@ -386,7 +448,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             return;
         }
 
-        HandleInput();
+        if (currentState != GameManager.GameStates.LOBBY)
+        {
+            HandleInput();
+        }
     }
 
     /// <summary>
