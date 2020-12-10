@@ -29,6 +29,8 @@ public class HealthPack : MonoBehaviour
                    collision.gameObject.GetComponent<Player>().HealthBoost(heal);
             Destroy(gameObject);
 
+            FindObjectOfType<AudioManager>().Play("HealthPack");
+
         }
            
         
