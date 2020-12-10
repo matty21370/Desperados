@@ -86,6 +86,8 @@ public class LobbyManager : MonoBehaviour
             }
 
             started = true;
+
+            FindObjectOfType<AudioManager>().Stop("Music");
         }
     }
 }

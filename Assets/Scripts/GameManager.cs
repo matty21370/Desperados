@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     void Start()
     {
         Spawn();
+
     }
 
     public void Spawn()
