@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class LobbyManager : MonoBehaviour
 
     public Transform content;
 
-    public Text hostText;
+    public TMP_Text hostText;
 
     float timer = 1.0f;
 
