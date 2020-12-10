@@ -9,6 +9,8 @@ public class LobbyManager : MonoBehaviour
 
     public Transform content;
 
+    public Text hostText;
+
     float timer = 1.0f;
 
     bool started = false;
@@ -65,6 +67,11 @@ public class LobbyManager : MonoBehaviour
             {
                 currentNum++;
             }
+
+            if(player.masterClient)
+            {
+                hostText.text = player.GetName();
+            }
         }
 
         if(currentNum >= numToStart && FindObjectsOfType<Player>().Length >= 2)
@@ -73,6 +80,7 @@ public class LobbyManager : MonoBehaviour
             {
                 //player.photonView.RPC("SetToGame", Photon.Pun.RpcTarget.AllBuffered);
                 player.currentState = GameManager.GameStates.GAME;
+                player.isReady = true;
                 player.lobbyScreen.GetComponent<CanvasGroup>().alpha = 0;
             }
 

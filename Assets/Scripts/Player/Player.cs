@@ -130,7 +130,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject coinPickup;
 
     public bool isReady = false;
-
+    public bool masterClient = false;
     public int GetTeam()
     {
         return team;
@@ -205,7 +205,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(playerName);
             stream.SendNext(isReady);
             stream.SendNext(currentState);
-           
+            stream.SendNext(masterClient);
         }
         else if (stream.IsReading) 
         {
@@ -218,6 +218,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             playerName = (string)stream.ReceiveNext();
             isReady = (bool)stream.ReceiveNext();
             currentState = (GameManager.GameStates)stream.ReceiveNext();
+            masterClient = (bool)stream.ReceiveNext();
         }
     }
 
@@ -231,6 +232,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             userName = PlayerPrefs.GetString("Name"); 
             playerName = userName;
+        }
+
+        if(PhotonNetwork.IsMasterClient)
+        {
+            masterClient = true;
         }
 
         lobbyScreen = GameObject.Find("Lobby");

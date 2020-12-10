@@ -812,6 +812,7 @@ MonoBehaviour:
   isDead: 0
   coinPickup: {fileID: 3318978757863166718, guid: f7f183043a9369a4686014bbebb01a30, type: 3}
   isReady: 0
+  masterClient: 0
   currentState: 0
 --- !u!65 &941554950578719353
 BoxCollider:
