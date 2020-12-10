@@ -248,6 +248,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 //photonView.RPC("SetToLobby", RpcTarget.AllBuffered);
                 currentState = GameManager.GameStates.LOBBY;
+                lobbyScreen.GetComponent<CanvasGroup>().alpha = 1;
             }
             else
             {
