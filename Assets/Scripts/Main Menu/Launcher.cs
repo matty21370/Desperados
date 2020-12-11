@@ -81,7 +81,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void Connect()
     {
         progressLabel.SetActive(true); 
-        playPage.SetActive(false); 
+        playPage.SetActive(false);
+        controlPanel.SetActive(false);
 
         if (PhotonNetwork.IsConnected) 
         {
