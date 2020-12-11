@@ -44,7 +44,8 @@ public class ScoreTracker : MonoBehaviour
                 gameOverScreen.SetScores(player.GetName(), yourPlayer.GetKills());
                 yourPlayer.canMove = false;
                 yourPlayer.canShoot = false;
-                Invoke("RestartGame", 5f);
+                //Invoke("RestartGame", 5f);
+                RestartGame();
             }
         }
     }
@@ -58,6 +59,6 @@ public class ScoreTracker : MonoBehaviour
         yourPlayer.canMove = true;
         yourPlayer.canShoot = true;
         yourPlayer.photonView.RPC("ResetPlayer", RpcTarget.All);
-        gameOverScreen.GetComponent<CanvasGroup>().alpha = 0;
+        //gameOverScreen.GetComponent<CanvasGroup>().alpha = 0;
     }
 }

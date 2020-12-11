@@ -172,7 +172,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
          minesEnabled = false;*/
         //  Disconnect();
         gameOver = true;
-
+        canMove = false;
+        canShoot = false;
     }
   /*  public bool getResetPlayer()
 	{
@@ -445,8 +446,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             //  ToggleMenu();
             // Application.Quit();
-            
-            leaveButton.setEnabled();
+
+            Disconnect();
+            UnityEngine.Cursor.visible = true;
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
+
+            /*leaveButton.setEnabled();
 
             if (leaveButton.leaveEnabled)
             {
@@ -460,13 +465,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 leaveButton.gameObject.SetActive(false);
                 UnityEngine.Cursor.visible = false;
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-            }
+            }*/
         }
         
-        if (Input.GetKeyDown(KeyCode.P) && (leaveButton.leaveEnabled || gameOver))
-        {
-            Disconnect();
-        }
+        //if (Input.GetKeyDown(KeyCode.P) && (leaveButton.leaveEnabled || gameOver))
+        //{
+        //    Disconnect();
+        //}
         if (gameOver)
 		{
             

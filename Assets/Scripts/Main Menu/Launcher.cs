@@ -90,7 +90,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         else //If the player is not currently connected to the network
         {
-            isConnecting = PhotonNetwork.ConnectUsingSettings(); 
+            PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = "eu";
+            isConnecting = PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = gameVersion; 
         }
     }
