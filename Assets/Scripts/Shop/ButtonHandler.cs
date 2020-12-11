@@ -7,10 +7,13 @@ using Photon.Pun;
 public class ButtonHandler : MonoBehaviour
 {
 	[SerializeField] private GameObject owner;
-	
+
 	private Text txt;
 	private bool altern = false;
-
+	private bool healthTextp = false;
+	private bool mineTextp = false;
+	private bool speedTextp = false;
+	private bool coolTextp = false;
 	///<summary>
 	///Runs when the button is clicked 
 	///<param name="text">
@@ -19,10 +22,11 @@ public class ButtonHandler : MonoBehaviour
 	///</summary>
 	public void SetText(string text)
 	{
+
 		//the health button 
 		if (text.Equals("health"))
 		{
-		
+
 			int price = 100;
 			//set price of the item
 			if (owner.GetComponent<Player>().getCurrency() >= price)
@@ -33,7 +37,7 @@ public class ButtonHandler : MonoBehaviour
 
 				owner.GetComponent<Player>().upgradePurchasedHealth();
 				//run players upgrade
-				
+				healthTextp = true;
 				makePurchase(price);
 				//deal with the cost
 			}
@@ -43,8 +47,8 @@ public class ButtonHandler : MonoBehaviour
 				//run alternate if not enough points 
 			}
 
-		}else if (text.Equals("speed"))
-			//speed button see health for more details
+		} else if (text.Equals("speed"))
+		//speed button see health for more details
 		{
 			int price = 50;
 			if (owner.GetComponent<Player>().getCurrency() >= price)
@@ -53,14 +57,14 @@ public class ButtonHandler : MonoBehaviour
 				dissableButton("speedText");
 
 				owner.GetComponent<Player>().upgradePurchasedSpeed();
-				
+				speedTextp = true;
 				makePurchase(price);
 			}
 			else
 			{
 				altText("speedText", "Increase Speed: \n 50 Points");
 			}
-				
+
 		}
 		else if (text.Equals("mine"))
 		{
@@ -69,9 +73,9 @@ public class ButtonHandler : MonoBehaviour
 			if (owner.GetComponent<Player>().getCurrency() >= price)
 			{
 				dissableButton("mineText");
-				
+
 				owner.GetComponent<Player>().unlockMines();
-				
+				mineTextp = true;
 				makePurchase(price);
 			}
 			else
@@ -87,9 +91,9 @@ public class ButtonHandler : MonoBehaviour
 			if (owner.GetComponent<Player>().getCurrency() >= price)
 			{
 				dissableButton("CoolText");
-				
-				owner.GetComponent<Player>().cooldownUpgrade();
 
+				owner.GetComponent<Player>().cooldownUpgrade();
+				coolTextp = true;
 				makePurchase(price);
 			}
 			else
@@ -113,8 +117,46 @@ public class ButtonHandler : MonoBehaviour
 	}
 
 
+	public void Reset()
+	{
+		if (speedTextp)
+		{
+			altText("speedText", "Increase Speed: \n 50 Points");
+			speedTextp = false;
+		}
+		if (coolTextp)
+		{
+			altText("CoolText", "Decrease Weapon Cooldown: \n 250 Points");
+			coolTextp = false;
+		}
+		if (mineTextp)
+		{
+			altText("mineText", "Unlock Mines: \n 20 Points");
+			mineTextp = false;
+		}
+		if (healthTextp)
+		{
 
-
+			altText("healthText", "Increase Health: \n 100 Points");
+			healthTextp = false;
+		}
+ }
+	/*void Update()
+	{
+		if (owner.GetComponent<Player>().getResetPlayer())
+		{
+			Reset();
+			Debug.Log("RESET CALLED IN SHOP");
+			owner.GetComponent<Player>().SetResetPlayer();
+		}
+	}
+	*/
+		private void enableButton(string buttonNeeded, string item)
+	{
+		Text txt = transform.Find(buttonNeeded).GetComponent<Text>();
+		GetComponent<Button>().interactable = true;
+		txt.text = item;
+	}
 	/// <summary>
 	/// dissable the item button
 	/// <param name="buttonSearch"> 
@@ -144,9 +186,9 @@ public class ButtonHandler : MonoBehaviour
 			Text txt = transform.Find(buttonNeeded).GetComponent<Text>();
 			txt.text = "Insufficient Funds";
 			
-			Debug.Log("before");
+			
 		StartCoroutine(CoolDownTimer( buttonNeeded, item));
-	
+		GetComponent<Button>().interactable = true;
 	}
 	private void resetText(string buttonNeeded, string item)
 	{

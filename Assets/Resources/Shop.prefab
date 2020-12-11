@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 1475886753167804358}
   - component: {fileID: 8337399055773201053}
   - component: {fileID: 4724035820164372418}
+  - component: {fileID: 5868728838451124323}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -424,6 +425,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopEnabled: 0
   slots: []
+  buttonHandler: {fileID: 5868728838451124323}
+--- !u!114 &5868728838451124323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102162718954158627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926b9ac66ece0d14b9febdc9abbe7f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
 --- !u!1 &2226828274951382612
 GameObject:
   m_ObjectHideFlags: 0

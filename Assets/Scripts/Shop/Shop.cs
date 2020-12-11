@@ -11,12 +11,13 @@ public class Shop : MonoBehaviour
 	private int allSlots=4;
 	private int enabeldSlots;
 	[SerializeField] private GameObject[] slots;
+	[SerializeField] private ButtonHandler buttonHandler;
 	private Text txt;
 	//public GameObject slotHolder;
 
 	void Start()
 	{
-	
+		
 	}
 
 	public void updateTxt()
@@ -33,7 +34,10 @@ public class Shop : MonoBehaviour
 
 	}
 
-
+	public void Reset()
+	{
+		
+	}
 
 		
 

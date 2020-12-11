@@ -17,7 +17,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     private string playerName;
     private string userName;
-
+    
     /// <summary>
     /// This is the base speed of the player, can be upgraded later
     /// </summary>
@@ -103,7 +103,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject hitParticle;
     [SerializeField] private GameObject explosiveParticle;
     [SerializeField] private GameObject boostTrail;
-
+   
     private Shop shop;
     private LeaveButton leaveButton;
     Leaderboard leaderboard;
@@ -117,10 +117,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     private Text overHeatText;
     private Text mapText;
-
+    private bool resetPlayer = false;
     private int shotsLeft = 12;
     private float weaponCool = 2f;
-
+   
     public GameObject respawnScreen;
 
     public GameObject lobbyScreen;
@@ -157,17 +157,33 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     public GameManager.GameStates currentState;
-
+    private bool gameOver = false;
     [PunRPC]
     public void ResetPlayer()
     {
-        killCount = 0;
-        deaths = 0;
-        currency = 0;
-        shotsLeft = 12;
-        speedIncrease = 1;
-        bulletDamage = 1;
+        /* resetPlayer = true;
+         killCount = 0;
+         deaths = 0;
+         currency = 50;
+         shotsLeft = 12;
+         speedIncrease = 1;
+         bulletDamage = 1;
+         weaponCool = 2f;
+         minesEnabled = false;*/
+        //  Disconnect();
+        gameOver = true;
+
     }
+  /*  public bool getResetPlayer()
+	{
+       // resetPlayer = false;
+        return resetPlayer;
+	}
+    public void SetResetPlayer()
+    {
+         resetPlayer = false;
+       
+    }*/
 
     [PunRPC]
     public void SetToLobby()
@@ -425,7 +441,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) )
         {
             //  ToggleMenu();
             // Application.Quit();
@@ -446,9 +462,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
             }
         }
-        if (Input.GetKeyDown(KeyCode.P) && leaveButton.leaveEnabled)
+        
+        if (Input.GetKeyDown(KeyCode.P) && (leaveButton.leaveEnabled || gameOver))
         {
             Disconnect();
+        }
+        if (gameOver)
+		{
+            
+                leaveButton.gameObject.SetActive(true);
+
+                UnityEngine.Cursor.visible = true;
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
+            
         }
 
             pingText.text = "Latency: " + PhotonNetwork.GetPing(); 

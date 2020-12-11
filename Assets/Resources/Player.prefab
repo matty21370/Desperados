@@ -1051,6 +1051,10 @@ PrefabInstance:
       propertyPath: owner
       value: 
       objectReference: {fileID: 9077486523674453253}
+    - target: {fileID: 961948371897259803, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 1354961450635613485, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -1103,6 +1107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shop
       objectReference: {fileID: 0}
+    - target: {fileID: 3141929400242114210, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
+      propertyPath: m_Name
+      value: ButtonSpeed
+      objectReference: {fileID: 0}
     - target: {fileID: 3770093239562587244, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -1131,6 +1139,10 @@ PrefabInstance:
       propertyPath: owner
       value: 
       objectReference: {fileID: 9077486523674453253}
+    - target: {fileID: 4530948464897693387, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 5827297091490452587, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1214,6 +1226,14 @@ PrefabInstance:
     - target: {fileID: 5827297091490452587, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5868728838451124323, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 9077486523674453253}
+    - target: {fileID: 6333659358656540467, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
+      propertyPath: m_Name
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 7724279766599722784, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
       propertyPath: owner
