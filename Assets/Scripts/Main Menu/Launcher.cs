@@ -58,7 +58,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// </summary>
     private void Awake()
     {
-        PhotonNetwork.AutomaticallySyncScene = true; 
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // Start is called before the first frame update

@@ -174,6 +174,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         gameOver = true;
         canMove = false;
         canShoot = false;
+
+        foreach(MeshRenderer r in FindObjectsOfType<MeshRenderer>())
+        {
+            r.enabled = false;
+        }
+
+        foreach (ParticleSystem r in FindObjectsOfType<ParticleSystem>())
+        {
+            Destroy(r.gameObject);
+        }
+
+        Invoke("Disconnect", 5f);
     }
   /*  public bool getResetPlayer()
 	{
@@ -260,7 +272,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if(FindObjectsOfType<Player>().Length < 2)
         {
-            //photonView.RPC("SetToLobby", RpcTarget.AllBuffered);
             currentState = GameManager.GameStates.LOBBY;
             lobbyScreen.GetComponent<CanvasGroup>().alpha = 1;
         }
@@ -269,7 +280,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if(player.currentState == GameManager.GameStates.LOBBY)
             {
-                //photonView.RPC("SetToLobby", RpcTarget.AllBuffered);
                 currentState = GameManager.GameStates.LOBBY;
                 lobbyScreen.GetComponent<CanvasGroup>().alpha = 1;
             }
@@ -439,26 +449,23 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                //photonView.RPC("ReadyUp", RpcTarget.AllBuffered);
                 isReady = !isReady;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) )
         {
-            //  ToggleMenu();
-            // Application.Quit();
+            ToggleMenu();
 
-            Disconnect();
             UnityEngine.Cursor.visible = true;
             UnityEngine.Cursor.lockState = CursorLockMode.None;
 
-            /*leaveButton.setEnabled();
+            leaveButton.setEnabled();
 
             if (leaveButton.leaveEnabled)
             {
                 leaveButton.gameObject.SetActive(true);
-               
+
                 UnityEngine.Cursor.visible = true;
                 UnityEngine.Cursor.lockState = CursorLockMode.None;
             }
@@ -467,24 +474,21 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 leaveButton.gameObject.SetActive(false);
                 UnityEngine.Cursor.visible = false;
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-            }*/
+            }
         }
-        
-        //if (Input.GetKeyDown(KeyCode.P) && (leaveButton.leaveEnabled || gameOver))
-        //{
-        //    Disconnect();
-        //}
+
+        if (Input.GetKeyDown(KeyCode.P) && (leaveButton.leaveEnabled))
+        {
+            Disconnect();
+        }
+
         if (gameOver)
 		{
-            
-                leaveButton.gameObject.SetActive(true);
-
-                UnityEngine.Cursor.visible = true;
-                UnityEngine.Cursor.lockState = CursorLockMode.None;
-            
+            isDead = true;
+            canShoot = false;
         }
 
-            pingText.text = "Latency: " + PhotonNetwork.GetPing(); 
+        pingText.text = "Latency: " + PhotonNetwork.GetPing(); 
     }
 
     /// <summary>
