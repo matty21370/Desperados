@@ -325,9 +325,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         pingText = GameObject.Find("Ping Text").GetComponent<Text>();
 
-        camera = GetComponentInChildren<Camera>(); 
+        camera = GetComponentInChildren<Camera>();
 
-        if(!photonView.IsMine)
+        transform.forward = camera.transform.forward;
+
+        if (!photonView.IsMine)
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
         }
@@ -506,7 +508,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     void HandleInput()
     {
-        if (canMove)
+        if (canMove && !isDead)
         {
             CheckOutOfBounds();
             if (Input.GetKey(KeyCode.W) )
@@ -681,14 +683,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void Despawn()
     {
         isDead = true;
+        canShoot = false;
+        canMove = false;
+
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
         FindObjectOfType<AudioManager>().Play("PlayerExplode");
         Destroy(p, 5f);
 
         if (photonView.IsMine)
         {
-            canShoot = false;
-            canMove = false;
             photonView.RPC("NetworkAddDeath", RpcTarget.AllBuffered);
             PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths"));// + 1);
             killStreak = 0;
@@ -986,7 +989,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 	{
         mapText.text = "";
         if (transform.position.z <= -170) {
-            mapText.text = "   Leaving Battle Field";
+            mapText.text = "   Leaving Battlfield";
             if (transform.position.z <= -180)
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y, -170);
@@ -995,7 +998,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         else if (transform.position.z >= 280)
         {
-            mapText.text = "   Leaving Battle Field";
+            mapText.text = "   Leaving Battlefield";
             if (transform.position.z >= 300)
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y, 280);
@@ -1003,7 +1006,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (transform.position.y <= -160)
         {
-            mapText.text = "   Leaving Battle Field";
+            mapText.text = "   Leaving Battlefield";
             if (transform.position.y <= -180)
             {
                 transform.position = new Vector3(transform.position.x, -160, transform.position.z);
@@ -1011,7 +1014,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         else if (transform.position.y >= 280)
         {
-            mapText.text = "   Leaving Battle Field";
+            mapText.text = "   Leaving Battlefield";
             if (transform.position.y >= 300)
             {
                 transform.position = new Vector3(transform.position.x, 280, transform.position.z);
@@ -1019,7 +1022,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (transform.position.x >= 280)
         {
-            mapText.text = "   Leaving Battle Field";
+            mapText.text = "   Leaving Battlefield";
             if (transform.position.x >= 300)
             {
                 transform.position = new Vector3(280, transform.position.y, transform.position.z);
@@ -1028,7 +1031,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         else if (transform.position.x <= -160)
         {
-            mapText.text = "   Leaving Battle Field";
+            mapText.text = "   Leaving Battlefield";
             if (transform.position.x <= -180)
             {
                 transform.position = new Vector3(-160, transform.position.y, transform.position.z);
