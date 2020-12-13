@@ -740,7 +740,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         isDead = false;
         transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
-        respawnScreen.GetComponent<CanvasGroup>().alpha = 0;
+        //respawnScreen.GetComponent<CanvasGroup>().alpha = 0;
         playerHealth = maxHealth; 
         UpdateHealthBar();
         shotsLeft = 12;

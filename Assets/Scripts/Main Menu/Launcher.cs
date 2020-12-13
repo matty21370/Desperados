@@ -156,6 +156,11 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
     }
 
+    public void ChangeNameButton()
+    {
+        namePrompt.SetActive(true);
+    }
+
     /// <summary>
     /// The below methods are called depending on the button pressed in the main menu
     /// </summary>
