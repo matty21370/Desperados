@@ -386,16 +386,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                hitDetected(1, this);
-            }
-
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                AddExperience(10);
-            }
-
             if (Input.GetKeyDown(KeyCode.T) && (minesEnabled))
             {
                 photonView.RPC("DropMine", RpcTarget.All);
