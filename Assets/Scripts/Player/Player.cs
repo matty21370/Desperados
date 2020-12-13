@@ -712,7 +712,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         //respawnScreen.GetComponent<CanvasGroup>().alpha = 1;
         StartCoroutine(RespawnTimer());
 
-        Instantiate(coinPickup, transform.position, Quaternion.identity);
+        //Instantiate(coinPickup, transform.position, Quaternion.identity);
     }
 
     public void RespawnButton()
