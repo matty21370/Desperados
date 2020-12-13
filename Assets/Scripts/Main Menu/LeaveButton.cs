@@ -23,8 +23,8 @@ public class LeaveButton : MonoBehaviour
 		//the health button 
 		if (text.Equals("leave"))
 		{
-			Debug.Log("leave game");
-			leaveGame(owner);
+			//Debug.Log("leave game");
+		//	leaveGame(owner);
 
 		}
 	}
