@@ -815,10 +815,10 @@ MonoBehaviour:
     bullet: {fileID: 2389822185922206963, guid: 4c046527c3c304142bf4b3c13f6665e1, type: 3}
     mine: {fileID: 7879776065982680788, guid: 11640d99904ba344ebee690c44fc8bb5, type: 3}
     healthPack: {fileID: 7333544667966990008, guid: aaf9edda7edf74341b949d509a45e8db, type: 3}
-  explosionParticle: {fileID: 426939254516331892, guid: 661b2b08c4e2b944cb376f66a1e838f4, type: 3}
+  explosionParticle: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   levelUpEffect: {fileID: 967225870870258871, guid: 421587dd401956c4ba9dad5162787d42, type: 3}
   hitParticle: {fileID: 1092632126663006434, guid: 2d8c92cdaa809e748836433028e21082, type: 3}
-  explosiveParticle: {fileID: 426939254516331892, guid: 661b2b08c4e2b944cb376f66a1e838f4, type: 3}
+  explosiveParticle: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   boostTrail: {fileID: 8626708731874616210, guid: eb5b9f73209c02a4daa361e7613a0d43, type: 3}
   canMove: 0
   respawnScreen: {fileID: 0}
