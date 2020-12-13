@@ -58,7 +58,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// </summary>
     private void Awake()
     {
-        PhotonNetwork.AutomaticallySyncScene = true; 
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // Start is called before the first frame update
@@ -90,7 +93,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         else //If the player is not currently connected to the network
         {
-            isConnecting = PhotonNetwork.ConnectUsingSettings(); 
+            PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = "eu";
+            isConnecting = PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = gameVersion; 
         }
     }

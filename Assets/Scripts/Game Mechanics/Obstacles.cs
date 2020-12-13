@@ -8,58 +8,35 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] private int obstacleHealth ;
     [SerializeField] private GameObject explosionParticle;
-    private float movement;//= Random.Range(1, 4);
+
+    private float movement;
+
     private bool notDestroyed = true;
     private bool checkCalled = false;
-    private  float Xpos;
-     private  float Ypos;
-     private  float Zpos;
+
+    private float Xpos;
+    private float Ypos;
+    private float Zpos;
+
     private bool positionSet = false;
 
-    // Start is called before the first frame update
-
-    public void spawn()
-    {
-       
-    }
-    public void start()
-	{
-       
-
-    }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
             stream.SendNext(obstacleHealth);
             stream.SendNext(notDestroyed);
-            /*stream.SendNext(movement);
-
-            stream.SendNext(Xpos);
-            stream.SendNext(Ypos);
-            stream.SendNext(Zpos);
-
-            stream.SendNext(positionSet);*/
-
         }
         else if (stream.IsReading)
         {
             obstacleHealth = (int)stream.ReceiveNext();
             notDestroyed = (bool)stream.ReceiveNext();
-           /* movement = (float)stream.ReceiveNext();
-            Xpos=(float)stream.ReceiveNext();
-            Ypos = (float)stream.ReceiveNext();
-            Zpos = (float)stream.ReceiveNext();
-            positionSet = (bool)stream.ReceiveNext();*/
         }
-        
     }
-
 
     // Update is called once per frame
     void Update()
     {
-	   
         if (!checkCalled && !notDestroyed)
         {
             photonView.RPC("Despawn", RpcTarget.All);
@@ -67,8 +44,6 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-
-
             movement = Random.Range(1, 4);
 
             if (movement == 1)
@@ -85,7 +60,6 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
                 transform.Rotate(2 * Time.deltaTime, 0, 0);
 
             }
-
         }
     }
 
@@ -97,25 +71,17 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 	/// </param>
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("collide");
-        Debug.Log(collision.transform.tag);
-          if (collision.transform.tag == "Player")
-            //if the player has collided
-            {
-           
+        if (collision.transform.tag == "Player")
+        {
             collision.gameObject.GetComponent<Player>().hitDetected(1, null);
-            //give the player damage
-                               
-            }
-          else if (collision.transform.tag == "Bullet")
+        }
+        else if (collision.transform.tag == "Bullet")
 		{
             reduceHealth(collision.gameObject.GetComponent<Bullet>().getDamage());
 		}
-                 
-        
     }
 
-        /// <summary>
+    /// <summary>
 	/// if anything hits the object
 	/// </summary>
 	/// <param name="collision">
@@ -125,30 +91,20 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 	{
         obstacleHealth = obstacleHealth - damage;
 
-       
         if (obstacleHealth <= 0)
 		{
-         FindObjectOfType<AudioManager>().Play("MeteorExplode");
-            GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
+            FindObjectOfType<AudioManager>().Play("MeteorExplode");
+            Instantiate(explosionParticle, transform.position, Quaternion.identity);
             photonView.RPC("Despawn", RpcTarget.All);
-           
-
         }
 	}
-
-
 
     [PunRPC]
     public void Despawn()
     {
-
         notDestroyed = false;
-        
-        // Destroy(gameObject);
-        this.GetComponent<Obstacles>().GetComponent<MeshRenderer>().enabled=false;
-        GetComponent < CapsuleCollider > ().enabled = false;
-
-
+        GetComponent<Obstacles>().GetComponent<MeshRenderer>().enabled=false;
+        GetComponent<MeshCollider>().enabled = false;
     }
 
     private void setPosition()
@@ -159,6 +115,4 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
         transform.position = new Vector3(Xpos,Ypos,Zpos);
         positionSet = true;
 	}
-
-
 }
