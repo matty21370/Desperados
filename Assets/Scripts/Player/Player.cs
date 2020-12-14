@@ -131,6 +131,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public bool isReady = false;
     public bool masterClient = false;
+
+    public ParticleSystem[] trails;
+
     public int GetTeam()
     {
         return team;
@@ -337,6 +340,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         camera = GetComponentInChildren<Camera>();
 
+        foreach (ParticleSystem p in trails)
+        {
+            p.Pause();
+        }
+
         transform.forward = camera.transform.forward;
 
         if (!photonView.IsMine)
@@ -428,11 +436,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 FindObjectOfType<AudioManager>().Play("BoostNoise");
+                foreach(ParticleSystem p in trails)
+                {
+                    p.Play();
+                }
             }
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 FindObjectOfType<AudioManager>().Stop("BoostNoise");
+                foreach (ParticleSystem p in trails)
+                {
+                    p.Pause();
+                }
             }
         }
         else
