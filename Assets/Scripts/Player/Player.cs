@@ -447,7 +447,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 FindObjectOfType<AudioManager>().Stop("BoostNoise");
                 foreach (ParticleSystem p in trails)
                 {
-                    p.Pause();
+                    p.Stop();
                 }
             }
         }
