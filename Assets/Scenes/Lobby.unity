@@ -940,7 +940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1470910640682766142, guid: 91becd6265f3cc848b83677b2968dece, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Connect
+      value: OpenShopPage
       objectReference: {fileID: 0}
     - target: {fileID: 1470910640682766142, guid: 91becd6265f3cc848b83677b2968dece, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
