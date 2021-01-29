@@ -75,7 +75,7 @@ public class LobbyManager : MonoBehaviour
             }
         }
 
-        if(currentNum >= numToStart && FindObjectsOfType<Player>().Length >= 2)
+        if(currentNum >= numToStart && FindObjectsOfType<Player>().Length >= 0)
         {
             foreach(Player player in FindObjectsOfType<Player>())
             {

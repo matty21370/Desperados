@@ -8151,13 +8151,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1174234794}
   - component: {fileID: 1174234795}
+  - component: {fileID: 1174234796}
   m_Layer: 5
   m_Name: Settings Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1174234794
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8195,6 +8196,21 @@ MonoBehaviour:
   sfxMixer: {fileID: 24100000, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
   musicMixer: {fileID: 24100000, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
   fullscreenToggle: {fileID: 463699602}
+  sfxSlider: {fileID: 2125472912}
+  musicSlider: {fileID: 1231783134}
+  masterSlider: {fileID: 961877703}
+--- !u!225 &1174234796
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174234793}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1179906278
 GameObject:
   m_ObjectHideFlags: 0
