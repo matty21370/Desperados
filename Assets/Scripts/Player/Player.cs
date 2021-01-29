@@ -114,7 +114,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private GameObject pauseMenu;
     private CanvasGroup pauseMenuGroup;
     private TMP_Text currencyText;
-
+    private bool manualCool = false;
     private Text overHeatText;
     private Text mapText;
     private bool resetPlayer = false;
@@ -126,7 +126,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject lobbyScreen;
 
     public bool isDead = false;
-
+  
     public GameObject coinPickup;
 
     public bool isReady = false;
@@ -318,7 +318,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         pauseMenuGroup = pauseMenu.GetComponent<CanvasGroup>();
 
         canMove = true;
-
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -390,11 +390,29 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 else
                 {
-                    weaponOverheat();
+                    /* if (manualCool)
+                     {
+                         weaponOverheat("Weapon Cooling");
+                     }
+                     else
+                   {*/
+                    if (!manualCool)
+                    {
+                        weaponOverheat("Weapon Overheating");
+                    }
+                   // }
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.T) && (minesEnabled))
+			if (Input.GetKeyDown(KeyCode.T)&& !manualCool)
+			{
+                manualCool = true;
+                shotsLeft = 0;
+                // weaponOverheat("Weapon Cooling");
+                weaponOverheat("Weapon Cooling");
+            }
+
+            if (Input.GetKeyDown(KeyCode.R) && (minesEnabled))
             {
                 photonView.RPC("DropMine", RpcTarget.All);
 
@@ -934,19 +952,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     ///set up text and start timer for cool down 
     /// </summary>
     [PunRPC]
-    private void weaponOverheat()
+    private void weaponOverheat(String messageText)
 	{
-        Debug.Log("Weapon Overheating ");
+        Debug.Log(messageText);
 
         overHeatText.color = new Color(255, 0, 0, 1);
         //set text colour to red
-        overHeatText.text = "Weapon Overheating";
+        overHeatText.text = messageText;
         //set warning message
         StartCoroutine("CoolDownTimer");
         //run timmer
 
         FindObjectOfType<AudioManager>().Play("Overheat");
-
+        
     }
     /// <summary>
     ///reset the weapon so that it can fire again
@@ -954,11 +972,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     private void weaponCoolDown()
 	{
-       
+		
         overHeatText.text = "";
         //make the text invisible
         shotsLeft = 12;
         //reset the number of shots
+        manualCool = false;
     }
     /// <summary>
     ///runs while the weapon is unable to fire
