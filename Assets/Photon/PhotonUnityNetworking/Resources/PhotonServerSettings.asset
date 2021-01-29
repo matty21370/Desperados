@@ -71,6 +71,9 @@ MonoBehaviour:
   - SetToLobby
   - SetToGame
   - ReadyUp
+  - UpdateScoreMinus
+  - UpdateScorePlus
+  - RPCUpdateScores
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

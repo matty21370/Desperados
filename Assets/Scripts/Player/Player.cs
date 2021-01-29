@@ -212,6 +212,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         currentState = GameManager.GameStates.GAME;
         lobbyScreen.GetComponent<CanvasGroup>().alpha = 0;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     [PunRPC]
@@ -269,6 +271,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if(PhotonNetwork.IsMasterClient)
         {
             masterClient = true;
+            FindObjectOfType<LobbyManager>().isHost = true;
         }
 
         lobbyScreen = GameObject.Find("Lobby");
@@ -290,6 +293,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 currentState = GameManager.GameStates.GAME;
                 lobbyScreen.GetComponent<CanvasGroup>().alpha = 0;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
         }
 
@@ -319,9 +324,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         canMove = true;
         
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         healthText = GameObject.Find("Health Text").GetComponent<Text>(); 
         healthSlider = GameObject.Find("Health Background").GetComponent<Slider>();
         levelText = GameObject.Find("Level Text").GetComponent<Text>();

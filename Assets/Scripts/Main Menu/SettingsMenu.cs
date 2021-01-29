@@ -21,10 +21,11 @@ public class SettingsMenu : MonoBehaviour
     public Slider musicSlider;
     public Slider masterSlider;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
-
         //initialise array with all possible resolutions
         resolutions = Screen.resolutions;
 
