@@ -36,10 +36,6 @@ public class ScoreTracker : MonoBehaviour
 
             if (player.GetKills() >= scoreToWin)
             {
-                if (yourPlayer.isDead)
-                {
-                    yourPlayer.respawnScreen.GetComponent<CanvasGroup>().alpha = 0;
-                }
                 gameOverScreen.GetComponent<CanvasGroup>().alpha = 1;
                 gameOverScreen.SetScores(player.GetName(), yourPlayer.GetKills());
                 yourPlayer.canMove = false;
