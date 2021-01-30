@@ -74,6 +74,8 @@ MonoBehaviour:
   - UpdateScoreMinus
   - UpdateScorePlus
   - RPCUpdateScores
+  - StartTrail
+  - StopTrail
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

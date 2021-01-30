@@ -87,6 +87,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Text pingText;
     private UnityEngine.UI.Slider healthSlider;
     private UnityEngine.UI.Slider expSlider;
+    private Slider cooldownSlider;
 
     private GameObject levelUpNotification;
 
@@ -328,6 +329,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         healthSlider = GameObject.Find("Health Background").GetComponent<Slider>();
         levelText = GameObject.Find("Level Text").GetComponent<Text>();
         expSlider = FindObjectOfType<Slider>();
+        cooldownSlider = GameObject.Find("Weapon Cooldown Bar Background").GetComponent<Slider>(); 
 
         playerHealth = maxHealth; 
         UpdateHealthBar();
@@ -373,6 +375,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (currentState != GameManager.GameStates.LOBBY)
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                FindObjectOfType<AudioManager>().Play("BoostNoise");
+                photonView.RPC("StartTrail", RpcTarget.All);
+                
+            }
+            
+            if(Input.GetKeyUp(KeyCode.Space))
+            {
+                FindObjectOfType<AudioManager>().Stop("BoostNoise");
+                photonView.RPC("StopTrail", RpcTarget.All);
+            }
+
             if (!Input.GetMouseButton(1))
             {
                 canMove = true;
@@ -453,23 +468,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                FindObjectOfType<AudioManager>().Play("BoostNoise");
-                foreach(ParticleSystem p in trails)
-                {
-                    p.Play();
-                }
-            }
-
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                FindObjectOfType<AudioManager>().Stop("BoostNoise");
-                foreach (ParticleSystem p in trails)
-                {
-                    p.Stop();
-                }
-            }
+            
         }
         else
         {
@@ -515,6 +514,24 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         pingText.text = "Latency: " + PhotonNetwork.GetPing(); 
+    }
+
+    [PunRPC]
+    private void StartTrail()
+    {
+        foreach (ParticleSystem p in trails)
+        {
+            p.Play();
+        }
+    }
+
+    [PunRPC]
+    private void StopTrail()
+    {
+        foreach (ParticleSystem p in trails)
+        {
+            p.Stop();
+        }
     }
 
     /// <summary>
