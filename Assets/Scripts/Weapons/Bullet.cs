@@ -78,8 +78,6 @@ public class Bullet : MonoBehaviourPunCallbacks
             if (collision.transform.tag == "Player")
             {
                 collision.gameObject.GetComponent<Player>().hitDetected(getDamage(), owner.GetComponent<Player>());
-                //collision.gameObject.GetPhotonView().RPC("hitDetected", RpcTarget.All, damage);
-                Debug.Log(getDamage());
             }
             else if (collision.transform.tag == "Mine")
             {

@@ -676,7 +676,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            playerHealth = playerHealth - damage;//damage;
+            playerHealth = playerHealth - damage;
             UpdateHealthBar();
 
             if (playerHealth <= 0)
@@ -723,7 +723,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine)
         {
             photonView.RPC("NetworkAddDeath", RpcTarget.AllBuffered);
-            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths"));// + 1);
+            PlayerPrefs.SetInt("Deaths", deaths);
             killStreak = 0;
             displayedKillstreakText = false;
         }
