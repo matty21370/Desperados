@@ -135,6 +135,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public ParticleSystem[] trails;
 
+    [SerializeField] private TMP_Text nameText;
+
     public int GetTeam()
     {
         return team;
@@ -162,6 +164,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public GameManager.GameStates currentState;
     private bool gameOver = false;
+
     [PunRPC]
     public void ResetPlayer()
     {
@@ -267,7 +270,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             userName = PlayerPrefs.GetString("Name"); 
             playerName = userName;
+            nameText.gameObject.SetActive(false);
         }
+
+        nameText.text = playerName;
 
         if(PhotonNetwork.IsMasterClient)
         {
@@ -576,7 +582,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     camera.GetComponent<CameraMovement>().SetMaxFOV(90f);
                 }
             }
-          
             else
             {
                 camera.fieldOfView -= Time.deltaTime * 6;
