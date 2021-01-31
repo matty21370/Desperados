@@ -137,6 +137,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     [SerializeField] private TMP_Text nameText;
 
+    private LineRenderer lineRenderer;
+
     public int GetTeam()
     {
         return team;
@@ -266,6 +268,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     void Start()
     {
+        lineRenderer = FindObjectOfType<LineRenderer>();
+
         if(photonView.IsMine)
         {
             userName = PlayerPrefs.GetString("Name"); 
@@ -363,6 +367,30 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    private void FindClosestPlayer()
+    {
+        if (FindObjectsOfType<Player>().Length >= 2)
+        {
+            Transform min = null;
+            float minDis = Mathf.Infinity;
+            Vector3 currentPosition = transform.position;
+
+            foreach (Player p in FindObjectsOfType<Player>())
+            {
+                if (!p.photonView.IsMine)
+                {
+                    float dist = Vector3.Distance(p.transform.position, currentPosition);
+                    if (dist < minDis)
+                    {
+                        min = p.transform;
+                        minDis = dist;
+                    }
+                }
+            }
+            lineRenderer.SetPosition(1, min.position);
+        }
+    }
+
     /// <summary>
     /// This method is called once per frame, framerate dependent.
     /// Movement related commands are not recommended to go in here.
@@ -373,6 +401,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             return; 
         }
+
+        lineRenderer.SetPosition(0, transform.position);
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -439,6 +469,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 photonView.RPC("DropMine", RpcTarget.All);
 
+            }
+
+            if(Input.GetKey(KeyCode.E))
+            {
+                FindClosestPlayer();
+                lineRenderer.SetWidth(0.05f, 0.05f);
+            }
+            else
+            {
+                lineRenderer.SetWidth(0, 0);
             }
 
             if (Input.GetKeyDown(KeyCode.I))
