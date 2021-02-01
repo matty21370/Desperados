@@ -152,10 +152,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     KeyCode kcCool = KeyCode.T;
     KeyCode kcMine = KeyCode.F;
     KeyCode kcScore = KeyCode.Tab;
-    KeyCode kcUp = KeyCode.LeftShift;
-    KeyCode kcDown = KeyCode.LeftControl;
+    KeyCode kcUp = KeyCode.Q;
+    KeyCode kcDown = KeyCode.E;
     KeyCode kcBoost = KeyCode.Space;
-    KeyCode kcClosest = KeyCode.E;
+    KeyCode kcClosest = KeyCode.LeftControl;
    
 
 
