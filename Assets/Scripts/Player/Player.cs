@@ -509,8 +509,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     shop.gameObject.SetActive(true);
                     shop.updateText(currency);
-                    UnityEngine.Cursor.visible = true;
-                    UnityEngine.Cursor.lockState = CursorLockMode.None;
+                  
                 }
                 else
                 {
@@ -518,6 +517,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     UnityEngine.Cursor.visible = false;
                     UnityEngine.Cursor.lockState = CursorLockMode.Locked;
                 }
+            }
+            if (shop.shopEnabled)//temp bug fix untill i can find reall solution
+            {
+                UnityEngine.Cursor.visible = true;
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
             }
 
             if (Input.GetKeyDown(kcScore))
