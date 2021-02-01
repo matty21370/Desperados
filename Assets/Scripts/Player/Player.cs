@@ -142,6 +142,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
 
 
+
     //key bindings
     KeyCode kcForward = KeyCode.W;
     KeyCode kcLeft = KeyCode.A;
@@ -156,6 +157,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     KeyCode kcBoost = KeyCode.Space;
     KeyCode kcClosest = KeyCode.LeftControl;
    
+
 
 
 
@@ -477,7 +479,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-			if (Input.GetKeyDown(kcCool)&& !manualCool)
+			if (Input.GetKeyDown(KeyCode.T)&& !manualCool)
 			{
                 manualCool = true;
                 shotsLeft = 0;
@@ -485,13 +487,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 weaponOverheat("Weapon Cooling");
             }
 
-            if (Input.GetKeyDown(kcMine) && (minesEnabled))
+            if (Input.GetKeyDown(KeyCode.R) && (minesEnabled))
             {
                 photonView.RPC("DropMine", RpcTarget.All);
 
             }
 
-            if(Input.GetKey(kcClosest))
+            if(Input.GetKey(KeyCode.E))
             {
                 FindClosestPlayer();
                 lineRenderer.SetWidth(0.05f, 0.05f);
@@ -501,7 +503,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 lineRenderer.SetWidth(0, 0);
             }
 
-            if (Input.GetKeyDown(kcShop))
+            if (Input.GetKeyDown(KeyCode.I))
             {
                 shop.setEnabled();
 
@@ -520,7 +522,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-            if (Input.GetKeyDown(kcScore))
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
                 if (!leaderboardOpen)
                 {
@@ -538,7 +540,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            if(Input.GetKeyDown(kcBoost))
+            if(Input.GetKeyDown(KeyCode.Space))
             {
                 isReady = !isReady;
             }
@@ -624,13 +626,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (canMove && !isDead)
         {
             CheckOutOfBounds();
-            if (Input.GetKey(kcForward) )
+            if (Input.GetKey(KeyCode.W) )
             {
                 
                 transform.position += -transform.forward * (speedIncrease *movementSpeed) * Time.deltaTime;
                 camera.fieldOfView += Time.deltaTime * 6;
 
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKey(kcBoost))
                 {
                     movementSpeed = 11f;
                     camera.GetComponent<CameraMovement>().SetMaxFOV(95f);
@@ -647,7 +649,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 camera.fieldOfView -= Time.deltaTime * 6;
             }
 
-            if (Input.GetKey(kcLeft) && !Input.GetKey(kcRight) )
+            if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) )
             {
                 transform.position += transform.right * (speedIncrease * movementSpeed) * Time.deltaTime;
                 float z = Input.GetAxis("Horizontal") * 15.0f;
@@ -657,12 +659,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
             
 
-            if (Input.GetKey(kcBack))
+            if (Input.GetKey(KeyCode.S))
             {
                 transform.position += transform.forward * (speedIncrease * movementSpeed) * Time.deltaTime;
             }
 
-            if (Input.GetKey(kcRight) && !Input.GetKey(kcLeft))
+            if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
             {
                 transform.position += -transform.right * (speedIncrease * movementSpeed) * Time.deltaTime;
                 float z = Input.GetAxis("Horizontal") * 15.0f;
@@ -671,12 +673,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 transform.localEulerAngles = euler;
             }
 
-            if (Input.GetKey(kcDown))
+            if (Input.GetKey(KeyCode.LeftControl))
             {
                 transform.position += -transform.up * (speedIncrease * movementSpeed) * Time.deltaTime;
             }
 
-            if (Input.GetKey(kcUp))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 transform.position += transform.up * (speedIncrease * movementSpeed) * Time.deltaTime;
             }
