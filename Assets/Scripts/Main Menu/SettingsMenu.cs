@@ -70,7 +70,6 @@ public class SettingsMenu : MonoBehaviour
         }
 
         if(PlayerPrefs.HasKey("MasterVolume"))
-        if(PlayerPrefs.HasKey("MasterVolume"))
         {
             masterSlider.value = PlayerPrefs.GetFloat("MasterVolume");
         }
@@ -100,19 +99,20 @@ public class SettingsMenu : MonoBehaviour
 
     public void setMasterVolume(float volume)
     {
-        masterMixer.SetFloat("masterVolume", volume);
+        masterMixer.SetFloat("masterVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("MasterVolume", volume);
     }
 
     public void setSFXVolume(float volume)
     {
-        sfxMixer.SetFloat("sfxVolume", volume);
+        sfxMixer.SetFloat("sfxVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 
     public void setMusicVolume(float volume)
     {
-        musicMixer.SetFloat("musicVolume", volume);
+        musicMixer.SetFloat("musicVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("MusicVolume", volume);
     }
+
 }
