@@ -155,8 +155,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     KeyCode kcDown = KeyCode.E;
     KeyCode kcBoost = KeyCode.Space;
     KeyCode kcClosest = KeyCode.LeftControl;
-   
+    KeyCode kcShowBoat = KeyCode.X;
 
+
+    //taunt varables
+    private bool showBoat = false;
+    private float rotZ=0;
 
 
     public int GetTeam()
@@ -500,6 +504,38 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 lineRenderer.SetWidth(0, 0);
             }
+			if (Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetMouseButton(1))
+			{
+                float z = Input.GetAxis("Horizontal") * 30.0f;
+                Vector3 euler = transform.localEulerAngles;
+                euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
+                transform.localEulerAngles = euler;
+            }
+            if (Input.GetKey(kcRight) && !Input.GetKey(kcLeft)&&!Input.GetMouseButton(1))
+                {
+                float z = Input.GetAxis("Horizontal") * 30.0f;
+                Vector3 euler = transform.localEulerAngles;
+                euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
+                transform.localEulerAngles = euler;
+            }
+			if (Input.GetKey(kcShowBoat) && !Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetKey(kcUp) && !Input.GetKey(kcDown) && !Input.GetKey(kcForward) && !Input.GetKey(kcBack))
+            {
+                showBoat = true;
+                
+            }
+			if (showBoat && !Input.GetMouseButton(1))
+			{
+                rotZ = rotZ+1f;
+                transform.Rotate(0, 0, rotZ);
+                if ( rotZ > 360)
+					{
+                        rotZ = 0;
+                        showBoat = false;
+                    transform.Rotate(0, 0, rotZ * Time.deltaTime);
+
+                    }
+
+			}
 
             if (Input.GetKeyDown(kcShop))
             {
@@ -654,10 +690,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKey(kcLeft) && !Input.GetKey(kcRight) )
             {
                 transform.position += transform.right * (speedIncrease * movementSpeed) * Time.deltaTime;
-                float z = Input.GetAxis("Horizontal") * 15.0f;
-                Vector3 euler = transform.localEulerAngles;
-                euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
-                transform.localEulerAngles = euler;
+               
             }
             
 
@@ -669,10 +702,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKey(kcRight) && !Input.GetKey(kcLeft))
             {
                 transform.position += -transform.right * (speedIncrease * movementSpeed) * Time.deltaTime;
-                float z = Input.GetAxis("Horizontal") * 15.0f;
-                Vector3 euler = transform.localEulerAngles;
-                euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
-                transform.localEulerAngles = euler;
+            
             }
 
             if (Input.GetKey(kcDown))
