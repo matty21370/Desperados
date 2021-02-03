@@ -377,6 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &27071736
 MeshCollider:
@@ -641,6 +642,7 @@ GameObject:
   - component: {fileID: 55822981}
   - component: {fileID: 55822980}
   - component: {fileID: 55822979}
+  - component: {fileID: 55822985}
   m_Layer: 0
   m_Name: Obstacle (11)
   m_TagString: Obstacle
@@ -728,6 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &55822983
 MeshRenderer:
@@ -778,6 +781,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55822977}
   m_Mesh: {fileID: -6321730818362257757, guid: 05f02f9f76fc0f745ba3e28fc24f969c, type: 3}
+--- !u!114 &55822985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55822977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00613ee418b060d46b3cb1891c78425a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positions:
+  - {x: 20, y: 10, z: 0}
+  - {x: -20, y: 10, z: 0}
+  - {x: 0, y: 0, z: 0}
 --- !u!1 &82705930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2963,6 +2982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &460116765
 MeshCollider:
@@ -4088,6 +4108,7 @@ GameObject:
   - component: {fileID: 706044401}
   - component: {fileID: 706044403}
   - component: {fileID: 706044396}
+  - component: {fileID: 706044402}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Obstacle
@@ -4185,6 +4206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!54 &706044401
 Rigidbody:
@@ -4202,6 +4224,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &706044402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706044395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00613ee418b060d46b3cb1891c78425a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positions:
+  - {x: 20, y: 10, z: 0}
+  - {x: -20, y: 10, z: 0}
+  - {x: 0, y: 10, z: 0}
 --- !u!114 &706044403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5371,6 +5409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &896277552
 MeshRenderer:
@@ -5917,8 +5956,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
-  explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
+  obstacleHealth: 0
+  obstacleHealth2: 0
+  explosionParticle: {fileID: 0}
 --- !u!23 &971735704
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7080,6 +7120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &1270588804
 MeshRenderer:
@@ -7544,6 +7585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &1402389212
 MeshRenderer:
@@ -8424,6 +8466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &1558553990
 MeshCollider:
@@ -8576,6 +8619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &1562427999
 MeshCollider:
@@ -8780,6 +8824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &1577945912
 MeshCollider:
@@ -10309,6 +10354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &1917505589
 MeshRenderer:
@@ -10769,6 +10815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
+  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &2017109226
 MeshCollider:
