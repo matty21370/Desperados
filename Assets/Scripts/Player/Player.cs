@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -18,11 +17,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private string playerName;
     private string userName;
     
-    /// <summary>
-    /// This is the base speed of the player, can be upgraded later
-    /// </summary>
-   // [SerializeField] private float baseSpeed = 5f;
-
     /// <summary>
     /// This is the speed of the player when boosting, can be upgraded later
     /// </summary>
@@ -59,10 +53,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int killsThisGame;
     public bool canShoot = true;
   
-    private int team;
-
     private bool leaderboardOpen;
     private bool outOfBounds;
+
     /// <summary>
     /// This is a reference to the camera object so it can be modified later
     /// </summary>
@@ -85,8 +78,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Text healthText;
     private Text joinText;
     private Text pingText;
-    private UnityEngine.UI.Slider healthSlider;
-    private UnityEngine.UI.Slider expSlider;
+
+    private Slider healthSlider;
+    private Slider expSlider;
     private Slider cooldownSlider;
 
     private GameObject levelUpNotification;
@@ -121,13 +115,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private bool resetPlayer = false;
     private int shotsLeft = 12;
     private float weaponCool = 2f;
-   
-    public GameObject respawnScreen;
-
-    public GameObject lobbyScreen;
-
     public bool isDead = false;
-  
+
+    private GameObject respawnScreen;
+    private GameObject lobbyScreen;
     public GameObject coinPickup;
 
     public bool isReady = false;
@@ -138,9 +129,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private TMP_Text nameText;
 
     private LineRenderer lineRenderer;
-
-
-
 
     //key bindings
     KeyCode kcForward = KeyCode.W;
@@ -157,53 +145,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     KeyCode kcClosest = KeyCode.LeftControl;
     KeyCode kcShowBoat = KeyCode.X;
 
-
     //taunt varables
     private bool showBoat = false;
     private float rotZ=0;
-
-
-    public int GetTeam()
-    {
-        return team;
-    }
-
-    public string GetName()
-    {
-        return playerName;
-    }
-    
-    public int GetLevel()
-    {
-        return level;
-    }
-
-    public int GetKills()
-    {
-        return killCount;
-    }
-
-    public int GetDeaths()
-    {
-        return deaths;
-    }
 
     public GameManager.GameStates currentState;
     private bool gameOver = false;
 
     [PunRPC]
-    public void ResetPlayer()
-    {
-        /* resetPlayer = true;
-         killCount = 0;
-         deaths = 0;
-         currency = 50;
-         shotsLeft = 12;
-         speedIncrease = 1;
-         bulletDamage = 1;
-         weaponCool = 2f;
-         minesEnabled = false;*/
-        //  Disconnect();
+    public void ResetPlayer() { 
         gameOver = true;
         canMove = false;
         canShoot = false;
@@ -212,7 +162,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             r.enabled = false;
         }
-
         foreach (ParticleSystem r in FindObjectsOfType<ParticleSystem>())
         {
             Destroy(r.gameObject);
@@ -220,16 +169,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         Invoke("Disconnect", 5f);
     }
-  /*  public bool getResetPlayer()
-	{
-       // resetPlayer = false;
-        return resetPlayer;
-	}
-    public void SetResetPlayer()
-    {
-         resetPlayer = false;
-       
-    }*/
 
     [PunRPC]
     public void SetToLobby()
@@ -265,7 +204,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(level);
             stream.SendNext(killCount);
             stream.SendNext(killsThisGame);
-            stream.SendNext(team);
             stream.SendNext(playerName);
             stream.SendNext(isReady);
             stream.SendNext(currentState);
@@ -278,7 +216,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             level = (int)stream.ReceiveNext();
             killCount = (int)stream.ReceiveNext();
             killsThisGame = (int)stream.ReceiveNext();
-            team = (int)stream.ReceiveNext();
             playerName = (string)stream.ReceiveNext();
             isReady = (bool)stream.ReceiveNext();
             currentState = (GameManager.GameStates)stream.ReceiveNext();
@@ -439,7 +376,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 FindObjectOfType<AudioManager>().Play("BoostNoise");
                 photonView.RPC("StartTrail", RpcTarget.All);
-                
             }
             
             if(Input.GetKeyUp(kcBoost))
@@ -466,18 +402,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     shotsLeft--;
                 }
                 else
-                {
-                    /* if (manualCool)
-                     {
-                         weaponOverheat("Weapon Cooling");
-                     }
-                     else
-                   {*/
+                { 
                     if (!manualCool)
                     {
                         weaponOverheat("Weapon Overheating");
                     }
-                   // }
                 }
             }
 
@@ -485,14 +414,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 			{
                 manualCool = true;
                 shotsLeft = 0;
-                // weaponOverheat("Weapon Cooling");
                 weaponOverheat("Weapon Cooling");
             }
 
             if (Input.GetKeyDown(kcMine) && (minesEnabled))
             {
                 photonView.RPC("DropMine", RpcTarget.All);
-
             }
 
             if(Input.GetKey(kcClosest))
@@ -504,6 +431,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 lineRenderer.SetWidth(0, 0);
             }
+
 			if (Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetMouseButton(1))
 			{
                 float z = Input.GetAxis("Horizontal") * 30.0f;
@@ -511,6 +439,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
                 transform.localEulerAngles = euler;
             }
+
             if (Input.GetKey(kcRight) && !Input.GetKey(kcLeft)&&!Input.GetMouseButton(1))
                 {
                 float z = Input.GetAxis("Horizontal") * 30.0f;
@@ -518,23 +447,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
                 transform.localEulerAngles = euler;
             }
+
 			if (Input.GetKey(kcShowBoat) && !Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetKey(kcUp) && !Input.GetKey(kcDown) && !Input.GetKey(kcForward) && !Input.GetKey(kcBack))
             {
                 showBoat = true;
-                
             }
+
 			if (showBoat && !Input.GetMouseButton(1))
 			{
                 rotZ = rotZ+1f;
                 transform.Rotate(0, 0, rotZ);
-                if ( rotZ > 360)
-					{
-                        rotZ = 0;
-                        showBoat = false;
+                if (rotZ > 360)
+				{
+                    rotZ = 0;
+                    showBoat = false;
                     transform.Rotate(0, 0, rotZ * Time.deltaTime);
-
-                    }
-
+                }
 			}
 
             if (Input.GetKeyDown(kcShop))
@@ -545,19 +473,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     shop.gameObject.SetActive(true);
                     shop.updateText(currency);
-                  
                 }
                 else
                 {
                     shop.gameObject.SetActive(false);
-                    UnityEngine.Cursor.visible = false;
-                    UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
                 }
             }
             if (shop.shopEnabled)//temp bug fix untill i can find reall solution
             {
-                UnityEngine.Cursor.visible = true;
-                UnityEngine.Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
             }
 
             if (Input.GetKeyDown(kcScore))
@@ -573,8 +500,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     leaderboardOpen = false;
                 }
             }
-
-            
         }
         else
         {
@@ -588,8 +513,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             ToggleMenu();
 
-            UnityEngine.Cursor.visible = true;
-            UnityEngine.Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
             leaveButton.setEnabled();
 
@@ -597,14 +522,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 leaveButton.gameObject.SetActive(true);
 
-                UnityEngine.Cursor.visible = true;
-                UnityEngine.Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
             }
             else
             {
                 leaveButton.gameObject.SetActive(false);
-                UnityEngine.Cursor.visible = false;
-                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
 
@@ -666,7 +591,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             CheckOutOfBounds();
             if (Input.GetKey(kcForward) )
             {
-                
                 transform.position += -transform.forward * (speedIncrease *movementSpeed) * Time.deltaTime;
                 camera.fieldOfView += Time.deltaTime * 6;
 
@@ -674,7 +598,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     movementSpeed = 11f;
                     camera.GetComponent<CameraMovement>().SetMaxFOV(95f);
-
                 }
                 else
                 {
@@ -690,10 +613,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKey(kcLeft) && !Input.GetKey(kcRight) )
             {
                 transform.position += transform.right * (speedIncrease * movementSpeed) * Time.deltaTime;
-               
             }
             
-
             if (Input.GetKey(kcBack))
             {
                 transform.position += transform.forward * (speedIncrease * movementSpeed) * Time.deltaTime;
@@ -702,7 +623,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKey(kcRight) && !Input.GetKey(kcLeft))
             {
                 transform.position += -transform.right * (speedIncrease * movementSpeed) * Time.deltaTime;
-            
             }
 
             if (Input.GetKey(kcDown))
@@ -761,7 +681,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Gun g = guns[0];
         GameObject mine = Instantiate(g.getMine(), g.getGunPosition().position, transform.rotation);
         mine.GetComponent<Mine>().InitializeMine(gameObject); 
-        
         Destroy(mine, 10f);
     }
 
@@ -769,7 +688,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void NetworkAddKill()
     {
         killCount += 1;
-
         if(photonView.IsMine)
         {
             PlayerPrefs.SetInt("Kills", PlayerPrefs.GetInt("Kills") + 1);
@@ -794,7 +712,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             playerHealth = playerHealth - damage;
             UpdateHealthBar();
-
             if (playerHealth <= 0)
             {
                 photonView.RPC("dropPack", RpcTarget.All);
@@ -862,8 +779,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         StartCoroutine(RespawnTimer());
-
-        //Instantiate(coinPickup, transform.position, Quaternion.identity);
     }
 
     public void RespawnButton()
@@ -972,6 +887,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         GameObject p = Instantiate(levelUpEffect, transform.position, Quaternion.identity);
         Destroy(p, 5f);
     }
+
     //Hit particle
     [PunRPC]
     public void RpcExplosiveParticle(Vector3 position)
@@ -1063,48 +979,37 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         //half the cooldown
 	}
 
-
     /// <summary>
     ///set up text and start timer for cool down 
     /// </summary>
     [PunRPC]
     private void weaponOverheat(String messageText)
 	{
-        Debug.Log(messageText);
-
-        overHeatText.color = new Color(255, 0, 0, 1);
-        //set text colour to red
-        overHeatText.text = messageText;
-        //set warning message
-        StartCoroutine("CoolDownTimer");
-        //run timmer
-
+        overHeatText.color = new Color(255, 0, 0, 1); //set text colour to red
+        overHeatText.text = messageText; //set warning message
+        StartCoroutine("CoolDownTimer"); //run timmer
         FindObjectOfType<AudioManager>().Play("Overheat");
-        
     }
+
     /// <summary>
     ///reset the weapon so that it can fire again
     /// </summary>
     [PunRPC]
     private void weaponCoolDown()
 	{
-		
-        overHeatText.text = "";
-        //make the text invisible
-        shotsLeft = 12;
-        //reset the number of shots
+        overHeatText.text = ""; //make the text invisible
+        shotsLeft = 12; //reset the number of shots
         manualCool = false;
     }
+
     /// <summary>
     ///runs while the weapon is unable to fire
     /// </summary>
     private IEnumerator CoolDownTimer()
     {
         yield return new WaitForSeconds(2f);
-        
         weaponCoolDown();
     }
-
 
     public void HealthBoost(int boost)
 	{
@@ -1118,17 +1023,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 		}
         UpdateHealthBar();
 	}
+
     [PunRPC]
     private void dropPack()
 	{
         Gun g = guns[0];
-     GameObject pack = Instantiate(g.getHealthPack(), g.getGunPosition().position, transform.rotation);
-       
+        GameObject pack = Instantiate(g.getHealthPack(), g.getGunPosition().position, transform.rotation);
         pack.GetComponent<HealthPack>().InitializePack(5);
-
         Destroy(pack,20f);
     }
-
 
     public void CheckOutOfBounds()
 	{
@@ -1188,6 +1091,26 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 	{
         PhotonNetwork.LeaveRoom();
     }
+
+    public string GetName()
+    {
+        return playerName;
+    }
+
+    public int GetLevel()
+    {
+        return level;
+    }
+
+    public int GetKills()
+    {
+        return killCount;
+    }
+
+    public int GetDeaths()
+    {
+        return deaths;
+    }
 }
 
 [Serializable]//create gun to fire weapons.
@@ -1215,5 +1138,4 @@ public class Gun
     {
         return healthPack;
     }
-
 }
