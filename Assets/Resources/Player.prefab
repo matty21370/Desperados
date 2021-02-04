@@ -1070,8 +1070,6 @@ MonoBehaviour:
   explosiveParticle: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   boostTrail: {fileID: 8626708731874616210, guid: eb5b9f73209c02a4daa361e7613a0d43, type: 3}
   canMove: 0
-  respawnScreen: {fileID: 0}
-  lobbyScreen: {fileID: 0}
   isDead: 0
   coinPickup: {fileID: 3318978757863166718, guid: f7f183043a9369a4686014bbebb01a30, type: 3}
   isReady: 0
@@ -1238,7 +1236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 13, y: 0}
   m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5500724611730839556

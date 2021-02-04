@@ -141,7 +141,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     KeyCode kcScore = KeyCode.Tab;
     KeyCode kcUp = KeyCode.Q;
     KeyCode kcDown = KeyCode.E;
-    KeyCode kcBoost = KeyCode.Space;
+    KeyCode kcBoost = KeyCode.LeftShift;
     KeyCode kcClosest = KeyCode.LeftControl;
     KeyCode kcShowBoat = KeyCode.X;
 
@@ -414,7 +414,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 			{
                 manualCool = true;
                 shotsLeft = 0;
-                weaponOverheat("Weapon Cooling");
+                weaponOverheat("   Weapon Cooling");
             }
 
             if (Input.GetKeyDown(kcMine) && (minesEnabled))
@@ -503,7 +503,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            if(Input.GetKeyDown(kcBoost))
+            if(Input.GetKeyDown(KeyCode.Space))
             {
                 isReady = !isReady;
             }
@@ -594,7 +594,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 transform.position += -transform.forward * (speedIncrease *movementSpeed) * Time.deltaTime;
                 camera.fieldOfView += Time.deltaTime * 6;
 
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKey(kcBoost))
                 {
                     movementSpeed = 11f;
                     camera.GetComponent<CameraMovement>().SetMaxFOV(95f);
