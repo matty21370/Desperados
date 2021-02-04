@@ -433,10 +433,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-			if (Input.GetKeyDown(kcCool)&& !manualCool)
+			if (Input.GetKeyDown(kcCool) && !manualCool)
 			{
                 manualCool = true;
-                maxShots = 0;
                 weaponOverheat("   Weapon Cooling");
             }
 
