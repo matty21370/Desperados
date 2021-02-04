@@ -448,7 +448,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 transform.localEulerAngles = euler;
             }
 
-			if (Input.GetKey(kcShowBoat) && !Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetKey(kcUp) && !Input.GetKey(kcDown) && !Input.GetKey(kcForward) && !Input.GetKey(kcBack))
+			if (Input.GetKey(kcShowBoat) && !Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetKey(kcUp) && !Input.GetKey(kcDown) )//&& !Input.GetKey(kcForward) && !Input.GetKey(kcBack))
             {
                 showBoat = true;
             }

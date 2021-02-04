@@ -184,7 +184,7 @@ public class ButtonHandler : MonoBehaviour
 	{
 	
 			Text txt = transform.Find(buttonNeeded).GetComponent<Text>();
-			txt.text = "Insufficient Funds";
+			txt.text = "More Funds Needed";
 			
 			
 		StartCoroutine(CoolDownTimer( buttonNeeded, item));
