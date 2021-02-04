@@ -379,7 +379,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if(weaponCooling)
         {
-            cooldownSlider.value -= Time.deltaTime * 6f;
+            cooldownSlider.value -= Time.deltaTime * (shots / 2);
         }
 
         if(cooldownSlider.value == 0)
