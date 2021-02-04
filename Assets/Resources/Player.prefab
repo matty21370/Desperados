@@ -1465,6 +1465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boostSpeed: 8
   maxHealth: 10
+  shootSpeed: 0.2
   canShoot: 1
   guns:
   - gunPosition: {fileID: 1660114049554927821}

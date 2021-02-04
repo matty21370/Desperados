@@ -116,8 +116,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Text overHeatText;
     private Text mapText;
     private bool resetPlayer = false;
-    private int shotsLeft = 12;
+
+    private int shots = 0;
+    private int maxShots = 12;
     private float weaponCool = 2f;
+    private bool weaponCooling = false;
+
     public bool isDead = false;
 
     private GameObject respawnScreen;
@@ -373,6 +377,20 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             masterClient = true;
         }
 
+        if(weaponCooling)
+        {
+            cooldownSlider.value -= Time.deltaTime * 6f;
+        }
+
+        if(cooldownSlider.value == 0)
+        {
+            cooldownSlider.GetComponent<CanvasGroup>().alpha = 0;
+        }
+        else
+        {
+            cooldownSlider.GetComponent<CanvasGroup>().alpha = 1;
+        }
+
         if (currentState != GameManager.GameStates.LOBBY)
         {
             if (Input.GetKeyDown(kcBoost))
@@ -399,10 +417,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             if (Input.GetMouseButton(0) && Time.time > shootTimer && canShoot && !shop.shopEnabled)
             {
-                if (shotsLeft > 0)
+                if (shots < maxShots)
                 {
                     photonView.RPC("Shoot", RpcTarget.All);
-                    shotsLeft--;
+                    shots++;
+                    cooldownSlider.value = shots;
                     shootTimer = Time.time + shootSpeed;
                 }
                 else
@@ -417,7 +436,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 			if (Input.GetKeyDown(kcCool)&& !manualCool)
 			{
                 manualCool = true;
-                shotsLeft = 0;
+                maxShots = 0;
                 weaponOverheat("   Weapon Cooling");
             }
 
@@ -812,7 +831,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
         playerHealth = maxHealth; 
         UpdateHealthBar();
-        shotsLeft = 12;
+        maxShots = 12;
         foreach (Transform child in transform) 
         {
             if (child.GetComponent<MeshRenderer>())
@@ -1002,8 +1021,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private void weaponCoolDown()
 	{
         overHeatText.text = ""; //make the text invisible
-        shotsLeft = 12; //reset the number of shots
+        shots = 0; //reset the number of shots
+        cooldownSlider.value = 0;
         manualCool = false;
+        weaponCooling = false;
     }
 
     /// <summary>
@@ -1011,6 +1032,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     private IEnumerator CoolDownTimer()
     {
+        weaponCooling = true;
         yield return new WaitForSeconds(2f);
         weaponCoolDown();
     }

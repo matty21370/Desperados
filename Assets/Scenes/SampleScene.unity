@@ -377,7 +377,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &27071736
 MeshCollider:
@@ -730,7 +729,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &55822983
 MeshRenderer:
@@ -2982,7 +2980,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &460116765
 MeshCollider:
@@ -4206,7 +4203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!54 &706044401
 Rigidbody:
@@ -5409,7 +5405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &896277552
 MeshRenderer:
@@ -5531,7 +5526,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.00061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.0012207031, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &905907881
@@ -5957,7 +5952,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 0
-  obstacleHealth2: 0
   explosionParticle: {fileID: 0}
 --- !u!23 &971735704
 MeshRenderer:
@@ -7120,7 +7114,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &1270588804
 MeshRenderer:
@@ -7585,7 +7578,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &1402389212
 MeshRenderer:
@@ -7711,7 +7703,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 50, y: -692}
-  m_SizeDelta: {x: 1250, y: 20}
+  m_SizeDelta: {x: 500, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1404080530
 MonoBehaviour:
@@ -7757,7 +7749,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 12
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -7809,7 +7801,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404080528}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -8466,7 +8458,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &1558553990
 MeshCollider:
@@ -8619,7 +8610,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &1562427999
 MeshCollider:
@@ -8824,7 +8814,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &1577945912
 MeshCollider:
@@ -10354,7 +10343,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &1917505589
 MeshRenderer:
@@ -10815,7 +10803,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleHealth: 10
-  obstacleHealth2: 0
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &2017109226
 MeshCollider:
