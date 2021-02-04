@@ -26,6 +26,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// This is the maximum health the player can have, can be upgraded layer
     /// </summary>
     [SerializeField] private float maxHealth = 10;
+
+    [SerializeField] private float shootSpeed = 0.2f;
+    private float shootTimer = 0.2f;
    
     /// <summary>
     /// This is the speed the player is currently moving at
@@ -394,12 +397,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 canMove = false;
             }
 
-            if (Input.GetMouseButtonDown(0) && photonView.IsMine && canShoot && !shop.shopEnabled)
+            if (Input.GetMouseButton(0) && Time.time > shootTimer && canShoot && !shop.shopEnabled)
             {
                 if (shotsLeft > 0)
                 {
                     photonView.RPC("Shoot", RpcTarget.All);
                     shotsLeft--;
+                    shootTimer = Time.time + shootSpeed;
                 }
                 else
                 { 
