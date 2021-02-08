@@ -148,7 +148,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     KeyCode kcScore = KeyCode.Tab;
     KeyCode kcUp = KeyCode.Q;
     KeyCode kcDown = KeyCode.E;
-    KeyCode kcBoost = KeyCode.LeftShift;
+    KeyCode kcBoost = KeyCode.Space;
     KeyCode kcClosest = KeyCode.LeftControl;
     KeyCode kcShowBoat = KeyCode.X;
 
