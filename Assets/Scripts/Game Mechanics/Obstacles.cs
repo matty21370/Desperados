@@ -75,10 +75,6 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
         {
             collision.gameObject.GetComponent<Player>().hitDetected(1, null);
         }
-        else if (collision.transform.tag == "Bullet")
-		{
-            reduceHealth(collision.gameObject.GetComponent<Bullet>().getDamage());
-		}
     }
 
     /// <summary>
@@ -87,7 +83,7 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 	/// <param name="collision">
 	/// the object that has hit the object
 	/// </param>
-    private void reduceHealth(int damage)
+    public void reduceHealth(int damage)
 	{
         obstacleHealth = obstacleHealth - damage;
 

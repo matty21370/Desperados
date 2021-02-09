@@ -68,6 +68,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// This is a list of all the guns currently attached to the player
     /// </summary>
     [SerializeField] private List<Gun> guns = new List<Gun>();
+    [SerializeField] private Transform crosshair;
 
     /// <summary>
     /// check if the user can use mines
@@ -134,6 +135,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public ParticleSystem[] trails;
 
     [SerializeField] private TMP_Text nameText;
+
+    [SerializeField] private GameObject trail;
 
     private LineRenderer lineRenderer;
 
@@ -236,9 +239,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     void Start()
     {
-        lineRenderer = FindObjectOfType<LineRenderer>();
+        lineRenderer = GameObject.Find("Line").GetComponent<LineRenderer>();
 
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {
             userName = PlayerPrefs.GetString("Name"); 
             playerName = userName;
@@ -332,6 +335,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (!photonView.IsMine)
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
+            crosshair.gameObject.SetActive(false);
         }
     }
 
@@ -686,11 +690,26 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void Shoot()
     {
+        FindObjectOfType<AudioManager>().Play("LaserSound1");
         foreach (Gun g in guns)
         {
-            GameObject bullet = Instantiate(g.getBullet(), g.getGunPosition().position, transform.rotation);
-            bullet.GetComponent<Bullet>().InitializeBullet(gameObject, -transform.forward, bulletDamage);
-            Destroy(bullet, 5f);
+            Vector3 startPos = g.getGunPosition().position;
+            Vector3 endPos = -transform.forward * 100f;
+            Trail t = Instantiate(trail, g.getGunPosition()).GetComponent<Trail>();
+            t.Init(startPos, g.getGunPosition().transform.forward);
+            RaycastHit hit;
+            if(Physics.Raycast(startPos, endPos, out hit))
+            {
+                RpcCreateHitParticle(hit.point);
+                if(hit.transform.tag == "Player")
+                {
+                    hit.transform.GetComponent<Player>().hitDetected(1, this);
+                }
+                else if(hit.transform.tag == "Obstacle")
+                {
+                    hit.transform.GetComponent<Obstacles>().reduceHealth(1);
+                }
+            }
         }
     }
 
@@ -1141,14 +1160,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 [Serializable]//create gun to fire weapons.
 public class Gun
 {
-    [SerializeField] private Transform gunPosition;
+    [SerializeField] private Transform gunTransform;
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject mine;
     [SerializeField] private GameObject healthPack;
 
     public Transform getGunPosition()
     {
-        return gunPosition;
+        return gunTransform;
     }
 
     public GameObject getBullet()
