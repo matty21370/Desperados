@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &27071736
 MeshCollider:
@@ -728,7 +728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &55822983
 MeshRenderer:
@@ -2979,7 +2979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &460116765
 MeshCollider:
@@ -4202,7 +4202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!54 &706044401
 Rigidbody:
@@ -5404,7 +5404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &896277552
 MeshRenderer:
@@ -5951,7 +5951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 0
+  obstacleHealth: 20
   explosionParticle: {fileID: 0}
 --- !u!23 &971735704
 MeshRenderer:
@@ -7113,7 +7113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &1270588804
 MeshRenderer:
@@ -7577,7 +7577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &1402389212
 MeshRenderer:
@@ -8457,7 +8457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &1558553990
 MeshCollider:
@@ -8609,7 +8609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &1562427999
 MeshCollider:
@@ -8813,7 +8813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &1577945912
 MeshCollider:
@@ -10342,7 +10342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!23 &1917505589
 MeshRenderer:
@@ -10802,7 +10802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05478c77f323d324fa7b86b72fa96e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleHealth: 10
+  obstacleHealth: 20
   explosionParticle: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
 --- !u!64 &2017109226
 MeshCollider:

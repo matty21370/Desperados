@@ -409,15 +409,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 photonView.RPC("StopTrail", RpcTarget.All);
             }
 
-            if (!Input.GetMouseButton(1))
-            {
-                canMove = true;
-                transform.forward = Vector3.Lerp(transform.forward, -GetComponentInChildren<Camera>().transform.forward, Time.deltaTime * 16f);
-            }
-            else
-            {
-                canMove = false;
-            }
+            transform.forward = Vector3.Lerp(transform.forward, -GetComponentInChildren<Camera>().transform.forward, Time.deltaTime * 16f);
 
             if (Input.GetMouseButton(0) && Time.time > shootTimer && canShoot && !shop.shopEnabled)
             {
@@ -630,6 +622,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     movementSpeed = 5f;
                     camera.GetComponent<CameraMovement>().SetMaxFOV(90f);
                 }
+            }
+            if(Input.GetMouseButtonDown(1))
+            {
+                camera.GetComponent<CameraMovement>().SetMaxFOV(80f);
             }
             else
             {
