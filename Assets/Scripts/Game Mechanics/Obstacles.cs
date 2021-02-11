@@ -101,6 +101,15 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
         notDestroyed = false;
         GetComponent<Obstacles>().GetComponent<MeshRenderer>().enabled=false;
         GetComponent<MeshCollider>().enabled = false;
+        Invoke("Respawn", 10);
+    }
+
+    public void Respawn()
+    {
+        notDestroyed = true;
+        GetComponent<Obstacles>().GetComponent<MeshRenderer>().enabled = true;
+        GetComponent<MeshCollider>().enabled = true;
+        obstacleHealth = 20;
     }
 
     private void setPosition()
