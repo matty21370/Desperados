@@ -499,7 +499,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     Cursor.lockState = CursorLockMode.Locked;
                 }
             }
-            if (shop.shopEnabled)//temp bug fix untill i can find reall solution
+            if (shop.shopEnabled || leaveButton.leaveEnabled)//temp bug fix untill i can find reall solution
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
@@ -1150,6 +1150,29 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public int GetDeaths()
     {
         return deaths;
+    }
+
+
+    public KeyCode getKeySet()
+	{
+        return kcForward;
+	}
+
+
+
+
+    ////////////////////////////
+	public void setControl(KeyCode key, string keySet)
+	{
+        if (keySet.Equals("foward"))
+		{
+            kcForward = key;
+        }
+        if (keySet.Equals("backward"))
+        {
+            kcBack = key;
+        }
+
     }
 }
 
