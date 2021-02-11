@@ -154,6 +154,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     KeyCode kcBoost = KeyCode.Space;
     KeyCode kcClosest = KeyCode.LeftControl;
     KeyCode kcShowBoat = KeyCode.X;
+    KeyCode kcShoot = KeyCode.Mouse0;
 
     //taunt varables
     private bool showBoat = false;
@@ -411,7 +412,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             transform.forward = Vector3.Lerp(transform.forward, -GetComponentInChildren<Camera>().transform.forward, Time.deltaTime * 16f);
 
-            if (Input.GetMouseButton(0) && Time.time > shootTimer && canShoot && !shop.shopEnabled)
+            if (Input.GetKeyDown(kcShoot) && Time.time > shootTimer && canShoot && !shop.shopEnabled)
             {
                 if (shots < maxShots)
                 {
@@ -1172,7 +1173,50 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             kcBack = key;
         }
-
+        if (keySet.Equals("left"))
+        {
+            kcLeft = key;
+        }
+        if (keySet.Equals("right"))
+        {
+            kcRight = key;
+        }
+        if (keySet.Equals("up"))
+        {
+            kcUp = key;
+        }
+        if (keySet.Equals("down"))
+        {
+            kcDown = key;
+        }
+        if (keySet.Equals("shoot"))
+        {
+            kcShoot = key;
+        }
+        if (keySet.Equals("boost"))
+        {
+            kcBoost = key;
+        }
+        if (keySet.Equals("score"))
+        {
+            kcScore = key;
+        }
+        if (keySet.Equals("shop"))
+        {
+            kcShop = key;
+        }
+        if (keySet.Equals("mine"))
+        {
+            kcMine = key;
+        }
+        if (keySet.Equals("find"))
+        {
+            kcClosest = key;
+        }
+        if (keySet.Equals("flip"))
+        {
+            kcShowBoat = key;
+        }
     }
 }
 
