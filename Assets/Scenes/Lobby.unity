@@ -4618,6 +4618,9 @@ MonoBehaviour:
     volume: 0.6
     pitch: 1
     loop: 1
+    spatialBlend: 0
+    minDistance: 0
+    maxDistance: 0
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: LaserSound1
@@ -4625,6 +4628,9 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+    spatialBlend: 1
+    minDistance: 1
+    maxDistance: 1
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: BoostNoise
@@ -4632,6 +4638,9 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 1
+    spatialBlend: 1
+    minDistance: 1
+    maxDistance: 0
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: MeteorExplode
@@ -4639,6 +4648,9 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+    spatialBlend: 1
+    minDistance: 1
+    maxDistance: 1
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: Overheat
@@ -4646,6 +4658,9 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+    spatialBlend: 1
+    minDistance: 1
+    maxDistance: 0
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: HealthPack
@@ -4653,6 +4668,9 @@ MonoBehaviour:
     volume: 0.6
     pitch: 1
     loop: 0
+    spatialBlend: 1
+    minDistance: 1
+    maxDistance: 0
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: PlayerExplode
@@ -4660,6 +4678,9 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+    spatialBlend: 1
+    minDistance: 1
+    maxDistance: 0
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: LevelUp
@@ -4667,6 +4688,9 @@ MonoBehaviour:
     volume: 0.7
     pitch: 1
     loop: 0
+    spatialBlend: 0
+    minDistance: 1
+    maxDistance: 0
     source: {fileID: 0}
 --- !u!4 &751442056
 Transform:

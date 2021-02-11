@@ -89,7 +89,7 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 
         if (obstacleHealth <= 0)
 		{
-            FindObjectOfType<AudioManager>().Play("MeteorExplode");
+            FindObjectOfType<AudioManager>().Play("MeteorExplode", transform.position);
             Instantiate(explosionParticle, transform.position, Quaternion.identity);
             photonView.RPC("Despawn", RpcTarget.All);
         }

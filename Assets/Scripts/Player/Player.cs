@@ -399,7 +399,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (Input.GetKeyDown(kcBoost))
             {
-                FindObjectOfType<AudioManager>().Play("BoostNoise");
+                FindObjectOfType<AudioManager>().Play("BoostNoise", transform.position);
                 photonView.RPC("StartTrail", RpcTarget.All);
             }
             
@@ -686,10 +686,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void Shoot()
     {
-        FindObjectOfType<AudioManager>().Play("LaserSound1");
+        
         foreach (Gun g in guns)
         {
             Vector3 startPos = g.getGunPosition().position;
+            FindObjectOfType<AudioManager>().Play("LaserSound1", startPos);
             Vector3 endPos = -transform.forward * 100f;
             Trail t = Instantiate(trail, g.getGunPosition()).GetComponent<Trail>();
             t.Init(startPos, g.getGunPosition().transform.forward);
@@ -787,7 +788,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         canMove = false;
 
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
-        FindObjectOfType<AudioManager>().Play("PlayerExplode");
+        FindObjectOfType<AudioManager>().Play("PlayerExplode", transform.position);
         Destroy(p, 5f);
 
         if (photonView.IsMine)
@@ -1025,7 +1026,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         overHeatText.color = new Color(255, 0, 0, 1); //set text colour to red
         overHeatText.text = messageText; //set warning message
         StartCoroutine("CoolDownTimer"); //run timmer
-        FindObjectOfType<AudioManager>().Play("Overheat");
+        FindObjectOfType<AudioManager>().Play("Overheat", transform.position);
     }
 
     /// <summary>
