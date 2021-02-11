@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 7343669169923775169}
   - component: {fileID: 2288063917099627284}
   m_Layer: 5
-  m_Name: DMinetext
+  m_Name: FPtext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2249,7 +2249,7 @@ GameObject:
   - component: {fileID: 8289041212943547896}
   - component: {fileID: 8756629323417316166}
   m_Layer: 5
-  m_Name: Ltext
+  m_Name: Scoretext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2763,7 +2763,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: leader
+          m_StringArgument: score
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &4825578116344770325
