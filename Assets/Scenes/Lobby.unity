@@ -4670,7 +4670,7 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 1
     minDistance: 1
-    maxDistance: 0
+    maxDistance: 30
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: PlayerExplode
@@ -4690,7 +4690,7 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 0
     minDistance: 1
-    maxDistance: 30
+    maxDistance: 1
     source: {fileID: 0}
 --- !u!4 &751442056
 Transform:
