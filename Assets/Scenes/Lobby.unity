@@ -4630,7 +4630,7 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 1
     minDistance: 1
-    maxDistance: 1
+    maxDistance: 50
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: BoostNoise
@@ -4638,9 +4638,9 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 1
-    spatialBlend: 1
+    spatialBlend: 0
     minDistance: 1
-    maxDistance: 0
+    maxDistance: 30
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: MeteorExplode
@@ -4650,7 +4650,7 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 1
     minDistance: 1
-    maxDistance: 1
+    maxDistance: 400
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: Overheat
@@ -4660,7 +4660,7 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 1
     minDistance: 1
-    maxDistance: 0
+    maxDistance: 30
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: HealthPack
@@ -4680,7 +4680,7 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 1
     minDistance: 1
-    maxDistance: 0
+    maxDistance: 150
     source: {fileID: 0}
   - audioMixerGroup: {fileID: -4143044424102719792, guid: 96ea266572789bc40b33b33f5bc1d2cd, type: 2}
     name: LevelUp
@@ -4690,7 +4690,7 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 0
     minDistance: 1
-    maxDistance: 0
+    maxDistance: 30
     source: {fileID: 0}
 --- !u!4 &751442056
 Transform:

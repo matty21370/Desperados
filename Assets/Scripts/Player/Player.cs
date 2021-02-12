@@ -400,7 +400,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (Input.GetKeyDown(kcBoost))
             {
-                FindObjectOfType<AudioManager>().Play("BoostNoise", transform.position);
+                FindObjectOfType<AudioManager>().Play("BoostNoise");
                 photonView.RPC("StartTrail", RpcTarget.All);
             }
             
