@@ -412,7 +412,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             transform.forward = Vector3.Lerp(transform.forward, -GetComponentInChildren<Camera>().transform.forward, Time.deltaTime * 16f);
 
-            if (Input.GetKeyDown(kcShoot) && Time.time > shootTimer && canShoot && !shop.shopEnabled)
+            if (Input.GetKey(kcShoot) && Time.time > shootTimer && canShoot && !shop.shopEnabled)
             {
                 if (shots < maxShots)
                 {
