@@ -23,16 +23,16 @@ public class LeaveButton : MonoBehaviour
 		//the health button 
 		if (text.Equals("leave"))
 		{
-			//Debug.Log("leave game");
-		//	leaveGame(owner);
+			Debug.Log("leave game");
+			leaveGame();
 
 		}
 	}
 
-	private void leaveGame(GameObject owner)
+	private void leaveGame()
 	{
-		gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-		Application.Quit();
+		//gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+		//Application.Quit();
 		
 		//gameManager.LeaveRoom();
 		//PhotonNetwork.LeaveRoom();

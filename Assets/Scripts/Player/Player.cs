@@ -425,7 +425,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 { 
                     if (!manualCool)
                     {
-                        weaponOverheat("Weapon Overheating");
+                        weaponOverheat("Weapon Reloading");
                     }
                 }
             }
@@ -433,7 +433,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 			if (Input.GetKeyDown(kcCool) && !manualCool)
 			{
                 manualCool = true;
-                weaponOverheat("   Weapon Cooling");
+                weaponOverheat("Weapon Reloading");
             }
 
             if (Input.GetKeyDown(kcMine) && (minesEnabled))
@@ -453,7 +453,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
 			if (Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetMouseButton(1))
 			{
-                float z = Input.GetAxis("Horizontal") * 30.0f;
+                float z = Input.GetAxis("Horizontal") * 20.0f;
                 Vector3 euler = transform.localEulerAngles;
                 euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
                 transform.localEulerAngles = euler;
@@ -461,7 +461,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             if (Input.GetKey(kcRight) && !Input.GetKey(kcLeft)&&!Input.GetMouseButton(1))
                 {
-                float z = Input.GetAxis("Horizontal") * 30.0f;
+                float z = Input.GetAxis("Horizontal") * 20.0f;
                 Vector3 euler = transform.localEulerAngles;
                 euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
                 transform.localEulerAngles = euler;
@@ -608,7 +608,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (canMove && !isDead)
         {
             CheckOutOfBounds();
-            if (Input.GetKey(kcForward) )
+            if (Input.GetKey(kcForward)|| Input.GetKey(kcBoost))
             {
                 transform.position += -transform.forward * (speedIncrease *movementSpeed) * Time.deltaTime;
                 camera.fieldOfView += Time.deltaTime * 6;
