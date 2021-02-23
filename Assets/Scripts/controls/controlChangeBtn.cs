@@ -124,7 +124,7 @@ public class controlChangeBtn : MonoBehaviour
         }
         
     }
-
+    
     private void setButton(KeyCode code, string buttonSearch)
     {
         Text txt = transform.Find(buttonSearch).GetComponent<Text>();

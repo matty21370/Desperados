@@ -105,6 +105,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
    
     private Shop shop;
     private LeaveButton leaveButton;
+    private ControlsPage controlsPage;
     Leaderboard leaderboard;
     GameManager manager;
     public bool canMove;
@@ -293,6 +294,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         shop.gameObject.SetActive(false);
         leaveButton = FindObjectOfType<LeaveButton>();
         leaveButton.gameObject.SetActive(false);
+        controlsPage = FindObjectOfType<ControlsPage>();
+        controlsPage.gameObject.SetActive(false);
         overHeatText = GameObject.Find("OverHeatText").GetComponent<Text>();
         overHeatText.text = "";
         mapText = GameObject.Find("MapText").GetComponent<Text>();
@@ -536,17 +539,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Cursor.lockState = CursorLockMode.None;
 
             leaveButton.setEnabled();
-
+            controlsPage.setEnabled();
             if (leaveButton.leaveEnabled)
             {
                 leaveButton.gameObject.SetActive(true);
-
+                controlsPage.gameObject.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
             else
             {
                 leaveButton.gameObject.SetActive(false);
+                controlsPage.gameObject.SetActive(false);
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }
