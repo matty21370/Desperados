@@ -39,6 +39,8 @@ public class Bullet : MonoBehaviourPunCallbacks
         this.movement = movement;
         this.damage = damage;
 
+
+       
         FindObjectOfType<AudioManager>().Play("LaserSound1");
     }
 
@@ -47,7 +49,11 @@ public class Bullet : MonoBehaviourPunCallbacks
     /// </summary>
     private void Update()
     {
-       transform.position += movement * speed * Time.deltaTime; 
+       transform.position += movement * speed * Time.deltaTime;
+        
+
+        
+
     }
 
     /// <summary>

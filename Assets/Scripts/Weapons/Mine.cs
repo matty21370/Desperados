@@ -26,6 +26,9 @@ public class Mine : MonoBehaviourPunCallbacks
         this.owner = owner;
       
     }
+    
+      
+  
 
     public int getDamage()
     {

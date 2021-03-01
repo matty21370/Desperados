@@ -102,7 +102,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject hitParticle;
     [SerializeField] private GameObject explosiveParticle;
     [SerializeField] private GameObject boostTrail;
-   
+
+  
     private Shop shop;
     private LeaveButton leaveButton;
     private ControlsPage controlsPage;
@@ -132,11 +133,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public bool isReady = false;
     public bool masterClient = false;
-
+    
     public ParticleSystem[] trails;
-
+    private int trailInt;
     [SerializeField] private TMP_Text nameText;
-
+    private int trailCustom;
     [SerializeField] private GameObject trail;
 
     private LineRenderer lineRenderer;
@@ -195,6 +196,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         lobbyScreen.GetComponent<CanvasGroup>().alpha = 0;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
     }
 
     [PunRPC]
@@ -573,8 +575,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     private void StartTrail()
     {
+        
         foreach (ParticleSystem p in trails)
         {
+            if (PlayerPrefs.GetInt("custom") == 10)
+            {
+                p.startColor = new Color(1, 0, 1, .5f);
+            }
             p.Play();
         }
     }
@@ -1165,7 +1172,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 	}
 
 
-
+    public void setCustom(int customValue)
+	{
+        trailInt = customValue;
+        Debug.Log("Called");
+	}
 
     ////////////////////////////
 	public void setControl(KeyCode key, string keySet)
