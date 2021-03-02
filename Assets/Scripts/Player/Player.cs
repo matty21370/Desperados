@@ -586,7 +586,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
             else if (customValue == 15)
             {
-                p.startColor = new Color(0, 0, 1, .5f);
+                p.startColor = new Color(0 , 0.8f , 1,.5f);
             }
             else if (customValue == 20)
             {
@@ -719,6 +719,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (custom == 1)
             {
                 t.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            }
+            else if(custom ==2)
+			{
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(0.7f , 1, 0));
+                
             }
             RaycastHit hit;
             if(Physics.Raycast(startPos, endPos, out hit))
