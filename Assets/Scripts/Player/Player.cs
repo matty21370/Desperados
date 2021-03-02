@@ -405,10 +405,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (Input.GetKeyDown(kcBoost))
             {
-                foreach (ParticleSystem p in trails)
-                {
-                  
-                }
+              
+
                     FindObjectOfType<AudioManager>().Play("BoostNoise");
                 photonView.RPC("StartTrail",RpcTarget.All, PlayerPrefs.GetInt("custom"));
             }
@@ -425,7 +423,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (shots < maxShots)
                 {
-                    photonView.RPC("Shoot", RpcTarget.All);
+                    photonView.RPC("Shoot", RpcTarget.All, PlayerPrefs.GetInt("bulletCustom"));
                     shots++;
                     cooldownSlider.value = shots;
                     shootTimer = Time.time + shootSpeed;
@@ -586,9 +584,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 p.startColor = new Color(1, 0, 1, .5f);
             }
-            if (customValue == 15)
+            else if (customValue == 15)
             {
                 p.startColor = new Color(0, 0, 1, .5f);
+            }
+            else if (customValue == 20)
+            {
+                p.startColor = new Color(0, 1, 0, .5f);
             }
             p.Play();
         }
@@ -704,7 +706,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// This RPC function allows the player to shoot.
     /// </summary>
     [PunRPC]
-    void Shoot()
+    void Shoot(int custom)
     {
         
         foreach (Gun g in guns)
@@ -714,6 +716,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Vector3 endPos = -transform.forward * 100f;
             Trail t = Instantiate(trail, g.getGunPosition()).GetComponent<Trail>();
             t.Init(startPos, g.getGunPosition().transform.forward);
+            if (custom == 1)
+            {
+                t.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            }
             RaycastHit hit;
             if(Physics.Raycast(startPos, endPos, out hit))
             {

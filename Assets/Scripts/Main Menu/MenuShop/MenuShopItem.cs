@@ -43,13 +43,38 @@ public class MenuShopItem : MonoBehaviour
                 Debug.Log("SET");
             }
         }
-        else
+        else if (text.Equals("level20"))
+        {
+            if (checkLevel(20))
+            {
+                PlayerPrefs.SetInt("custom", 20);
+                PlayerPrefs.Save();
+                Debug.Log("SET");
+            }
+        }
+        else if(text.Equals("trailRest"))
         {
             PlayerPrefs.SetInt("custom", 0);
             PlayerPrefs.Save();
             Debug.Log("SET");
         }
-
+        else if (text.Equals("BulletRest"))
+        {
+            PlayerPrefs.SetInt("bulletCustom", 0);
+            PlayerPrefs.Save();
+            Debug.Log("SET");
+        }
+        else if (text.Equals("BulletOne"))
+        {
+            
+            if (checkLevel(10))
+            {
+                PlayerPrefs.SetInt("bulletCustom", 1);
+                PlayerPrefs.Save();
+                Debug.Log("SET");
+            }
+            
+        }
     }
 
 
