@@ -405,8 +405,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (Input.GetKeyDown(kcBoost))
             {
-                FindObjectOfType<AudioManager>().Play("BoostNoise");
-                photonView.RPC("StartTrail", RpcTarget.All);
+                foreach (ParticleSystem p in trails)
+                {
+                  
+                }
+                    FindObjectOfType<AudioManager>().Play("BoostNoise");
+                photonView.RPC("StartTrail",RpcTarget.All, PlayerPrefs.GetInt("custom"));
             }
             
             if(Input.GetKeyUp(kcBoost))
@@ -573,14 +577,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    private void StartTrail()
+    private void StartTrail(int customValue)
     {
         
         foreach (ParticleSystem p in trails)
         {
-            if (PlayerPrefs.GetInt("custom") == 10)
+            if (customValue == 10)
             {
                 p.startColor = new Color(1, 0, 1, .5f);
+            }
+            if (customValue == 15)
+            {
+                p.startColor = new Color(0, 0, 1, .5f);
             }
             p.Play();
         }
