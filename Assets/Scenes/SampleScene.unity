@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 27071733}
   - component: {fileID: 27071736}
   - component: {fileID: 27071739}
+  - component: {fileID: 27071740}
   m_Layer: 0
   m_Name: Obstacle (10)
   m_TagString: Obstacle
@@ -346,6 +347,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 27071735}
+  - {fileID: 27071740}
   viewIdField: 20
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -460,6 +462,21 @@ MonoBehaviour:
   - {x: 90, y: -150, z: -10}
   - {x: 50, y: -130, z: -80}
   - {x: 170, y: -90, z: -50}
+--- !u!114 &27071740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27071731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &30082401
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,6 +678,7 @@ GameObject:
   - component: {fileID: 55822980}
   - component: {fileID: 55822979}
   - component: {fileID: 55822985}
+  - component: {fileID: 55822986}
   m_Layer: 0
   m_Name: Obstacle (11)
   m_TagString: Obstacle
@@ -816,6 +834,21 @@ MonoBehaviour:
   - {x: -140, y: 120, z: -10}
   - {x: -150, y: 80, z: -50}
   - {x: -160, y: 60, z: -90}
+--- !u!114 &55822986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55822977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &82705930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,6 +2999,7 @@ GameObject:
   - component: {fileID: 460116769}
   - component: {fileID: 460116765}
   - component: {fileID: 460116770}
+  - component: {fileID: 460116771}
   m_Layer: 0
   m_Name: Obstacle (3)
   m_TagString: Obstacle
@@ -3121,6 +3155,21 @@ MonoBehaviour:
   - {x: 26, y: 144, z: -20}
   - {x: 21, y: 159, z: -15}
   - {x: 12, y: 167, z: -32}
+--- !u!114 &460116771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460116762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &471906645
 GameObject:
   m_ObjectHideFlags: 0
@@ -4147,6 +4196,7 @@ GameObject:
   - component: {fileID: 706044396}
   - component: {fileID: 706044402}
   - component: {fileID: 706044404}
+  - component: {fileID: 706044405}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Obstacle
@@ -4318,6 +4368,21 @@ MonoBehaviour:
   - {x: 180, y: -313, z: 157}
   - {x: 159, y: -250, z: 164}
   - {x: 129, y: -270, z: 166}
+--- !u!114 &706044405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706044395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &723270180
 GameObject:
   m_ObjectHideFlags: 0
@@ -5434,6 +5499,7 @@ GameObject:
   - component: {fileID: 896277555}
   - component: {fileID: 896277548}
   - component: {fileID: 896277551}
+  - component: {fileID: 896277556}
   m_Layer: 0
   m_Name: Obstacle (4)
   m_TagString: Obstacle
@@ -5589,6 +5655,21 @@ MonoBehaviour:
   viewIdField: 15
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &896277556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896277547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &905907879
 GameObject:
   m_ObjectHideFlags: 0
@@ -5964,6 +6045,7 @@ GameObject:
   - component: {fileID: 971735700}
   - component: {fileID: 971735703}
   - component: {fileID: 971735706}
+  - component: {fileID: 971735707}
   m_Layer: 0
   m_Name: Obstacle (8)
   m_TagString: Obstacle
@@ -6137,6 +6219,21 @@ MonoBehaviour:
   - {x: 60, y: 40, z: 120}
   - {x: 270, y: 80, z: 149}
   - {x: 20, y: 60, z: 110}
+--- !u!114 &971735707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971735697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &971930764
 GameObject:
   m_ObjectHideFlags: 0
@@ -7163,6 +7260,7 @@ GameObject:
   - component: {fileID: 1270588801}
   - component: {fileID: 1270588800}
   - component: {fileID: 1270588806}
+  - component: {fileID: 1270588807}
   m_Layer: 0
   m_Name: Obstacle (13)
   m_TagString: Obstacle
@@ -7318,6 +7416,21 @@ MonoBehaviour:
   - {x: -20, y: -40, z: 120}
   - {x: -30, y: 50, z: 200}
   - {x: 0, y: 100, z: 130}
+--- !u!114 &1270588807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270588798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &1276544802
 GameObject:
   m_ObjectHideFlags: 0
@@ -7683,6 +7796,7 @@ GameObject:
   - component: {fileID: 1402389215}
   - component: {fileID: 1402389208}
   - component: {fileID: 1402389211}
+  - component: {fileID: 1402389216}
   m_Layer: 0
   m_Name: Obstacle (5)
   m_TagString: Obstacle
@@ -7838,6 +7952,21 @@ MonoBehaviour:
   viewIdField: 13
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1402389216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402389207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &1404080528
 GameObject:
   m_ObjectHideFlags: 0
@@ -8563,6 +8692,7 @@ GameObject:
   - component: {fileID: 1558553987}
   - component: {fileID: 1558553990}
   - component: {fileID: 1558553993}
+  - component: {fileID: 1558553994}
   m_Layer: 0
   m_Name: Obstacle (9)
   m_TagString: Obstacle
@@ -8718,6 +8848,21 @@ MonoBehaviour:
   - {x: -50, y: -160, z: 1130}
   - {x: -200, y: -50, z: 1180}
   - {x: -159, y: -70, z: 1120}
+--- !u!114 &1558553994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558553985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &1562427994
 GameObject:
   m_ObjectHideFlags: 0
@@ -8734,6 +8879,7 @@ GameObject:
   - component: {fileID: 1562427996}
   - component: {fileID: 1562427999}
   - component: {fileID: 1562428002}
+  - component: {fileID: 1562428003}
   m_Layer: 0
   m_Name: Obstacle (7)
   m_TagString: Obstacle
@@ -8889,6 +9035,21 @@ MonoBehaviour:
   - {x: -180, y: 130, z: 13}
   - {x: -130, y: 120, z: -32}
   - {x: -250, y: 177, z: -29}
+--- !u!114 &1562428003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562427994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &1571634495
 GameObject:
   m_ObjectHideFlags: 0
@@ -8980,6 +9141,7 @@ GameObject:
   - component: {fileID: 1577945915}
   - component: {fileID: 1577945912}
   - component: {fileID: 1577945916}
+  - component: {fileID: 1577945917}
   m_Layer: 0
   m_Name: Obstacle (6)
   m_TagString: Obstacle
@@ -9135,6 +9297,21 @@ MonoBehaviour:
   - {x: 127, y: 69, z: -38}
   - {x: 150, y: 70, z: -21}
   - {x: 110, y: 100, z: -12}
+--- !u!114 &1577945917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577945908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &1579875792
 GameObject:
   m_ObjectHideFlags: 0
@@ -10491,6 +10668,7 @@ GameObject:
   - component: {fileID: 1917505586}
   - component: {fileID: 1917505585}
   - component: {fileID: 1917505591}
+  - component: {fileID: 1917505592}
   m_Layer: 0
   m_Name: Obstacle (12)
   m_TagString: Obstacle
@@ -10646,6 +10824,21 @@ MonoBehaviour:
   - {x: 100, y: 30, z: -40}
   - {x: 70, y: 50, z: -130}
   - {x: 140, y: -40, z: -20}
+--- !u!114 &1917505592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917505583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &1929299778
 GameObject:
   m_ObjectHideFlags: 0
@@ -11021,6 +11214,7 @@ GameObject:
   - component: {fileID: 2017109230}
   - component: {fileID: 2017109226}
   - component: {fileID: 2017109231}
+  - component: {fileID: 2017109232}
   m_Layer: 0
   m_Name: Obstacle (1)
   m_TagString: Obstacle
@@ -11155,6 +11349,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 2017109225}
+  - {fileID: 2017109232}
   viewIdField: 9
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -11176,6 +11371,21 @@ MonoBehaviour:
   - {x: -214, y: 70, z: -25}
   - {x: -234, y: 50, z: -28}
   - {x: -264, y: 30, z: -30}
+--- !u!114 &2017109232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017109223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &2046251173
 GameObject:
   m_ObjectHideFlags: 0
