@@ -10,6 +10,7 @@ public class Trail : MonoBehaviour
     {
         transform.position = start;
         this.parent = parent;
+       
         Destroy(gameObject, 4f);
     }
 

@@ -102,7 +102,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject hitParticle;
     [SerializeField] private GameObject explosiveParticle;
     [SerializeField] private GameObject boostTrail;
-   
+
+  
     private Shop shop;
     private LeaveButton leaveButton;
     private ControlsPage controlsPage;
@@ -132,11 +133,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public bool isReady = false;
     public bool masterClient = false;
-
+    
     public ParticleSystem[] trails;
-
+    private int trailInt;
     [SerializeField] private TMP_Text nameText;
-
+    private int trailCustom;
     [SerializeField] private GameObject trail;
 
     private LineRenderer lineRenderer;
@@ -195,6 +196,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         lobbyScreen.GetComponent<CanvasGroup>().alpha = 0;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
     }
 
     [PunRPC]
@@ -403,8 +405,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (Input.GetKeyDown(kcBoost))
             {
-                FindObjectOfType<AudioManager>().Play("BoostNoise");
-                photonView.RPC("StartTrail", RpcTarget.All);
+              
+
+                    FindObjectOfType<AudioManager>().Play("BoostNoise");
+                photonView.RPC("StartTrail",RpcTarget.All, PlayerPrefs.GetInt("custom"));
             }
             
             if(Input.GetKeyUp(kcBoost))
@@ -419,7 +423,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (shots < maxShots)
                 {
-                    photonView.RPC("Shoot", RpcTarget.All);
+                    photonView.RPC("Shoot", RpcTarget.All, PlayerPrefs.GetInt("bulletCustom"));
                     shots++;
                     cooldownSlider.value = shots;
                     shootTimer = Time.time + shootSpeed;
@@ -571,10 +575,23 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    private void StartTrail()
+    private void StartTrail(int customValue)
     {
+        
         foreach (ParticleSystem p in trails)
         {
+            if (customValue == 10)
+            {
+                p.startColor = new Color(1, 0, 1, .5f);
+            }
+            else if (customValue == 15)
+            {
+                p.startColor = new Color(0 , 0.8f , 1,.5f);
+            }
+            else if (customValue == 20)
+            {
+                p.startColor = new Color(0, 1, 0, .5f);
+            }
             p.Play();
         }
     }
@@ -689,7 +706,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// This RPC function allows the player to shoot.
     /// </summary>
     [PunRPC]
-    void Shoot()
+    void Shoot(int custom)
     {
         
         foreach (Gun g in guns)
@@ -699,6 +716,24 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Vector3 endPos = -transform.forward * 100f;
             Trail t = Instantiate(trail, g.getGunPosition()).GetComponent<Trail>();
             t.Init(startPos, g.getGunPosition().transform.forward);
+            if (custom == 1)
+            {
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(1,0,0));
+            }
+            else if(custom ==2)
+			{
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(0.7f , 1, 0));
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(1, 0, 1));
+            }
+            else if (custom == 3)
+            {
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(0f, 1, 1));
+
+            }
+            else
+			{
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(0.7f, 1, 0));
+            }
             RaycastHit hit;
             if(Physics.Raycast(startPos, endPos, out hit))
             {
@@ -1165,7 +1200,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 	}
 
 
-
+    public void setCustom(int customValue)
+	{
+        trailInt = customValue;
+        Debug.Log("Called");
+	}
 
     ////////////////////////////
 	public void setControl(KeyCode key, string keySet)
