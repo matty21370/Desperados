@@ -112,12 +112,12 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
         obstacleHealth = 20;
     }
 
-    private void setPosition()
+  /*  private void setPosition()
 	{
         Xpos = Random.Range(-160, 280);
         Ypos = Random.Range(-160, 280);
         Zpos = Random.Range(-160, 280);
         transform.position = new Vector3(Xpos,Ypos,Zpos);
         positionSet = true;
-	}
+	}*/
 }
