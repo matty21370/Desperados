@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &30082401
 GameObject:
@@ -734,6 +734,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 55822982}
+  - {fileID: 55822986}
   viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -847,7 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &82705930
 GameObject:
@@ -3134,6 +3135,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 460116764}
+  - {fileID: 460116771}
   viewIdField: 21
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3168,7 +3170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &471906645
 GameObject:
@@ -4195,7 +4197,6 @@ GameObject:
   - component: {fileID: 706044403}
   - component: {fileID: 706044396}
   - component: {fileID: 706044402}
-  - component: {fileID: 706044404}
   - component: {fileID: 706044405}
   m_Layer: 0
   m_Name: Obstacle
@@ -4347,27 +4348,10 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 706044400}
+  - {fileID: 706044405}
   viewIdField: 17
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &706044404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706044395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00613ee418b060d46b3cb1891c78425a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positions:
-  - {x: 203, y: -295, z: 160}
-  - {x: 200, y: -200, z: 150}
-  - {x: 180, y: -313, z: 157}
-  - {x: 159, y: -250, z: 164}
-  - {x: 129, y: -270, z: 166}
 --- !u!114 &706044405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4381,7 +4365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &723270180
 GameObject:
@@ -5652,6 +5636,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 896277550}
+  - {fileID: 896277556}
   viewIdField: 15
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -5668,7 +5653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &905907879
 GameObject:
@@ -6044,7 +6029,6 @@ GameObject:
   - component: {fileID: 971735699}
   - component: {fileID: 971735700}
   - component: {fileID: 971735703}
-  - component: {fileID: 971735706}
   - component: {fileID: 971735707}
   m_Layer: 0
   m_Name: Obstacle (8)
@@ -6087,6 +6071,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 971735702}
+  - {fileID: 971735707}
   viewIdField: 16
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -6201,24 +6186,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971735697}
   m_Mesh: {fileID: -6321730818362257757, guid: 1c12f56d9ba116d409b2327960cdee56, type: 3}
---- !u!114 &971735706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971735697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00613ee418b060d46b3cb1891c78425a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positions:
-  - {x: 80, y: 62, z: 100}
-  - {x: 200, y: 10, z: 130}
-  - {x: 60, y: 40, z: 120}
-  - {x: 270, y: 80, z: 149}
-  - {x: 20, y: 60, z: 110}
 --- !u!114 &971735707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6232,7 +6199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &971930764
 GameObject:
@@ -7316,6 +7283,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1270588803}
+  - {fileID: 1270588807}
   viewIdField: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -7429,7 +7397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &1276544802
 GameObject:
@@ -7949,6 +7917,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1402389210}
+  - {fileID: 1402389216}
   viewIdField: 13
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -7965,7 +7934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &1404080528
 GameObject:
@@ -8734,6 +8703,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1558553989}
+  - {fileID: 1558553994}
   viewIdField: 18
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -8861,7 +8831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &1562427994
 GameObject:
@@ -8921,6 +8891,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1562427998}
+  - {fileID: 1562428003}
   viewIdField: 8
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -9048,7 +9019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &1571634495
 GameObject:
@@ -9276,6 +9247,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1577945911}
+  - {fileID: 1577945917}
   viewIdField: 11
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -9310,7 +9282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &1579875792
 GameObject:
@@ -10724,6 +10696,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1917505588}
+  - {fileID: 1917505592}
   viewIdField: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -10837,7 +10810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &1929299778
 GameObject:
@@ -11345,7 +11318,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   observableSearch: 2
-  Synchronization: 3
+  Synchronization: 2
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 2017109225}
@@ -11384,7 +11357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
 --- !u!1 &2046251173
 GameObject:

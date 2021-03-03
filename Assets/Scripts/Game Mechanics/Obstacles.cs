@@ -20,6 +20,8 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 
     private bool positionSet = false;
 
+    Player host;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -53,7 +55,6 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
             else if (movement == 2)
             {
                 transform.Rotate(0, 0, 2 * Time.deltaTime);
-
             }
             else if (movement == 3)
             {
