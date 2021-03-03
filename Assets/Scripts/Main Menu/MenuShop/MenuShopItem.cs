@@ -86,6 +86,17 @@ public class MenuShopItem : MonoBehaviour
             }
 
         }
+        else if (text.Equals("BulletThree"))
+        {
+
+            if (checkLevel(20))
+            {
+                PlayerPrefs.SetInt("bulletCustom", 3);
+                PlayerPrefs.Save();
+                Debug.Log("SET");
+            }
+
+        }
     }
 
 

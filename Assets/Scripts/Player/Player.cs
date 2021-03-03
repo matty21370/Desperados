@@ -718,12 +718,21 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             t.Init(startPos, g.getGunPosition().transform.forward);
             if (custom == 1)
             {
-                t.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(1,0,0));
             }
             else if(custom ==2)
 			{
                 t.GetComponent<Renderer>().material.SetColor("_Color", new Color(0.7f , 1, 0));
-                
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(1, 0, 1));
+            }
+            else if (custom == 3)
+            {
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(0f, 1, 1));
+
+            }
+            else
+			{
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(0.7f, 1, 0));
             }
             RaycastHit hit;
             if(Physics.Raycast(startPos, endPos, out hit))
