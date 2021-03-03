@@ -8,7 +8,7 @@ public class RandomPosition : MonoBehaviour
     void Start()
     {
         int randomNumber = Random.Range(0, positions.Length);
-      //  transform.position = positions[randomNumber];
+        transform.position = positions[randomNumber];
 
     }
 }
