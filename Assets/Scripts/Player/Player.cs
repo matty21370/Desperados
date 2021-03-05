@@ -195,7 +195,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void SetToGame()
     {
         currentState = GameManager.GameStates.GAME;
-        lobbyScreen.GetComponent<CanvasGroup>().alpha = 0;
+        lobbyScreen.GetComponent<CanvasGroup>().alpha = 0; //remove for testing
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
@@ -768,12 +768,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void NetworkAddKill()
     {
         killCount += 1;
-        if(photonView.IsMine)
-        {
+        if(photonView.IsMine) //remove for Testing
+        {//remove for Testing
             PlayerPrefs.SetInt("Kills", PlayerPrefs.GetInt("Kills") + 1);
             AddExperience(10);
             addCurrency();
-        }
+       }//remove for Testing
     }
 
     [PunRPC]
@@ -788,6 +788,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <param name="damage"> The amount of damage we want to apply to the player.</param>
     public void hitDetected(int damage, Player who)
     {
+        
         if (photonView.IsMine)//remove for testing
         {//remove for testing
             playerHealth = playerHealth - damage;
@@ -798,7 +799,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                    photonView.RPC("Despawn", RpcTarget.All);//remove for testing
                     who.photonView.RPC("NetworkAddKill", RpcTarget.AllBuffered);//remove for testing
         }
-          }//remove for testing
+         }//remove for testing
     }
 
     /// <summary>
@@ -909,16 +910,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <param name="amt">The amount of experience we want to give the player</param> 
     public void AddExperience(float amt)
     {
-        exp += amt; 
-        expSlider.value = exp / 100;
+        exp += amt;
+        //    expSlider.value = exp / 100;//remove for Testing
 
         if (exp >= 100) 
         {
-            photonView.RPC("RpcCreateLevelUpParticle", RpcTarget.All); 
+            photonView.RPC("RpcCreateLevelUpParticle", RpcTarget.All); //remove for Testing
             level += 1;
             StartCoroutine(levelUpPopup());
-            FindObjectOfType<AudioManager>().Play("LevelUp");
-            levelText.text = "Level: " + level;
+               FindObjectOfType<AudioManager>().Play("LevelUp"); //remove for Testing
+               levelText.text = "Level: " + level;//remove for Testing
             exp = 0;
             PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1); 
             expSlider.value = 0; 
@@ -1008,7 +1009,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private void addCurrency()
     {
         currency = currency + 20;
-        currencyText.text = "Currency: " + currency;
+        currencyText.text = "Currency: " + currency;//remove for Testing
     }
     /// <summary>
     //get the amount of points the player has
@@ -1023,7 +1024,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void purchaseMade(int price)
 	{
         currency = currency - price;
-        currencyText.text = "Currency: " + currency;
+        currencyText.text = "Currency: " + currency;//remove for testing
 	}
     /// <summary>
     //increase player health

@@ -15,21 +15,15 @@ namespace Tests
         // A Test behaves as an ordinary method
         [Test]
         public void hitDetectedTest()
-        {
-
-            
+        {   
             GameObject gameObject = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Player"));
               Player player = gameObject.GetComponent<Player>();
           
             float startHealth = player.getHealth();
             player.hitDetected(1, player);
 
-            Assert.AreEqual(player.getHealth(), startHealth - 1);
-            // Use the Assert class to test conditions
-
-              
-            
-        }
+            Assert.AreEqual(player.getHealth(), startHealth - 1);           
+           }
 
          
          
@@ -61,15 +55,47 @@ namespace Tests
             player.hitDetected(10, player);
             Assert.AreEqual(player.canMove, false);
         }
-
-            // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-            // `yield return null;` to skip a frame.
-            [UnityTest]
-        public IEnumerator editModeTestsWithEnumeratorPasses()
+        [Test]
+        public void checkPurchase()
         {
-            // Use the Assert class to test conditions.
-            // Use yield to skip a frame.
-            yield return null;
+            GameObject gameObject = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Player"));
+            Player player = gameObject.GetComponent<Player>();
+            int firstMoney=player.getCurrency();
+            int money = 2;
+            player.purchaseMade(money);
+            Assert.AreEqual(firstMoney - money, player.getCurrency());
+
+
         }
+
+
+        [Test]
+        public void checkKill()
+        {
+         
+           
+            GameObject gameObject = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Player"));
+            Player player = gameObject.GetComponent<Player>();
+            Player playerTwo = gameObject.GetComponent<Player>();
+            int count = playerTwo.GetKills();
+            playerTwo.NetworkAddKill();
+            Assert.AreEqual(playerTwo.GetKills(),count+1);
+
+        }
+
+            [Test]
+        public void checkSetTo()
+		{
+            GameObject gameObject = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Player"));
+            Player player = gameObject.GetComponent<Player>();
+            player.SetToLobby();
+            Assert.AreEqual(player.currentState, GameManager.GameStates.LOBBY);
+            player.SetToGame();
+            Assert.AreEqual(player.currentState, GameManager.GameStates.GAME);
+        }
+
+        
+
+
     }
 }
