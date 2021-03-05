@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using UnityEngine.TestTools;
+
 /// <summary>
 /// Script created by: Matthew Burke, Andrew Viney
 /// </summary>
@@ -786,17 +788,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// <param name="damage"> The amount of damage we want to apply to the player.</param>
     public void hitDetected(int damage, Player who)
     {
-        if (photonView.IsMine)
-        {
+        if (photonView.IsMine)//remove for testing
+        {//remove for testing
             playerHealth = playerHealth - damage;
-            UpdateHealthBar();
+            UpdateHealthBar();      //remove for testing
             if (playerHealth <= 0)
             {
-                photonView.RPC("dropPack", RpcTarget.All);
-                photonView.RPC("Despawn", RpcTarget.All);
-                who.photonView.RPC("NetworkAddKill", RpcTarget.AllBuffered);
-            }
+                 photonView.RPC("dropPack", RpcTarget.All);//remove for testing
+                   photonView.RPC("Despawn", RpcTarget.All);//remove for testing
+                    who.photonView.RPC("NetworkAddKill", RpcTarget.AllBuffered);//remove for testing
         }
+          }//remove for testing
     }
 
     /// <summary>
@@ -828,16 +830,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         canMove = false;
 
         GameObject p = Instantiate(explosionParticle, transform.position, Quaternion.identity);
-        FindObjectOfType<AudioManager>().Play("PlayerExplode", transform.position);
-        Destroy(p, 5f);
-
-        if (photonView.IsMine)
-        {
-            photonView.RPC("NetworkAddDeath", RpcTarget.AllBuffered);
-            PlayerPrefs.SetInt("Deaths", deaths);
-            killStreak = 0;
+        FindObjectOfType<AudioManager>().Play("PlayerExplode", transform.position);//remove For Test
+        Destroy(p, 5f);//remove For Test
+              if (photonView.IsMine)//remove For Test
+        {//remove For Test
+         photonView.RPC("NetworkAddDeath", RpcTarget.AllBuffered);//remove For Test
+            PlayerPrefs.SetInt("Deaths", deaths);//remove For Test
+        killStreak = 0;
             displayedKillstreakText = false;
-        }
+        }//remove For Test
 
         foreach (Transform child in transform)
         {
@@ -850,11 +851,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         GetComponent<BoxCollider>().enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
 
-        if (photonView.IsMine)
-        {
+       if (photonView.IsMine)//remove For Test
+       {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-        }
+       }
 
         StartCoroutine(RespawnTimer());
     }
@@ -876,16 +877,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     public void Respawn()
     {
-        if (photonView.IsMine)
-        {
+        if (photonView.IsMine) //remove For Test
+        {//remove For Test
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-        }
+        }//remove For Test
 
         isDead = false;
-        transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;
+      transform.position = manager.spawnPoints[UnityEngine.Random.Range(0, manager.spawnPoints.Count)].position;//remove For Test
         playerHealth = maxHealth; 
-        UpdateHealthBar();
+       UpdateHealthBar();//remove For Test
         maxShots = 12;
         foreach (Transform child in transform) 
         {
@@ -1290,3 +1291,5 @@ public class Gun
         return healthPack;
     }
 }
+
+
