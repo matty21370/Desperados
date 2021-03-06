@@ -20,8 +20,8 @@ public class controlChangeBtn : MonoBehaviour
 		{
            
 
-            buttonPress("Ftext");
-            owner.GetComponent<Player>().setControl(newKey, "foward");
+            buttonPress("Ftext");  
+           owner.GetComponent<Player>().setControl(newKey, "foward");
         }
         if (text.Equals("backward"))
         {
@@ -131,4 +131,5 @@ public class controlChangeBtn : MonoBehaviour
         txt.text = newKey.ToString();
         
     }
+
 }

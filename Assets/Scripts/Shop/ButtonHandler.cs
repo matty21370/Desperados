@@ -51,19 +51,19 @@ public class ButtonHandler : MonoBehaviour
 		//speed button see health for more details
 		{
 			int price = 50;
-			if (owner.GetComponent<Player>().getCurrency() >= price)
-			{
+			if (owner.GetComponent<Player>().getCurrency() >= price) //remove for testing
+			{//remove for testing
 
-				dissableButton("speedText");
+			dissableButton("speedText");//remove for testing
 
-				owner.GetComponent<Player>().upgradePurchasedSpeed();
+			owner.GetComponent<Player>().upgradePurchasedSpeed();//remove for testing
 				speedTextp = true;
-				makePurchase(price);
-			}
-			else
-			{
-				altText("speedText", "Increase Speed: \n 50 Points");
-			}
+					makePurchase(price); //remove for testing
+				}//remove for testing
+				else //remove for testing
+			{//remove for testing
+				altText("speedText", "Increase Speed: \n 50 Points");//remove for testing
+				}//remove for testing
 
 		}
 		else if (text.Equals("mine"))
@@ -121,7 +121,7 @@ public class ButtonHandler : MonoBehaviour
 	{
 		if (speedTextp)
 		{
-			altText("speedText", "Increase Speed: \n 50 Points");
+			altText("speedText", "Increase Speed: \n 50 Points");//remove for testing
 			speedTextp = false;
 		}
 		if (coolTextp)
@@ -206,5 +206,16 @@ public class ButtonHandler : MonoBehaviour
 		yield return new WaitForSeconds(2f);
 		resetText(buttonNeeded, item);
 
+	}
+
+
+	/***
+	 * used to facilitate testing
+	 * 
+	 */
+	public bool getSpeedTextp()
+	{
+
+		return speedTextp;
 	}
 }

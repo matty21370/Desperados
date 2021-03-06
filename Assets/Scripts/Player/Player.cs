@@ -1058,6 +1058,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         weaponCool = weaponCool / 2;
         //half the cooldown
 	}
+    public float getCoolDown()
+	{
+        return weaponCool;
+	}
 
     /// <summary>
     ///set up text and start timer for cool down 

@@ -102,7 +102,7 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
         notDestroyed = false;
         GetComponent<Obstacles>().GetComponent<MeshRenderer>().enabled=false;
         GetComponent<MeshCollider>().enabled = false;
-        Invoke("Respawn", 10);
+        Invoke("Respawn", 50);
     }
 
     public void Respawn()
@@ -120,5 +120,11 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
         Zpos = Random.Range(-160, 280);
         transform.position = new Vector3(Xpos,Ypos,Zpos);
         positionSet = true;
+	}
+
+    //facilitating testing
+    public int getHealth()
+	{
+     return   obstacleHealth;
 	}
 }
