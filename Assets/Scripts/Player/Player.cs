@@ -732,6 +732,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 t.GetComponent<Renderer>().material.SetColor("_Color", new Color(0f, 1, 1));
 
             }
+            else if (custom == 4)
+            {
+                t.GetComponent<Renderer>().material.SetColor("_Color", new Color(0.5f, 0.0f, 0.2f));
+
+            }
             else
 			{
                 t.GetComponent<Renderer>().material.SetColor("_Color", new Color(0.7f, 1, 0));
@@ -1219,54 +1224,55 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 		{
             kcForward = key;
         }
-        if (keySet.Equals("backward"))
-        {
-            kcBack = key;
-        }
-        if (keySet.Equals("left"))
-        {
-            kcLeft = key;
-        }
-        if (keySet.Equals("right"))
-        {
-            kcRight = key;
-        }
-        if (keySet.Equals("up"))
-        {
-            kcUp = key;
-        }
-        if (keySet.Equals("down"))
-        {
-            kcDown = key;
-        }
-        if (keySet.Equals("shoot"))
-        {
-            kcShoot = key;
-        }
-        if (keySet.Equals("boost"))
-        {
-            kcBoost = key;
-        }
-        if (keySet.Equals("score"))
-        {
-            kcScore = key;
-        }
-        if (keySet.Equals("shop"))
-        {
-            kcShop = key;
-        }
-        if (keySet.Equals("mine"))
-        {
-            kcMine = key;
-        }
-        if (keySet.Equals("find"))
-        {
-            kcClosest = key;
-        }
-        if (keySet.Equals("flip"))
+       else if (keySet.Equals("flip"))
         {
             kcShowBoat = key;
         }
+        else if (keySet.Equals("backward"))
+        {
+            kcBack = key;
+        }
+        else if (keySet.Equals("left"))
+        {
+            kcLeft = key;
+        }
+        else if (keySet.Equals("right"))
+        {
+            kcRight = key;
+        }
+        else if (keySet.Equals("up"))
+        {
+            kcUp = key;
+        }
+        else if (keySet.Equals("down"))
+        {
+            kcDown = key;
+        }
+        else if (keySet.Equals("shoot"))
+        {
+            kcShoot = key;
+        }
+        else if (keySet.Equals("boost"))
+        {
+            kcBoost = key;
+        }
+        else if (keySet.Equals("score"))
+        {
+            kcScore = key;
+        }
+        else if (keySet.Equals("shop"))
+        {
+            kcShop = key;
+        }
+        else if (keySet.Equals("mine"))
+        {
+            kcMine = key;
+        }
+        else if (keySet.Equals("find"))
+        {
+            kcClosest = key;
+        }
+        
     }
 }
 

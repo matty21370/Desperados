@@ -23,44 +23,50 @@ public class controlChangeBtn : MonoBehaviour
             buttonPress("Ftext");  
            owner.GetComponent<Player>().setControl(newKey, "foward");
         }
-        if (text.Equals("backward"))
+        else if (text.Equals("backward"))
         {
            
             buttonPress("Btext");
             owner.GetComponent<Player>().setControl(newKey, "backward");
         }
-        if (text.Equals("left"))
+        else if (text.Equals("left"))
         {
             buttonPress("Ltext");
             owner.GetComponent<Player>().setControl(newKey, "left");
         }
-        if (text.Equals("right"))
+        else if (text.Equals("right"))
         {
             
             buttonPress("Rtext");
             owner.GetComponent<Player>().setControl(newKey, "right");
         }
-        if (text.Equals("up"))
+       else if (text.Equals("flip"))
+        {
+
+            buttonPress("Fliptext");
+            owner.GetComponent<Player>().setControl(newKey, "Flip");
+        }
+        else if (text.Equals("up"))
         {
            
             buttonPress("Utext");
             owner.GetComponent<Player>().setControl(newKey, "up");
         }
-        if (text.Equals("down"))
+        else if (text.Equals("down"))
         {
             
             buttonPress( "Dtext");
             owner.GetComponent<Player>().setControl(newKey, "down");
 
         }
-        if (text.Equals("shoot"))
+        else if (text.Equals("shoot"))
         {
             
             buttonPress( "Stext");
             owner.GetComponent<Player>().setControl(newKey, "shoot");
         }
      
-        if (text.Equals("boost"))
+        else if (text.Equals("boost"))
         {
 
             buttonPress("BoostText");
@@ -68,31 +74,31 @@ public class controlChangeBtn : MonoBehaviour
 
         }
        
-        if (text.Equals("shop"))
+        else if (text.Equals("shop"))
         {
 
             buttonPress("Shoptext");
             owner.GetComponent<Player>().setControl(newKey, "shop");
         }
-        if (text.Equals("score"))
+        else if (text.Equals("score"))
         {
 
             buttonPress("Scoretext");
             owner.GetComponent<Player>().setControl(newKey, "score");
         }
-        if (text.Equals("deployMine"))
+        else if (text.Equals("deployMine"))
         {
 
             buttonPress("DMinetext");
             owner.GetComponent<Player>().setControl(newKey, "mine");
         }
-        if (text.Equals("find"))
+        else if (text.Equals("find"))
         {
 
             buttonPress("FPtext");
             owner.GetComponent<Player>().setControl(newKey, "find");
         }
-        if (text.Equals("flip"))
+        else if (text.Equals("flip"))
         {
 
             buttonPress("Fliptext");

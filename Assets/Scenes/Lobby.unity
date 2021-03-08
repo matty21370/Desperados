@@ -196,7 +196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 237.5, y: -147.5}
+  m_AnchoredPosition: {x: 237.5, y: -222.5}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &17081584
@@ -419,7 +419,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0.5838219}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4448,7 +4448,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 47.5, y: -147.5}
+  m_AnchoredPosition: {x: 47.5, y: -222.5}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &631392993
@@ -8781,8 +8781,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 38389910}
   m_HandleRect: {fileID: 38389909}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.5838219
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11480,37 +11480,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Forward                                          W
-
-    Backward                                      
-    S
-
-    Left                                                  A
-
-    Right                                              
-    D
-
-    Up                                                   Shift
-
-    Down                                             
-    Ctrl
-
-    Shoot Laser                                   Left-Mb
-
-    Boost                                             
-    Space
-
-    Leaderboard                                  Tab
-
-    Shop                                               
-    I
-
-    Deploy Mine                                   T
-
-    Quit Game                                      
-    Esc
-
-'
+  m_text: "Forward                                          W\nBackward                                      
+    S\nLeft                                                  A\nRight                                              
+    D\nUp                                                   Q\nDown                                             
+    E\nFind Opponent\t\t           Control\nFlip\t\t\t            X\nManual Reload\t\t           
+    T\nShoot Laser                                   Left-Mb\nBoost                                             
+    Space\nLeaderboard                                  Tab\nShop                                               
+    I\nDeploy Mine                                   G\nQuit Game                                      
+    Esc\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3cb8c1f48bbc19f49a674315e571f9bd, type: 2}
   m_sharedMaterial: {fileID: -5074255986384781600, guid: 3cb8c1f48bbc19f49a674315e571f9bd, type: 2}
@@ -11537,8 +11514,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23
-  m_fontSizeBase: 23
+  m_fontSize: 21
+  m_fontSizeBase: 21
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13210,7 +13187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 332.5, y: -147.5}
+  m_AnchoredPosition: {x: 332.5, y: -222.5}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1642744074
@@ -13731,7 +13708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000045925666}
+  m_AnchoredPosition: {x: 0, y: 38.610447}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1763474379
@@ -13755,7 +13732,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 75, y: 75}
-  m_Spacing: {x: 20, y: 25}
+  m_Spacing: {x: 20, y: 100}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &1777538974
@@ -15732,7 +15709,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 142.5, y: -147.5}
+  m_AnchoredPosition: {x: 142.5, y: -222.5}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2142553902

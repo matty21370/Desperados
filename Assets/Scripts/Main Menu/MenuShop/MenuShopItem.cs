@@ -121,6 +121,21 @@ public class MenuShopItem : MonoBehaviour
             }
 
         }
+        else if (text.Equals("BulletFour"))
+        {
+
+            if (checkLevel(25))
+            {
+                PlayerPrefs.SetInt("bulletCustom", 4);
+                PlayerPrefs.Save();
+                Debug.Log("SET");
+            }
+            else
+            {
+                altText("BulletThreeTxt", "Aqua Bullet \n Unlocks at Level 20");
+            }
+
+        }
     }
 
 
