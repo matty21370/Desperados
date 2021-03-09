@@ -432,16 +432,21 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 else
                 { 
-                    if (!manualCool)
+                  if (!manualCool)
                     {
                         weaponOverheat("Weapon Reloading");
                     }
-                }
+					else
+					{
+                        weaponOverheat("Weapon Reloading");
+                    }
+                } 
             }
 
 			if (Input.GetKeyDown(kcCool) && !manualCool)
 			{
                 manualCool = true;
+                shots = maxShots + 1;
                 weaponOverheat("Weapon Reloading");
             }
 
@@ -462,7 +467,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
 			if (Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetMouseButton(1))
 			{
-                float z = Input.GetAxis("Horizontal") * 20.0f;
+                float z = Input.GetAxis("Horizontal") * 10.0f;
                 Vector3 euler = transform.localEulerAngles;
                 euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
                 transform.localEulerAngles = euler;
@@ -470,7 +475,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             if (Input.GetKey(kcRight) && !Input.GetKey(kcLeft)&&!Input.GetMouseButton(1))
                 {
-                float z = Input.GetAxis("Horizontal") * 20.0f;
+                float z = Input.GetAxis("Horizontal") * 10.0f;
                 Vector3 euler = transform.localEulerAngles;
                 euler.z = Mathf.Lerp(euler.z, z, 25.0f * Time.deltaTime);
                 transform.localEulerAngles = euler;
@@ -752,6 +757,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 else if(hit.transform.tag == "Obstacle")
                 {
                     hit.transform.GetComponent<Obstacles>().reduceHealth(1);
+                }
+                else if (hit.transform.tag == "Mine")
+                {
+                    hit.transform.GetComponent<Mine>().hit();
                 }
             }
         }

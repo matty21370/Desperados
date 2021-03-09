@@ -4154,6 +4154,7 @@ GameObject:
   - component: {fileID: 5701809087265153668}
   - component: {fileID: 1726592514809631009}
   - component: {fileID: 3631533452772833780}
+  - component: {fileID: 3517224475222985213}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4353,6 +4354,14 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!81 &3517224475222985213
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9077486523674453253}
+  m_Enabled: 1
 --- !u!1 &9170062080342278679
 GameObject:
   m_ObjectHideFlags: 0
@@ -5293,13 +5302,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
---- !u!4 &9029182064489874961 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4368491947231596, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
-  m_PrefabInstance: {fileID: 9025666795730063229}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &9222921094097764023 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198151785488069066, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+  m_PrefabInstance: {fileID: 9025666795730063229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9029182064489874961 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4368491947231596, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
   m_PrefabInstance: {fileID: 9025666795730063229}
   m_PrefabAsset: {fileID: 0}
