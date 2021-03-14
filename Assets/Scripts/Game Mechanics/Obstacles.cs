@@ -18,9 +18,9 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
     private float Ypos;
     private float Zpos;
 
-    private bool positionSet = false;
+   
 
-    Player host;
+   // Player host;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -115,11 +115,11 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 
     private void setPosition()
 	{
-        Xpos = Random.Range(-160, 280);
-        Ypos = Random.Range(-160, 280);
-        Zpos = Random.Range(-160, 280);
-        transform.position = new Vector3(Xpos,Ypos,Zpos);
-        positionSet = true;
+       // Xpos = Random.Range(-160, 280);
+       // Ypos = Random.Range(-160, 280);
+      //  Zpos = Random.Range(-160, 280);
+     //   transform.position = new Vector3(Xpos,Ypos,Zpos);
+     //   positionSet = true;
 	}
 
     //facilitating testing

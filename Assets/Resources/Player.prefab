@@ -1593,8 +1593,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Forward                                          \nBackward                                                                                        
     \nRight   \nLeft                                             \nUp                                                  
-    \nDown  \n                                             \nShoot Laser           
-    \t   Mouse Button 1                       \nBoost                                             
+    \nDown  \nFlip\t\t\t\t\tX                                            \nShoot
+    Laser            \t   Mouse Button 1                       \nBoost                                             
     \nLeaderboard                                  \nShop                                                
     \nDeploy Mine                                   \nFind Player                                     
     \n"
@@ -4361,7 +4361,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9077486523674453253}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1 &9170062080342278679
 GameObject:
   m_ObjectHideFlags: 0

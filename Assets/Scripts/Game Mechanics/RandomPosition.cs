@@ -7,8 +7,8 @@ public class RandomPosition : MonoBehaviour
     public Vector3[] positions;
     void Start()
     {
-        int randomNumber = Random.Range(0, positions.Length);
-        transform.position = positions[randomNumber];
+       // int randomNumber = Random.Range(0, positions.Length);
+        //transform.position = positions[randomNumber];
 
     }
 }
