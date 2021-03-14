@@ -850,7 +850,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
               if (photonView.IsMine)//remove For Test
         {//remove For Test
          photonView.RPC("NetworkAddDeath", RpcTarget.AllBuffered);//remove For Test
-            PlayerPrefs.SetInt("Deaths", deaths);//remove For Test
+            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths")+1);//remove For Test
         killStreak = 0;
             displayedKillstreakText = false;
         }//remove For Test
@@ -925,7 +925,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void AddExperience(float amt)
     {
         exp += amt;
-        //    expSlider.value = exp / 100;//remove for Testing
+            expSlider.value = exp / 100;//remove for Testing
 
         if (exp >= 100) 
         {
