@@ -55,18 +55,18 @@ public class Shop : MonoBehaviour
 		
 	}
 
-	private void onTriggerEnter(Collider other)
-	{
-		if (other.tag == "Item")
-		{
-			GameObject itemToStore = other.gameObject;
-			Item item = itemToStore.GetComponent<Item>();
+	//private void onTriggerEnter(Collider other)
+	//{
+	//	if (other.tag == "Item")
+		//{
+		//	GameObject itemToStore = other.gameObject;
+		//	Item item = itemToStore.GetComponent<Item>();
 
 
 			//AddItem(itemToStore, item.ID, item.type, item.description, item.icon);
 
-		}
-	}
+//		}
+//	}
 
 	/*void AddItem(GameObject itemObject, int itemId, string itemType, string description, Sprite itemIcon)
 	{

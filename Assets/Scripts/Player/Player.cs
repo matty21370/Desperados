@@ -19,10 +19,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private string playerName;
     private string userName;
     
-    /// <summary>
-    /// This is the speed of the player when boosting, can be upgraded later
-    /// </summary>
-    [SerializeField] private float boostSpeed = 8f;
+    
 
     /// <summary>
     /// This is the maximum health the player can have, can be upgraded layer
@@ -56,10 +53,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private int deaths;
     private int killStreak;
     private int killsThisGame;
-    public bool canShoot = true;
-  
+    public bool canShoot = true;  
     private bool leaderboardOpen;
-    private bool outOfBounds;
+
 
     /// <summary>
     /// This is a reference to the camera object so it can be modified later
@@ -113,14 +109,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     GameManager manager;
     public bool canMove;
     private int speedIncrease = 1;
-    private int bulletDamage = 1;
+   
     private GameObject pauseMenu;
     private CanvasGroup pauseMenuGroup;
     private TMP_Text currencyText;
     private bool manualCool = false;
     private Text overHeatText;
     private Text mapText;
-    private bool resetPlayer = false;
 
     private int shots = 0;
     private int maxShots = 12;
@@ -304,7 +299,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         overHeatText.text = "";
         mapText = GameObject.Find("MapText").GetComponent<Text>();
         mapText.text = "";
-        outOfBounds = false;
+     
        
         leaderboard = FindObjectOfType<Leaderboard>();
         leaderboard.player = this;

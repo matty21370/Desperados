@@ -2412,6 +2412,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: W
+--- !u!114 &4521297042742828970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333768534982032731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0afd49cb217b34d45844e3de4eafb068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonHandler: {fileID: 0}
 --- !u!1 &4392474433837001939
 GameObject:
   m_ObjectHideFlags: 0
@@ -4201,7 +4214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458ca6c7060d5bf479a03202b660f987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostSpeed: 8
   maxHealth: 10
   shootSpeed: 0.2
   canShoot: 1
@@ -4864,11 +4876,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 59
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2427505663398822780, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
 --- !u!224 &6119152887286593525 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5827297091490452587, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
+  m_PrefabInstance: {fileID: 303200183207945118}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4333768534982032731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4040165856086269637, guid: 3595382224ae75b43861e375f3b04d4a, type: 3}
   m_PrefabInstance: {fileID: 303200183207945118}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6092705365641423683
