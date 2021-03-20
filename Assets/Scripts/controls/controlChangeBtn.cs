@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// in charge of handeling key binding changes
+/// writen by Andrew Viney
+/// </summary>
 public class controlChangeBtn : MonoBehaviour
 {
     [SerializeField] private GameObject owner;
@@ -14,6 +17,10 @@ public class controlChangeBtn : MonoBehaviour
 
     private KeyCode refworkingKey;
     private KeyCode newKey;
+    /// <summary>
+	/// start changing the key
+	/// </summary>
+	/// <param name="text">which key has been selected to change</param>
     public void SetText(string text)
     {
         if (text.Equals("foward"))
@@ -105,7 +112,10 @@ public class controlChangeBtn : MonoBehaviour
             owner.GetComponent<Player>().setControl(newKey, "flip");
         }
     }
-
+    /// <summary>
+	/// pudate the text on the button
+	/// </summary>
+	/// <param name="buttonText">the name of the button</param>
     private void buttonPress(string buttonText)
 	{
         refworkingKey = owner.GetComponent<Player>().getKeySet();
@@ -114,7 +124,9 @@ public class controlChangeBtn : MonoBehaviour
         setButton(newKey, buttonText);
        // owner.GetComponent<Player>().setControl(newKey, buttonText);
     }
-
+    /// <summary>
+	/// retreive the next button to be pressed to be saved as the new key
+	/// </summary>
     private void getKey()
     {
         foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
@@ -130,7 +142,11 @@ public class controlChangeBtn : MonoBehaviour
         }
         
     }
-    
+    /// <summary>
+	/// set button text
+	/// </summary>
+	/// <param name="code">the new key code</param>
+	/// <param name="buttonSearch">the button which text to change</param>
     private void setButton(KeyCode code, string buttonSearch)
     {
         Text txt = transform.Find(buttonSearch).GetComponent<Text>();

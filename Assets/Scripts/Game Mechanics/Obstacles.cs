@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
 {
+    /// <summary>
+	/// class thatt determins obsitcle behaviour need to make sure object has a mesh collider attached
+	/// </summary>
     [SerializeField] private int obstacleHealth ;
     [SerializeField] private GameObject explosionParticle;
 
@@ -21,7 +24,11 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
    
 
    // Player host;
-
+   /// <summary>
+   /// information to synce between players
+   /// </summary>
+   /// <param name="stream"></param>
+   /// <param name="info"></param>
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -104,7 +111,9 @@ public class Obstacles : MonoBehaviourPunCallbacks, IPunObservable
         GetComponent<MeshCollider>().enabled = false;
         Invoke("Respawn", 50);
     }
-
+    /// <summary>
+	/// respawn the object
+	/// </summary>
     public void Respawn()
     {
         notDestroyed = true;

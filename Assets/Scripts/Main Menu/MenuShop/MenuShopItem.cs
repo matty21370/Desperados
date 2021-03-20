@@ -22,20 +22,23 @@ public class MenuShopItem : MonoBehaviour
 
 
 
-
+   /// <summary>
+   /// takes the button pressed in and changes the custom values
+   /// </summary>
+   /// <param name="text"> check which button pressed</param>
     public void SetText(string text)
     {
         if (text.Equals("level10"))
         {
-            if (checkLevel(10))
+            if (checkLevel(10))//check what the players level is
             {
-                PlayerPrefs.SetInt("custom", 10);
-                PlayerPrefs.Save();
-                Debug.Log("SET");
+                PlayerPrefs.SetInt("custom", 10);//set value
+                PlayerPrefs.Save();//save changes
+                Debug.Log("SET");//debug proof
             }
             else
             {
-                altText("TrailOneTxt", "Purple Trail \n Unlocks at Level 10");
+                altText("TrailOneTxt", "Purple Trail \n Unlocks at Level 10");//send message if not high enough level
             }
         }
         else if (text.Equals("level15"))
@@ -138,7 +141,11 @@ public class MenuShopItem : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+	/// chech that the level us above the minimum value
+	/// </summary>
+	/// <param name="min">minimum player value</param>
+	/// <returns>boolean if player has the level</returns>
     private bool checkLevel(int min)
     {
         int num = int.Parse(levelText.text);
@@ -186,7 +193,12 @@ public class MenuShopItem : MonoBehaviour
       //  Debug.Log(altern);
     }
 
-
+    /// <summary>
+	/// timer for how long to show alt message
+	/// </summary>
+	/// <param name="buttonNeeded">the name of the buttons text to change</param>
+	/// <param name="item">the value that needs to be shown</param>
+	/// <returns></returns>
     [PunRPC]
     private IEnumerator CoolDownTimer(string buttonNeeded, string item)
     {

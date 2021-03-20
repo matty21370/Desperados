@@ -101,7 +101,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject explosiveParticle;
     [SerializeField] private GameObject boostTrail;
 
-  
+  /// <summary>
+  /// set starting varables and get refrences for other objects
+  /// </summary>
     private Shop shop;
     private LeaveButton leaveButton;
     private ControlsPage controlsPage;
@@ -139,7 +141,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     private LineRenderer lineRenderer;
 
-    //key bindings
+    /// <summary>
+	/// key bindings
+	/// </summary>
     KeyCode kcForward = KeyCode.W;
     KeyCode kcLeft = KeyCode.A;
     KeyCode kcRight = KeyCode.D;
@@ -161,7 +165,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public GameManager.GameStates currentState;
     private bool gameOver = false;
-
+    /// <summary>
+	/// reset the player when connecting
+	/// </summary>
     [PunRPC]
     public void ResetPlayer() { 
         gameOver = true;
@@ -179,13 +185,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         Invoke("Disconnect", 5f);
     }
-
+    /// <summary>
+	/// move from game to lobby
+	/// </summary>
     [PunRPC]
     public void SetToLobby()
     {
         currentState = GameManager.GameStates.LOBBY;
     }
-
+    /// <summary>
+	/// move from lobby to game
+	/// </summary>
     [PunRPC]
     public void SetToGame()
     {
@@ -195,7 +205,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Cursor.visible = false;
         
     }
-
+    /// <summary>
+	/// set to ready for use in lobby
+	/// </summary>
     [PunRPC]
     public void ReadyUp()
     {
@@ -341,7 +353,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             crosshair.gameObject.SetActive(false);
         }
     }
-
+    /// <summary>
+	/// find the next closest player will draw a line from the player to the next closest player item
+	/// </summary>
     private void FindClosestPlayer()
     {
         if (FindObjectsOfType<Player>().Length >= 2)
@@ -400,7 +414,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (currentState != GameManager.GameStates.LOBBY)
         {
-            if (Input.GetKeyDown(kcBoost))
+            if (Input.GetKeyDown(kcBoost))//boost on
             {
               
 
@@ -408,7 +422,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 photonView.RPC("StartTrail",RpcTarget.All, PlayerPrefs.GetInt("custom"));
             }
             
-            if(Input.GetKeyUp(kcBoost))
+            if(Input.GetKeyUp(kcBoost))//boost off
             {
                 FindObjectOfType<AudioManager>().Stop("BoostNoise");
                 photonView.RPC("StopTrail", RpcTarget.All);
@@ -416,7 +430,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             transform.forward = Vector3.Lerp(transform.forward, -GetComponentInChildren<Camera>().transform.forward, Time.deltaTime * 16f);
 
-            if (Input.GetKey(kcShoot) && Time.time > shootTimer && canShoot && !shop.shopEnabled)
+            if (Input.GetKey(kcShoot) && Time.time > shootTimer && canShoot && !shop.shopEnabled)//shooting 
             {
                 if (shots < maxShots)
                 {
@@ -427,7 +441,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 else
                 { 
-                  if (!manualCool)
+                  if (!manualCool)//over heating 
                     {
                         weaponOverheat("Weapon Reloading");
                     }
@@ -438,19 +452,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 } 
             }
 
-			if (Input.GetKeyDown(kcCool) && !manualCool)
+			if (Input.GetKeyDown(kcCool) && !manualCool)//reload
 			{
                 manualCool = true;
                 shots = maxShots + 1;
                 weaponOverheat("Weapon Reloading");
             }
 
-            if (Input.GetKeyDown(kcMine) && (minesEnabled))
+            if (Input.GetKeyDown(kcMine) && (minesEnabled))//mine
             {
                 photonView.RPC("DropMine", RpcTarget.All);
             }
 
-            if(Input.GetKey(kcClosest))
+            if(Input.GetKey(kcClosest))//closes player
             {
                 FindClosestPlayer();
                 lineRenderer.SetWidth(0.05f, 0.05f);
@@ -460,7 +474,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 lineRenderer.SetWidth(0, 0);
             }
 
-			if (Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetMouseButton(1))
+			if (Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetMouseButton(1))//move left
 			{
                 float z = Input.GetAxis("Horizontal") * 10.0f;
                 Vector3 euler = transform.localEulerAngles;
@@ -468,7 +482,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 transform.localEulerAngles = euler;
             }
 
-            if (Input.GetKey(kcRight) && !Input.GetKey(kcLeft)&&!Input.GetMouseButton(1))
+            if (Input.GetKey(kcRight) && !Input.GetKey(kcLeft)&&!Input.GetMouseButton(1))//move right
                 {
                 float z = Input.GetAxis("Horizontal") * 10.0f;
                 Vector3 euler = transform.localEulerAngles;
@@ -476,12 +490,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 transform.localEulerAngles = euler;
             }
 
-			if (Input.GetKey(kcShowBoat) && !Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetKey(kcUp) && !Input.GetKey(kcDown) )//&& !Input.GetKey(kcForward) && !Input.GetKey(kcBack))
+			if (Input.GetKey(kcShowBoat) && !Input.GetKey(kcLeft) && !Input.GetKey(kcRight) && !Input.GetKey(kcUp) && !Input.GetKey(kcDown) )//flip
             {
                 showBoat = true;
             }
 
-			if (showBoat && !Input.GetMouseButton(1))
+			if (showBoat && !Input.GetMouseButton(1))//flip
 			{
                 rotZ = rotZ+1f;
                 transform.Rotate(0, 0, rotZ);
@@ -493,7 +507,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
 			}
 
-            if (Input.GetKeyDown(kcShop))
+            if (Input.GetKeyDown(kcShop))//open in game shop
             {
                 shop.setEnabled();
 
@@ -531,22 +545,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.Space))//ready up
             {
                 isReady = !isReady;
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) )
+        if (Input.GetKeyDown(KeyCode.Escape) )//exit and menue
         {
-            ToggleMenu();
+            ToggleMenu();//show menue
 
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
             leaveButton.setEnabled();
             controlsPage.setEnabled();
-            if (leaveButton.leaveEnabled)
+            if (leaveButton.leaveEnabled)//set so they can be seen
             {
                 leaveButton.gameObject.SetActive(true);
                 controlsPage.gameObject.SetActive(true);
@@ -562,20 +576,23 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P) && (leaveButton.leaveEnabled))
+        if (Input.GetKeyDown(KeyCode.P) && (leaveButton.leaveEnabled))//leave game 
         {
             Disconnect();
         }
 
-        if (gameOver)
+        if (gameOver)//end game
 		{
             isDead = true;
             canShoot = false;
         }
 
-        pingText.text = "Latency: " + PhotonNetwork.GetPing(); 
+        pingText.text = "Latency: " + PhotonNetwork.GetPing(); //show ping
     }
-
+    /// <summary>
+	/// start the player trail so all players can see
+	/// </summary>
+	/// <param name="customValue">the value for trail colour to be show</param>
     [PunRPC]
     private void StartTrail(int customValue)
     {
@@ -706,6 +723,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     /// <summary>
     /// This RPC function allows the player to shoot.
+    /// <param name="custom">the value for shot colour to be show</param>
     /// </summary>
     [PunRPC]
     void Shoot(int custom)
@@ -718,7 +736,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Vector3 endPos = -transform.forward * 100f;
             Trail t = Instantiate(trail, g.getGunPosition()).GetComponent<Trail>();
             t.Init(startPos, g.getGunPosition().transform.forward);
-            if (custom == 1)
+            if (custom == 1)//get colours
             {
                 t.GetComponent<Renderer>().material.SetColor("_Color", new Color(1,0,0));
             }
@@ -1128,7 +1146,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         pack.GetComponent<HealthPack>().InitializePack(5);
         Destroy(pack,20f);
     }
-
+    /// <summary>
+	/// 
+	/// check if the player has moved out of bounds and shift them back into play if they have
+	/// </summary>
     public void CheckOutOfBounds()
 	{
         mapText.text = "";
@@ -1221,7 +1242,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("Called");
 	}
 
-    ////////////////////////////
+    /// <summary>
+	/// set the player controls for this round
+	/// </summary>
+	/// <param name="key">the key to change to</param>
+	/// <param name="keySet">the key that wants to be changed</param>
 	public void setControl(KeyCode key, string keySet)
 	{
         if (keySet.Equals("foward"))

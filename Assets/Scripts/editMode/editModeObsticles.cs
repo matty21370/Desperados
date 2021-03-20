@@ -5,7 +5,11 @@ using UnityEngine;
 using UnityEngine.TestTools;
 
 namespace Tests
-{
+{/// <summary>
+/// created by andrew viney
+/// test that the obsticels basic features work correctly
+/// remeber to find remove for testing comments in relevent classes
+/// </summary>
     public class editModeObsticles
     {
         // A Test behaves as an ordinary method

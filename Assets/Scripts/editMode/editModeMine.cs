@@ -5,7 +5,11 @@ using UnityEngine;
 using UnityEngine.TestTools;
 
 namespace Tests
-{
+{/// <summary>
+/// created by andrew viney 
+/// these test are for weapons check that the basic wepon functions are working
+/// remember to find remove for testing comments in relevent classes
+/// </summary>
     public class editModeMine
     {
         // A Test behaves as an ordinary method
